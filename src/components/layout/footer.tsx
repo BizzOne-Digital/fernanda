@@ -41,8 +41,8 @@ export function Footer({ settings }: FooterProps) {
       : LEGAL_NAV;
 
   return (
-    <footer className="site-shell mt-20 w-full border-t border-sand/40 bg-lake-medium text-cream">
-      <div className="h-1 bg-gradient-to-r from-transparent via-golden/70 to-transparent" />
+    <footer className="site-shell mt-20 w-full border-t border-sky-bright/30 bg-gradient-to-br from-lake-medium to-lake-deep text-cream">
+      <div className="h-1.5 bg-gradient-to-r from-summer-yellow/60 via-golden to-summer-yellow/60" />
 
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6">
         <div className="grid gap-12 lg:grid-cols-[1.2fr_0.9fr_0.9fr_1fr]">

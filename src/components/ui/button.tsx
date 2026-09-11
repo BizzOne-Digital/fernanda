@@ -4,11 +4,12 @@ import { ComponentPropsWithoutRef, forwardRef } from "react";
 
 const variants = {
   primary:
-    "bg-lake-deep text-cream hover:bg-lake-medium focus-visible:ring-golden",
+    "bg-lake-medium text-cream shadow-[0_4px_16px_rgb(77_184_212_/_25%)] hover:bg-lake-deep hover:shadow-[0_6px_20px_rgb(42_125_148_/_30%)] focus-visible:ring-golden",
   secondary:
-    "bg-sand/40 text-ink border border-sand hover:bg-sand/70 focus-visible:ring-lake-medium",
-  ghost: "bg-transparent text-lake-deep hover:bg-lake-deep/5 focus-visible:ring-lake-medium",
-  golden: "bg-golden text-ink hover:brightness-105 focus-visible:ring-lake-deep",
+    "bg-white text-lake-deep border border-lake-medium/30 shadow-sm hover:border-lake-medium/60 hover:bg-sky-bright/15 focus-visible:ring-lake-medium",
+  ghost: "bg-transparent text-lake-deep hover:bg-sky-bright/20 focus-visible:ring-lake-medium",
+  golden:
+    "bg-golden text-ink shadow-[0_4px_16px_rgb(240_180_41_/_30%)] hover:brightness-110 focus-visible:ring-lake-deep",
 } as const;
 
 type ButtonProps = ComponentPropsWithoutRef<"button"> & {

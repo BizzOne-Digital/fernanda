@@ -26,7 +26,7 @@ export function PageHero({
       )}
     >
       <Image src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-t from-lake-deep/50 via-lake-deep/25 to-transparent" />
+      <div className="absolute inset-0 bg-gradient-to-t from-lake-deep/40 via-lake-medium/20 to-sky-bright/10" />
       <div className="relative z-10 mx-auto max-w-3xl min-w-0 px-4 py-20 text-center text-cream md:px-6 md:py-24">
         {eyebrow ? (
           <p className="text-[0.68rem] font-medium uppercase tracking-[0.32em] text-golden">{eyebrow}</p>

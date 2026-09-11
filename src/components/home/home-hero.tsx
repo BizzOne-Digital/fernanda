@@ -22,40 +22,55 @@ export function HomeHero({ settings }: HomeHeroProps) {
         className="object-cover object-center"
       />
 
-      <div className="absolute inset-0 bg-gradient-to-t from-black/25 via-transparent to-sky-bright/10" />
+      <div className="absolute inset-0 bg-gradient-to-r from-lake-deep/15 via-transparent to-sky-bright/15" />
 
-      <div className="absolute inset-x-0 bottom-0 top-auto flex flex-col justify-end p-4 sm:inset-y-0 sm:left-0 sm:top-0 sm:w-full sm:max-w-md sm:justify-center sm:p-0">
-        <div className="sm:flex sm:h-full sm:flex-col sm:justify-center">
-          <div className="rounded-sm bg-lake-deep/92 px-6 py-5 backdrop-blur-sm sm:rounded-none sm:px-10 sm:py-8 md:px-12 md:py-10">
-            <p className="font-serif text-[0.65rem] font-medium uppercase tracking-[0.28em] text-cream/90 sm:text-xs">
-              Vaseaux Lake • Oliver, BC
-            </p>
-            <h1 className="mt-3 font-serif text-2xl leading-tight text-cream sm:text-3xl md:text-4xl">
-              {settings.general.shortBrandName}
-            </h1>
-            <p className="mt-3 max-w-sm text-sm leading-relaxed text-cream/88 sm:text-base">
-              {settings.general.supportingHeadline}
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href="/inquire"
-                className="inline-flex items-center justify-center rounded-full bg-golden px-6 py-2.5 text-sm font-medium text-ink transition hover:brightness-105"
-              >
-                Check availability
-              </Link>
-              <Link
-                href="/gallery"
-                className="inline-flex items-center justify-center rounded-full border border-cream/60 bg-cream/10 px-6 py-2.5 text-sm font-medium text-cream backdrop-blur-sm transition hover:bg-cream/20"
-              >
-                See the lake
-              </Link>
-            </div>
+      <div className="absolute inset-y-0 left-0 flex w-full max-w-full overflow-hidden lg:max-w-[52%]">
+        <svg
+          className="absolute inset-0 h-full w-full text-lake-deep/72"
+          viewBox="0 0 760 900"
+          preserveAspectRatio="none"
+          aria-hidden
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 H560 C610,120 590,260 620,420 C650,580 600,760 640,900 H0 Z"
+          />
+        </svg>
+
+        <div className="hero-grain relative z-10 flex w-full min-w-0 flex-col justify-center px-4 pb-20 pt-36 sm:px-8 sm:pb-24 sm:pt-40 md:px-14 md:pb-28 md:pt-44 lg:px-16 lg:pb-32 lg:pt-48">
+          <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-golden sm:text-xs sm:tracking-[0.32em]">
+            Vaseaux Lake • Oliver, BC
+          </p>
+
+          <h1 className="mt-5 max-w-xl text-balance font-serif text-3xl leading-[1.08] tracking-[0.04em] text-cream uppercase sm:text-4xl md:text-[2.75rem] lg:text-5xl">
+            {settings.general.primaryHeadline}
+          </h1>
+
+          <p className="mt-5 max-w-md font-serif text-lg leading-relaxed text-cream/90 md:text-xl">
+            {settings.general.supportingHeadline}
+          </p>
+
+          <div className="mt-8 flex flex-wrap gap-3">
+            <Link
+              href="/cabins"
+              className="inline-flex items-center justify-center rounded-sm bg-golden px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-ink transition hover:brightness-110 hover:shadow-[0_8px_24px_rgb(240_180_41_/_35%)]"
+            >
+              Explore the cabins
+            </Link>
+            <Link
+              href="/inquire"
+              className="inline-flex items-center justify-center rounded-sm border border-golden/80 bg-cream/10 px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-golden backdrop-blur-sm transition hover:bg-golden/15"
+            >
+              Plan your stay
+            </Link>
           </div>
 
-          <div className="mt-0 rounded-sm bg-lake-medium/95 px-6 py-3 backdrop-blur-sm sm:rounded-none sm:px-10 sm:py-3.5 md:px-12">
-            <p className="text-sm font-medium text-cream sm:text-[0.95rem]">
-              {settings.general.primaryHeadline}
-            </p>
+          <div className="mt-10 hidden max-w-md items-center gap-4 sm:flex">
+            <span className="h-px flex-1 bg-golden/50" aria-hidden />
+            <span className="font-serif text-[0.62rem] uppercase tracking-[0.28em] text-golden/95">
+              Eight private stays • One historic roof
+            </span>
+            <span className="h-px flex-1 bg-golden/50" aria-hidden />
           </div>
         </div>
       </div>

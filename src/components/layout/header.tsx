@@ -53,8 +53,8 @@ export function Header({ settings, cabins }: HeaderProps) {
   const shellClass = cn(
     "mx-auto flex w-full min-w-0 max-w-6xl items-center justify-between gap-2 px-3 py-3 sm:gap-4 sm:px-4 md:px-6",
     isHome &&
-      "rounded-sm border border-white/40 bg-white/85 shadow-[0_8px_32px_rgb(30_95_115_/_8%)] backdrop-blur-md",
-    !isHome && "max-w-7xl border-b border-sand/50 bg-cream/90 py-3 backdrop-blur-md",
+      "rounded-sm border border-white/60 bg-white/90 shadow-[0_8px_32px_rgb(77_184_212_/_12%)] backdrop-blur-md",
+    !isHome && "max-w-7xl border-b border-sky-bright/40 bg-white/95 py-3 shadow-sm backdrop-blur-md",
   );
 
   return (

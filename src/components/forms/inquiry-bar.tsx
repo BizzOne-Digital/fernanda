@@ -29,7 +29,7 @@ export function InquiryBar({ cabins = [] }: InquiryBarProps) {
   return (
     <form
       onSubmit={submit}
-      className="postcard-border mx-auto grid w-full min-w-0 max-w-5xl gap-3 rounded-sm bg-cream/95 p-4 md:grid-cols-[1fr_1fr_0.7fr_1fr_auto]"
+      className="postcard-border mx-auto grid w-full min-w-0 max-w-5xl gap-3 rounded-sm border border-golden/30 bg-white/95 p-4 shadow-[0_12px_40px_rgb(240_180_41_/_12%)] backdrop-blur-md md:grid-cols-[1fr_1fr_0.7fr_1fr_auto]"
     >
       <label className="text-xs uppercase tracking-[0.15em] text-ink/60">
         Arrival
@@ -76,7 +76,7 @@ export function InquiryBar({ cabins = [] }: InquiryBarProps) {
         </select>
       </label>
       <div className="flex items-end">
-        <Button type="submit" variant="primary" className="w-full">
+        <Button type="submit" variant="golden" className="w-full">
           Check availability
         </Button>
       </div>

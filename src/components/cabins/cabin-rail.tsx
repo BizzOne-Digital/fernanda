@@ -31,11 +31,11 @@ export function CabinRail({ cabins }: CabinRailProps) {
             <ScrollReveal key={cabin.slug} direction={index % 2 === 0 ? "left" : "right"} className="shrink-0">
               <Link
                 href={`/cabins/${cabin.slug}`}
-                className="postcard-border block w-64 overflow-hidden rounded-sm bg-cream md:w-72"
+                className="card-lift postcard-border block w-64 overflow-hidden rounded-sm bg-white md:w-72"
               >
                 <div className="relative aspect-[4/5]">
                   <SiteImage src={image.src} alt={image.alt} fill sizes="280px" />
-                  <span className="absolute left-3 top-3 rounded bg-lake-deep px-2 py-1 text-[10px] uppercase tracking-[0.2em] text-cream">
+                  <span className="absolute left-3 top-3 rounded bg-golden px-2 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-ink shadow-sm">
                     {cabin.cabinNumber}
                   </span>
                 </div>
