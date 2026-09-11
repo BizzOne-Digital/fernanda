@@ -76,7 +76,7 @@ export const PROPERTY_GALLERY: { path: string; alt: string; category: string }[]
   { path: `${BASE}/property-pine-sky.jpg`, alt: "Tall pine tree against a bright blue summer sky", category: "property" },
 ];
 
-export const HERO_IMAGE = `${BASE}/sunset-chairs.jpg`;
+export const HERO_IMAGE = "/images/hero-lake.jpg";
 
 export function demoImage(key: DemoImageKey) {
   return PROPERTY_IMAGE_META[key].path;

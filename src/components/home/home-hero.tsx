@@ -9,13 +9,13 @@ type HomeHeroProps = {
 };
 
 export function HomeHero({ settings }: HomeHeroProps) {
-  const heroSrc = resolvePublicImageUrl(settings.general.logo?.url || HERO_IMAGE, HERO_IMAGE);
+  const heroSrc = resolvePublicImageUrl(HERO_IMAGE, HERO_IMAGE);
 
   return (
     <section className="relative min-h-[100svh] overflow-hidden">
       <Image
         src={heroSrc}
-        alt="Adirondack chairs facing a sunset over Vaseaux Lake"
+        alt="Waterfront cabins on Vaseaux Lake at golden hour with willow tree and paddleboards"
         fill
         priority
         sizes="100vw"
