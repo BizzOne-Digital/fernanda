@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Demo placeholder: sunset over the lake">
+  <defs>
+    <linearGradient id="sunset-sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#E8A838"/>
+      <stop offset="40%" stop-color="#F5C87A"/>
+      <stop offset="70%" stop-color="#A8D8EA"/>
+      <stop offset="100%" stop-color="#3A9CB5"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="800" fill="url(#sunset-sky)"/>
+  <ellipse cx="600" cy="620" rx="520" ry="60" fill="#1E7A94" opacity="0.55"/>
+  <ellipse cx="600" cy="300" rx="90" ry="90" fill="#F5D76E" opacity="0.9"/>
+  <text x="600" y="760" text-anchor="middle" fill="#FAF8F4" font-family="Georgia, serif" font-size="24">Demo sunset placeholder</text>
+</svg>

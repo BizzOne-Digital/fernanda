@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Demo placeholder: kitchen">
+  <rect width="1200" height="800" fill="#F4EFE4"/>
+  <rect x="100" y="120" width="1000" height="560" fill="#D8C6A5" opacity="0.5"/>
+  <rect x="160" y="200" width="300" height="400" fill="#66765A" opacity="0.3"/>
+  <rect x="520" y="200" width="520" height="180" fill="#4E8290" opacity="0.25"/>
+  <text x="600" y="760" text-anchor="middle" fill="#202823" font-family="Georgia, serif" font-size="24">Demo kitchen placeholder</text>
+</svg>

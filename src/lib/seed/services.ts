@@ -1,0 +1,282 @@
+import { demoGallery, img, propertyImg } from "@/lib/seed/helpers";
+
+const INQUIRY_STEPS = [
+  "Choose your preferred dates and guest count.",
+  "Submit an inquiry through our booking form.",
+  "We will reply with availability and a quote — your stay is not confirmed until we confirm.",
+];
+
+export const serviceSeeds = [
+  {
+    title: "Weekly High-Season Stays",
+    slug: "weekly-high-season-stays",
+    shortDescription:
+      "Classic week-long lake holidays from Canada Day week through Labour Day week. Contact for pricing.",
+    iconAccent: "golden-hour",
+    cardImage: img("lakeHero", "Weekly high-season stays on Vaseaux Lake"),
+    ctaText: "Inquire about a weekly stay",
+    ctaUrl: "/inquire?interest=weekly-high-season",
+    heroEyebrow: "High season",
+    heroHeading: "Weekly lake holidays when summer is in full swing",
+    heroSubheading: "Canada Day week through Labour Day week — inquire for availability and a quote.",
+    heroImage: img("lakeHero", "High-season lake week placeholder"),
+    overview:
+      "Our high season is built around unhurried week-long stays on Vaseaux Lake. Rates vary by cabin, guest count, and dates — we provide a personal quote for each inquiry.",
+    benefits: [
+      "Full week to settle into lake life",
+      "Access to complimentary boats, paddleboards, and the floating raft",
+      "Patios, BBQs, lawn, and shallow lake for family time",
+      "Quiet evenings and star-filled skies",
+    ],
+    experienceDetails:
+      "High-season weeks are our most popular time. We do not publish fixed prices online — every stay is quoted based on your dates, party size, and preferred cabin.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes:
+      "High-season dates shift each calendar year. Admin configures start and end dates annually.",
+    safetyPolicies:
+      "Lake conditions, equipment availability, and weather vary. Children must be supervised around water and shared equipment.",
+    sectionImages: demoGallery(5, "Weekly high-season stay"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 0,
+    seo: {
+      title: "Weekly High-Season Stays | Vaseaux Lake Cabins",
+      description: "Week-long summer stays on Vaseaux Lake. Contact for availability and a quote.",
+    },
+    isArchived: false,
+  },
+  {
+    title: "Shoulder-Season Short Stays",
+    slug: "shoulder-season-short-stays",
+    shortDescription:
+      "Shorter stays may be available in May, June, and September. Contact for pricing and minimum stays.",
+    iconAccent: "sage",
+    cardImage: img("nature", "Shoulder-season lake stay placeholder"),
+    ctaText: "Ask about shoulder-season dates",
+    ctaUrl: "/inquire?interest=shoulder-season",
+    heroEyebrow: "Shoulder season",
+    heroHeading: "Quieter lake days in May, June, and September",
+    heroSubheading: "Shorter stays may be available — inquire for rates and minimum stay requirements.",
+    heroImage: img("nature", "Shoulder-season Vaseaux Lake"),
+    overview:
+      "Before and after peak summer, the lake takes on a calmer rhythm. Shoulder-season availability and rates depend on dates and cabin — we quote each inquiry individually.",
+    benefits: [
+      "Potentially shorter minimum stays",
+      "Peaceful lake atmosphere",
+      "Same in-unit amenities and shared outdoor spaces",
+      "Ideal for couples or small families with flexible dates",
+    ],
+    experienceDetails:
+      "Shoulder-season rules change year to year. We never publish fixed prices — contact us with your dates and we will reply with options.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes: "May, June, and September may offer different minimum stays than high season.",
+    safetyPolicies:
+      "Spring and fall weather can be variable. Equipment and lake use remain subject to conditions.",
+    sectionImages: demoGallery(5, "Shoulder-season stay"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 1,
+    seo: {
+      title: "Shoulder-Season Short Stays | Vaseaux Lake Cabins",
+      description: "May, June, and September stays on Vaseaux Lake. Inquire for availability.",
+    },
+    isArchived: false,
+  },
+  {
+    title: "Family Lake Getaways",
+    slug: "family-lake-getaways",
+    shortDescription:
+      "Simple, nostalgic lake holidays made for families — fishing, swimming, BBQs, and time together.",
+    iconAccent: "lake-blue",
+    cardImage: img("patioBbq", "Family lake getaway placeholder"),
+    ctaText: "Plan a family stay",
+    ctaUrl: "/inquire?interest=family-getaway",
+    heroEyebrow: "Families",
+    heroHeading: "Lake days built for families",
+    heroSubheading: "Shallow water, lawns, BBQs, and room for everyone to spread out.",
+    heroImage: img("patioBbq", "Family BBQ and patio at the lake"),
+    overview:
+      "Generations have returned to Vaseaux Lake for uncomplicated summer holidays. Our eight private units under one historic roof offer a base for fishing, swimming, boating, and slow evenings together.",
+    benefits: [
+      "Cabins sleeping 4–6 guests",
+      "Kitchen, washroom, patio, and BBQ in every unit",
+      "Complimentary boats and paddleboards",
+      "Shallow lake and lawn for younger swimmers",
+    ],
+    experienceDetails:
+      "Choose a cabin that fits your party size and sleeping preferences. We help match families to the right unit when you inquire.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes: "Family weeks are most common in high season; shoulder dates may suit smaller groups.",
+    safetyPolicies:
+      "Children must be supervised around water, boats, and BBQs. Wildlife sightings are possible but never guaranteed.",
+    sectionImages: demoGallery(5, "Family lake getaway"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 2,
+    seo: {
+      title: "Family Lake Getaways | Vaseaux Lake Cabins",
+      description: "Family-friendly waterfront stays on Vaseaux Lake in the South Okanagan.",
+    },
+    isArchived: false,
+  },
+  {
+    title: "Fishing & Boating Escapes",
+    slug: "fishing-boating-escapes",
+    shortDescription:
+      "Quiet mornings on the lake with complimentary boats for guest use. Conditions vary — inquire for details.",
+    iconAccent: "water-blue",
+    cardImage: propertyImg("/images/property/lake-shallow-clear.jpg", "Fishing on Vaseaux Lake"),
+    ctaText: "Inquire about a fishing stay",
+    ctaUrl: "/inquire?interest=fishing-boating",
+    heroEyebrow: "On the water",
+    heroHeading: "Fishing and boating from your lakeside base",
+    heroSubheading: "Complimentary boats for guests — bring your rods and plan unhurried days on the water.",
+    heroImage: propertyImg("/images/property/sunset-boaters.jpg", "Boaters on Vaseaux Lake at sunset"),
+    overview:
+      "Vaseaux Lake draws anglers and boaters looking for a peaceful Okanagan escape. Boats are available for guest use; availability and conditions vary by season.",
+    benefits: [
+      "Direct lake access from the property",
+      "Complimentary boats for guests",
+      "Quiet surroundings between Eagle's Bluff and McIntyre Bluff",
+      "Evening gatherings after a day on the water",
+    ],
+    experienceDetails:
+      "We do not guarantee catch, weather, or equipment availability. Share your interests in your inquiry and we will confirm what is possible for your dates.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes: "Spring through fall offer different fishing and boating conditions.",
+    safetyPolicies:
+      "Life jackets and safe boating practices are the responsibility of guests. Children must be supervised.",
+    sectionImages: demoGallery(5, "Fishing and boating escape"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 3,
+    seo: {
+      title: "Fishing & Boating Escapes | Vaseaux Lake Cabins",
+      description: "Lakeside stays with complimentary boats on Vaseaux Lake.",
+    },
+    isArchived: false,
+  },
+  {
+    title: "Paddleboard, Kayak & Swim Days",
+    slug: "paddleboard-kayak-swim-days",
+    shortDescription:
+      "Paddleboards, shallow swimming, and long sunny afternoons — equipment for guest use when available.",
+    iconAccent: "medium-water",
+    cardImage: propertyImg("/images/property/family-lake-canopy.jpg", "Family swimming and lake play"),
+    ctaText: "Ask about water activities",
+    ctaUrl: "/inquire?interest=paddle-swim",
+    heroEyebrow: "Lake life",
+    heroHeading: "Paddle, swim, and float the afternoon away",
+    heroSubheading: "Paddleboards and a floating raft — perfect for warm Okanagan days.",
+    heroImage: img("lakeHero", "Swimming and paddleboarding on Vaseaux Lake"),
+    overview:
+      "The shallow lake, lawn, and complimentary paddleboards make it easy to spend whole days in and on the water. Equipment availability depends on season and conditions.",
+    benefits: [
+      "Paddleboards for guest use",
+      "Floating raft on the lake",
+      "Shallow areas suited to relaxed swimming",
+      "Patios and BBQs steps from the water",
+    ],
+    experienceDetails:
+      "Water temperature and equipment availability vary. Tell us your travel dates and we will confirm what is available.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes: "Warmest swim days are typically mid-summer; spring and fall are quieter on the water.",
+    safetyPolicies:
+      "Swimming and paddling are at your own risk. Supervise children at all times.",
+    sectionImages: demoGallery(5, "Paddleboard and swim days"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 4,
+    seo: {
+      title: "Paddleboard, Kayak & Swim Days | Vaseaux Lake Cabins",
+      description: "Waterfront stays with paddleboards and lake swimming on Vaseaux Lake.",
+    },
+    isArchived: false,
+  },
+  {
+    title: "Quiet Couples' Getaways",
+    slug: "quiet-couples-getaways",
+    shortDescription:
+      "Unhurried lake time for two — starry nights, morning coffee on the patio, and calm water views.",
+    iconAccent: "sand",
+    cardImage: img("stars", "Couples lakeside getaway placeholder"),
+    ctaText: "Inquire for two",
+    ctaUrl: "/inquire?interest=couples",
+    heroEyebrow: "Couples",
+    heroHeading: "Slow mornings and quiet lake evenings",
+    heroSubheading: "A peaceful South Okanagan escape without resort crowds.",
+    heroImage: img("stars", "Starry night over Vaseaux Lake"),
+    overview:
+      "Couples looking for simplicity and scenery find Vaseaux Lake a welcome contrast to busy resorts. Smaller-capacity cabins and shoulder-season dates can suit a quieter rhythm.",
+    benefits: [
+      "Intimate cabin options sleeping up to 4–5",
+      "Private patio and BBQ",
+      "Incredible star-filled skies",
+      "No fixed online pricing — personalized quotes",
+    ],
+    experienceDetails:
+      "Tell us your preferred dates and we will suggest cabins and stay lengths that fit a couples' getaway.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes: "Shoulder months may offer shorter stays and a quieter property.",
+    safetyPolicies: "Standard lake and equipment safety practices apply.",
+    sectionImages: demoGallery(5, "Couples getaway"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 5,
+    seo: {
+      title: "Quiet Couples' Getaways | Vaseaux Lake Cabins",
+      description: "Peaceful couples' stays on Vaseaux Lake in the South Okanagan.",
+    },
+    isArchived: false,
+  },
+  {
+    title: "Last-Minute Openings",
+    slug: "last-minute-openings",
+    shortDescription:
+      "Ask about last-minute availability — openings may appear when cancellations occur.",
+    iconAccent: "golden-hour",
+    cardImage: img("lakeHero", "Last-minute lake opening placeholder"),
+    ctaText: "Ask about last-minute openings",
+    ctaUrl: "/inquire?interest=last-minute",
+    heroEyebrow: "Availability",
+    heroHeading: "Last-minute lake openings",
+    heroSubheading: "Spontaneous summer plans? Inquire — we may have a cabin available.",
+    heroImage: img("patioBbq", "Last-minute lakeside stay"),
+    overview:
+      "Cancellations sometimes create short-notice availability. There is no guarantee of openings — submit an inquiry with your dates and we will reply honestly.",
+    benefits: [
+      "Possible shorter-notice stays",
+      "Same lakeside amenities when available",
+      "Direct inquiry — no third-party booking fees",
+      "Personal quote for any opening",
+    ],
+    experienceDetails:
+      "Last-minute offers depend on real-time availability. We never invent openings — contact us and we will confirm what is possible.",
+    inquirySteps: INQUIRY_STEPS,
+    seasonalNotes: "Most last-minute openings occur during high season but can appear anytime.",
+    safetyPolicies: "All standard property and lake policies apply.",
+    sectionImages: demoGallery(5, "Last-minute opening"),
+    relatedCabinIds: [],
+    relatedServiceIds: [],
+    faqs: [],
+    status: "published" as const,
+    sortOrder: 6,
+    seo: {
+      title: "Last-Minute Openings | Vaseaux Lake Cabins",
+      description: "Ask about last-minute cabin availability on Vaseaux Lake.",
+    },
+    isArchived: false,
+  },
+];

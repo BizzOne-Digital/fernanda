@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Demo placeholder: cabin interior nostalgia">
+  <rect width="1200" height="800" fill="#F4EFE4"/>
+  <rect x="80" y="80" width="1040" height="640" fill="#D8C6A5" opacity="0.45"/>
+  <rect x="140" y="160" width="420" height="280" fill="#66765A" opacity="0.35"/>
+  <rect x="620" y="160" width="420" height="420" fill="#4E8290" opacity="0.25"/>
+  <text x="600" y="760" text-anchor="middle" fill="#202823" font-family="Georgia, serif" font-size="24">Demo cabin placeholder</text>
+</svg>

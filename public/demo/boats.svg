@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Demo placeholder: boats and paddleboards">
+  <rect width="1200" height="800" fill="#4E8290" opacity="0.35"/>
+  <ellipse cx="600" cy="620" rx="520" ry="90" fill="#173F4F" opacity="0.35"/>
+  <path d="M420 580 Q520 520 640 580" stroke="#F4EFE4" stroke-width="8" fill="none"/>
+  <text x="600" y="760" text-anchor="middle" fill="#F4EFE4" font-family="Georgia, serif" font-size="24">Demo lake activity placeholder</text>
+</svg>

@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800" role="img" aria-label="Demo placeholder: wildlife and nature">
+  <rect width="1200" height="800" fill="#A8D8EA"/>
+  <rect y="500" width="1200" height="300" fill="#7CB87A" opacity="0.6"/>
+  <path d="M180 500 Q280 280 400 500" stroke="#4A7A42" stroke-width="20" fill="none" opacity="0.5"/>
+  <path d="M700 500 Q850 300 1000 500" stroke="#4A7A42" stroke-width="14" fill="none" opacity="0.45"/>
+  <ellipse cx="900" cy="420" rx="40" ry="25" fill="#8B7355" opacity="0.6"/>
+  <text x="600" y="760" text-anchor="middle" fill="#1E5F73" font-family="Georgia, serif" font-size="24">Demo wildlife placeholder</text>
+</svg>

@@ -1,0 +1,106 @@
+import { img, propertyImg } from "@/lib/seed/helpers";
+
+export const galleryCategorySeeds = [
+  {
+    name: "Lake & Waterfront",
+    slug: "lake-waterfront",
+    description: "Vaseaux Lake, shoreline, and views from the property.",
+    coverImage: propertyImg(
+      "/images/property/lake-mcintyre-bluff.jpg",
+      "McIntyre Bluff reflected on Vaseaux Lake",
+    ),
+    status: "published" as const,
+    sortOrder: 0,
+    isArchived: false,
+  },
+  {
+    name: "Property & Outdoor Spaces",
+    slug: "property-outdoor-spaces",
+    description: "Lawns, patios, BBQ areas, and shared outdoor gathering spaces.",
+    coverImage: propertyImg(
+      "/images/property/property-lakefront-lawn.jpg",
+      "Lakefront lawn and sandy beach at the property",
+    ),
+    status: "published" as const,
+    sortOrder: 1,
+    isArchived: false,
+  },
+  {
+    name: "Cabins 5–12",
+    slug: "cabins-5-12",
+    description: "Our eight private cabin-style units steps from the lake.",
+    coverImage: propertyImg(
+      "/images/property/property-hydrangeas-lawn.jpg",
+      "Shaded lawn and gardens at the property",
+    ),
+    status: "published" as const,
+    sortOrder: 2,
+    isArchived: false,
+  },
+  {
+    name: "Kitchens & Washrooms",
+    slug: "kitchens-washrooms",
+    description: "In-unit kitchens and washrooms included with every stay.",
+    coverImage: propertyImg(
+      "/images/property/family-picnic-sunset.jpg",
+      "Outdoor dining area at the property",
+    ),
+    status: "published" as const,
+    sortOrder: 3,
+    isArchived: false,
+  },
+  {
+    name: "Family Lake Days",
+    slug: "family-lake-days",
+    description: "Families swimming, playing on the lawn, and enjoying lake time together.",
+    coverImage: propertyImg(
+      "/images/property/family-lake-canopy.jpg",
+      "Family enjoying lake activities under a canopy tent",
+    ),
+    status: "published" as const,
+    sortOrder: 4,
+    isArchived: false,
+  },
+  {
+    name: "Paddleboards & Lake Play",
+    slug: "paddleboards-lake-play",
+    description: "Paddleboards, the floating raft, and on-water fun.",
+    coverImage: propertyImg(
+      "/images/property/family-paddleboat.jpg",
+      "Children enjoying a paddleboat on the lake",
+    ),
+    status: "published" as const,
+    sortOrder: 5,
+    isArchived: false,
+  },
+  {
+    name: "Nature & Wildlife",
+    slug: "nature-wildlife",
+    description: "Ponderosa pines, willows, birds, and wildlife sightings.",
+    coverImage: img("nature", "Bald eagle perched in a pine tree"),
+    status: "published" as const,
+    sortOrder: 6,
+    isArchived: false,
+  },
+  {
+    name: "Sunsets & Starry Nights",
+    slug: "sunsets-starry-nights",
+    description: "Golden-hour light and incredible night skies over the lake.",
+    coverImage: img("stars", "Adirondack chairs facing a sunset over the lake"),
+    status: "published" as const,
+    sortOrder: 7,
+    isArchived: false,
+  },
+  {
+    name: "Historic / Sundial Motel",
+    slug: "historic-sundial-motel",
+    description: "The nostalgic lakeside building and generations of summer holidays.",
+    coverImage: propertyImg(
+      "/images/property/property-pine-sky.jpg",
+      "Tall pine tree against a summer sky at the property",
+    ),
+    status: "published" as const,
+    sortOrder: 8,
+    isArchived: false,
+  },
+];
