@@ -66,7 +66,6 @@ export const PROPERTY_GALLERY: { path: string; alt: string; category: string }[]
   { path: `${BASE}/wildlife-swans.jpg`, alt: "White swans swimming on Vaseaux Lake", category: "wildlife" },
   { path: `${BASE}/wildlife-swans-pair.jpg`, alt: "Pair of swans gliding across calm blue water", category: "wildlife" },
   { path: `${BASE}/wildlife-eagle.jpg`, alt: "Bald eagle perched in a pine tree", category: "wildlife" },
-  { path: `${BASE}/wildlife-toad.jpg`, alt: "Western toad on the forest floor near the property", category: "wildlife" },
   { path: `${BASE}/family-paddleboat.jpg`, alt: "Children in life jackets on a paddleboat", category: "family" },
   { path: `${BASE}/family-lake-canopy.jpg`, alt: "Family enjoying lake activities under a canopy tent", category: "family" },
   { path: `${BASE}/family-group-dining.jpg`, alt: "Large group dining outdoors by the lake at dusk", category: "family" },
