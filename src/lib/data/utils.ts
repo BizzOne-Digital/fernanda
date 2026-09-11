@@ -1,5 +1,5 @@
 import { DEMO_IMAGES, demoImage, demoGallery, type DemoImageKey } from "@/lib/demo-images";
-import { resolvePublicImageUrl } from "@/lib/uploads/stored-uploads";
+import { resolvePublicImageUrl } from "@/lib/uploads/public-url";
 
 const LEGACY_DEMO_MAP: Record<string, string> = {
   "/demo/lake-hero.svg": DEMO_IMAGES.lakeHero,

@@ -1,5 +1,5 @@
 import Image, { ImageProps } from "next/image";
-import { resolvePublicImageUrl } from "@/lib/uploads/stored-uploads";
+import { resolvePublicImageUrl } from "@/lib/uploads/public-url";
 import { cn } from "@/lib/utils/cn";
 
 type SiteImageProps = ImageProps & {

@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { AdminInput, FormField } from "@/components/admin/form-field";
 import { adminUploadToFolder, deleteStoredUpload, useAdminFetch } from "@/hooks/use-admin-fetch";
-import type { UploadFolder } from "@/lib/uploads/stored-uploads";
+import type { UploadFolder } from "@/lib/uploads/public-url";
 import { cn } from "@/lib/utils/cn";
 import Image from "next/image";
 import { useCallback, useRef, useState } from "react";

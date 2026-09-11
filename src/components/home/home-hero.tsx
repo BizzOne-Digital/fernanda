@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { SiteSettingsData } from "@/lib/data/settings";
 import { HERO_IMAGE } from "@/lib/demo-images";
-import { resolvePublicImageUrl } from "@/lib/uploads/stored-uploads";
+import { resolvePublicImageUrl } from "@/lib/uploads/public-url";
 
 type HomeHeroProps = {
   settings: SiteSettingsData;

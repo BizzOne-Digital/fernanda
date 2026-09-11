@@ -5,7 +5,7 @@ import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { adminUploadToFolder, deleteStoredUpload } from "@/hooks/use-admin-fetch";
-import type { UploadFolder } from "@/lib/uploads/stored-uploads";
+import type { UploadFolder } from "@/lib/uploads/public-url";
 import { cn } from "@/lib/utils/cn";
 
 type LocalImageFieldProps = {

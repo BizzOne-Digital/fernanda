@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
-import type { UploadFolder } from "@/lib/uploads/stored-uploads";
+import type { UploadFolder } from "@/lib/uploads/public-url";
 
 export class AdminApiError extends Error {
   status: number;
