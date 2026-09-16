@@ -8,8 +8,8 @@ type SiteLogoProps = {
 };
 
 export function SiteLogo({ className, compact, tone = "dark" }: SiteLogoProps) {
-  const textClass = tone === "light" ? "text-cream" : "text-lake-deep";
-  const subTextClass = tone === "light" ? "text-cream/75" : "text-lake-deep/80";
+  const textClass = tone === "light" ? "text-cream" : "text-resort-navy";
+  const subTextClass = tone === "light" ? "text-cream/75" : "text-resort-navy/75";
   const iconWrapClass =
     tone === "light"
       ? "border-cream/20 bg-lake-deep/40"

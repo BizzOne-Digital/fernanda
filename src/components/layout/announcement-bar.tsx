@@ -14,7 +14,7 @@ export function AnnouncementBar({ settings }: AnnouncementBarProps) {
   );
 
   return (
-    <div className="bg-lake-deep text-cream">
+    <div className="bg-golden text-resort-navy">
       <div className="mx-auto flex max-w-7xl items-center justify-center px-4 py-2 text-center">
         {announcementLink ? (
           <Link href={announcementLink} className="hover:text-golden">

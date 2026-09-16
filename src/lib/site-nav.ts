@@ -3,24 +3,28 @@ export type SiteNavItem = {
   label: string;
 };
 
+/** Main header navigation — classic resort style. */
 export const PRIMARY_NAV: SiteNavItem[] = [
   { href: "/", label: "Home" },
-  { href: "/cabins", label: "Cabins" },
-  { href: "/about", label: "About" },
+  { href: "/about", label: "About Us" },
+  { href: "/cabins", label: "Accommodation" },
+  { href: "/things-to-do", label: "Activities" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/things-to-do", label: "Things to Do" },
+  { href: "/policies", label: "Policies" },
   { href: "/contact", label: "Contact" },
 ];
 
-/** Footer-only links — not used in the site header. */
-export const FOOTER_SECONDARY_NAV: SiteNavItem[] = [
-  { href: "/services", label: "Experiences" },
-  { href: "/rates-and-seasons", label: "Rates & Seasons" },
-  { href: "/inquire", label: "Check Availability" },
-  { href: "/testimonials", label: "Testimonials" },
+export const GUEST_INFO_NAV: SiteNavItem[] = [
   { href: "/faqs", label: "FAQs" },
+  { href: "/rates-and-seasons", label: "Rates & Seasons" },
+  { href: "/services", label: "Stay Types" },
+  { href: "/inquire", label: "Check Availability" },
+  { href: "/testimonials", label: "Guest Reviews" },
   { href: "/blog", label: "Journal" },
 ];
+
+/** Footer “Plan your stay” column. */
+export const FOOTER_SECONDARY_NAV: SiteNavItem[] = GUEST_INFO_NAV;
 
 export const SECONDARY_NAV = FOOTER_SECONDARY_NAV;
 

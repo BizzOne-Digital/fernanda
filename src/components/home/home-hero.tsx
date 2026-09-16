@@ -12,65 +12,35 @@ export function HomeHero({ settings }: HomeHeroProps) {
   const heroSrc = resolvePublicImageUrl(HERO_IMAGE, HERO_IMAGE);
 
   return (
-    <section className="relative min-h-[100svh] overflow-hidden">
-      <Image
-        src={heroSrc}
-        alt="Waterfront cabins on Vaseaux Lake at golden hour with willow tree and paddleboards"
-        fill
-        priority
-        sizes="100vw"
-        className="object-cover object-center"
-      />
-
-      <div className="absolute inset-0 bg-gradient-to-r from-lake-deep/15 via-transparent to-sky-bright/15" />
-
-      <div className="absolute inset-y-0 left-0 flex w-full max-w-full overflow-hidden lg:max-w-[52%]">
-        <svg
-          className="absolute inset-0 h-full w-full text-lake-deep/72"
-          viewBox="0 0 760 900"
-          preserveAspectRatio="none"
-          aria-hidden
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 H560 C610,120 590,260 620,420 C650,580 600,760 640,900 H0 Z"
-          />
-        </svg>
-
-        <div className="hero-grain relative z-10 flex w-full min-w-0 flex-col justify-center px-4 pb-20 pt-36 sm:px-8 sm:pb-24 sm:pt-40 md:px-14 md:pb-28 md:pt-44 lg:px-16 lg:pb-32 lg:pt-48">
-          <p className="text-[0.65rem] font-medium uppercase tracking-[0.22em] text-golden sm:text-xs sm:tracking-[0.32em]">
-            Vaseaux Lake • Oliver, BC
+    <section className="relative">
+      <div className="relative min-h-[52vh] md:min-h-[58vh] lg:min-h-[62vh]">
+        <Image
+          src={heroSrc}
+          alt="Waterfront cabins on Vaseaux Lake at golden hour"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-resort-navy/75 via-resort-navy/25 to-transparent" />
+        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-4 pb-10 pt-16 text-center text-cream md:px-6 md:pb-14">
+          <p className="text-xs font-semibold uppercase tracking-[0.28em] text-golden">
+            Vaseaux Lake Waterfront Cabins
           </p>
-
-          <h1 className="mt-5 max-w-xl text-balance font-serif text-3xl leading-[1.08] tracking-[0.04em] text-cream uppercase sm:text-4xl md:text-[2.75rem] lg:text-5xl">
-            {settings.general.primaryHeadline}
+          <h1 className="mt-3 font-serif text-3xl font-semibold leading-tight md:text-5xl">
+            {settings.general.primaryHeadline || "Your getaway on Vaseaux Lake"}
           </h1>
-
-          <p className="mt-5 max-w-md font-serif text-lg leading-relaxed text-cream/90 md:text-xl">
-            {settings.general.supportingHeadline}
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-cream/90 md:text-lg">
+            {settings.general.supportingHeadline ||
+              "Family-friendly cabin-style stays in Oliver, BC — lake, lawn, and long summer evenings."}
           </p>
-
-          <div className="mt-8 flex flex-wrap gap-3">
-            <Link
-              href="/cabins"
-              className="inline-flex items-center justify-center rounded-sm bg-golden px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-ink transition hover:brightness-110 hover:shadow-[0_8px_24px_rgb(240_180_41_/_35%)]"
-            >
-              Explore the cabins
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Link href="/inquire" className="resort-btn-primary">
+              Request a reservation
             </Link>
-            <Link
-              href="/inquire"
-              className="inline-flex items-center justify-center rounded-sm border border-golden/80 bg-cream/10 px-6 py-3 text-[0.72rem] font-medium uppercase tracking-[0.22em] text-golden backdrop-blur-sm transition hover:bg-golden/15"
-            >
-              Plan your stay
+            <Link href="/gallery" className="resort-btn-outline border-cream/40 bg-transparent text-cream hover:bg-cream/10">
+              View gallery
             </Link>
-          </div>
-
-          <div className="mt-10 hidden max-w-md items-center gap-4 sm:flex">
-            <span className="h-px flex-1 bg-golden/50" aria-hidden />
-            <span className="font-serif text-[0.62rem] uppercase tracking-[0.28em] text-golden/95">
-              Eight private stays • One historic roof
-            </span>
-            <span className="h-px flex-1 bg-golden/50" aria-hidden />
           </div>
         </div>
       </div>

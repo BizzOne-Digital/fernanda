@@ -4,7 +4,6 @@ import Link from "next/link";
 import { SiteImage } from "@/components/ui/site-image";
 import type { CabinData } from "@/lib/data/cabins";
 import { resolveImage } from "@/lib/data/utils";
-import { ScrollReveal } from "@/components/motion/scroll-reveal";
 
 type CabinRailProps = {
   cabins: CabinData[];
@@ -12,42 +11,23 @@ type CabinRailProps = {
 
 export function CabinRail({ cabins }: CabinRailProps) {
   return (
-    <div className="relative max-w-full overflow-hidden">
-      <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-xs uppercase tracking-[0.2em] text-lake-medium">Units 5–12</p>
-          <h2 className="font-serif text-3xl text-lake-deep md:text-4xl">
-            Eight private stays under one roof
-          </h2>
-        </div>
-        <Link href="/cabins" className="text-sm text-lake-medium hover:text-lake-deep">
-          Compare all cabins
-        </Link>
-      </div>
-      <div className="flex max-w-full gap-4 overflow-x-auto pb-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-        {cabins.map((cabin, index) => {
-          const image = resolveImage(cabin.cardImage, "cabinInterior", cabin.name);
-          return (
-            <ScrollReveal key={cabin.slug} direction={index % 2 === 0 ? "left" : "right"} className="shrink-0">
-              <Link
-                href={`/cabins/${cabin.slug}`}
-                className="card-lift postcard-border block w-64 overflow-hidden rounded-sm bg-white md:w-72"
-              >
-                <div className="relative aspect-[4/5]">
-                  <SiteImage src={image.src} alt={image.alt} fill sizes="280px" />
-                  <span className="absolute left-3 top-3 rounded bg-golden px-2 py-1 text-[10px] font-medium uppercase tracking-[0.2em] text-ink shadow-sm">
-                    {cabin.cabinNumber}
-                  </span>
-                </div>
-                <div className="p-4">
-                  <p className="font-serif text-xl">{cabin.name}</p>
-                  <p className="text-sm text-ink/70">Sleeps {cabin.capacity}</p>
-                </div>
-              </Link>
-            </ScrollReveal>
-          );
-        })}
-      </div>
+    <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+      {cabins.slice(0, 8).map((cabin) => {
+        const image = resolveImage(cabin.cardImage, "cabinInterior", cabin.name);
+        return (
+          <Link key={cabin.slug} href={`/cabins/${cabin.slug}`} className="resort-card group">
+            <div className="relative aspect-[4/3] overflow-hidden">
+              <SiteImage src={image.src} alt={image.alt} fill sizes="(max-width:768px) 50vw, 25vw" className="object-cover transition duration-500 group-hover:scale-105" />
+            </div>
+            <div className="border-t border-sand/80 p-4">
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-lake-medium">Cabin {cabin.cabinNumber}</p>
+              <p className="mt-1 font-serif text-xl text-resort-navy">{cabin.name}</p>
+              <p className="mt-1 text-sm text-ink/70">Sleeps {cabin.capacity}</p>
+              <span className="mt-3 inline-block text-xs font-bold uppercase tracking-[0.14em] text-golden">More info →</span>
+            </div>
+          </Link>
+        );
+      })}
     </div>
   );
 }

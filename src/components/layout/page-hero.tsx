@@ -19,22 +19,17 @@ export function PageHero({
   className,
 }: PageHeroProps) {
   return (
-    <section
-      className={cn(
-        "relative flex min-h-[38vh] items-center justify-center overflow-hidden md:min-h-[44vh]",
-        className,
-      )}
-    >
-      <Image src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover object-center" />
-      <div className="absolute inset-0 bg-gradient-to-t from-lake-deep/40 via-lake-medium/20 to-sky-bright/10" />
-      <div className="relative z-10 mx-auto max-w-3xl min-w-0 px-4 py-20 text-center text-cream md:px-6 md:py-24">
-        {eyebrow ? (
-          <p className="text-[0.68rem] font-medium uppercase tracking-[0.32em] text-golden">{eyebrow}</p>
-        ) : null}
-        <h1 className="mt-3 font-serif text-4xl tracking-[0.03em] md:text-5xl">{title}</h1>
-        <p className="mx-auto mt-4 max-w-2xl font-serif text-lg leading-relaxed text-cream/88 md:text-xl">
-          {subtitle}
-        </p>
+    <section className={cn("relative overflow-hidden border-b border-sand/80", className)}>
+      <div className="relative min-h-[32vh] md:min-h-[38vh]">
+        <Image src={imageSrc} alt={imageAlt} fill priority sizes="100vw" className="object-cover object-center" />
+        <div className="absolute inset-0 bg-resort-navy/55" />
+        <div className="relative z-10 mx-auto flex min-h-[32vh] max-w-4xl flex-col items-center justify-center px-4 py-16 text-center text-cream md:min-h-[38vh] md:px-6">
+          {eyebrow ? (
+            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-golden">{eyebrow}</p>
+          ) : null}
+          <h1 className="mt-2 font-serif text-4xl font-semibold md:text-5xl">{title}</h1>
+          <p className="mx-auto mt-4 max-w-2xl text-base leading-relaxed text-cream/90 md:text-lg">{subtitle}</p>
+        </div>
       </div>
     </section>
   );

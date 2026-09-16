@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { SiteSettingsData } from "@/lib/data/settings";
 import { SiteLogo } from "@/components/layout/site-logo";
-import { FOOTER_SECONDARY_NAV, LEGAL_NAV, PRIMARY_NAV } from "@/lib/site-nav";
+import { GUEST_INFO_NAV, LEGAL_NAV, PRIMARY_NAV } from "@/lib/site-nav";
 
 type FooterProps = {
   settings: SiteSettingsData;
@@ -16,14 +16,11 @@ function FooterNavColumn({
 }) {
   return (
     <div>
-      <p className="text-[0.68rem] font-medium uppercase tracking-[0.28em] text-golden">{title}</p>
-      <ul className="mt-4 space-y-2.5">
+      <p className="text-xs font-bold uppercase tracking-[0.2em] text-golden">{title}</p>
+      <ul className="mt-4 space-y-2">
         {links.map((link) => (
           <li key={link.href}>
-            <Link
-              href={link.href}
-              className="font-serif text-sm tracking-[0.04em] text-cream/82 transition hover:text-golden"
-            >
+            <Link href={link.href} className="text-sm text-cream/85 transition hover:text-golden">
               {link.label}
             </Link>
           </li>
@@ -40,73 +37,51 @@ export function Footer({ settings }: FooterProps) {
       ? footer.legalLinks.map((link) => ({ href: link.url, label: link.label }))
       : LEGAL_NAV;
 
-  return (
-    <footer className="site-shell mt-20 w-full border-t border-sky-bright/30 bg-gradient-to-br from-lake-medium to-lake-deep text-cream">
-      <div className="h-1.5 bg-gradient-to-r from-summer-yellow/60 via-golden to-summer-yellow/60" />
+  const accommodationLinks = [
+    { href: "/cabins", label: "All cabins" },
+    { href: "/rates-and-seasons", label: "Rates & seasons" },
+    { href: "/inquire", label: "Check availability" },
+  ];
 
+  return (
+    <footer className="site-shell mt-16 w-full bg-resort-navy text-cream">
       <div className="mx-auto max-w-7xl px-4 py-14 md:px-6">
-        <div className="grid gap-12 lg:grid-cols-[1.2fr_0.9fr_0.9fr_1fr]">
-          <div className="max-w-sm">
+        <div className="grid gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div>
             <SiteLogo tone="light" />
-            <p className="mt-5 text-sm leading-relaxed text-cream/78">
+            <p className="mt-4 text-sm leading-relaxed text-cream/80">
               {footer.shortDescription ||
-                "Eight private cabin-style accommodations under one historic roof on the shores of Vaseaux Lake."}
+                "Eight private cabin-style accommodations under one historic roof on Vaseaux Lake, near Oliver in the South Okanagan."}
             </p>
-            <Link
-              href={footer.ctaUrl || "/inquire"}
-              className="mt-6 inline-flex rounded-sm bg-golden px-5 py-2.5 text-[0.68rem] font-medium uppercase tracking-[0.22em] text-ink transition hover:brightness-105"
-            >
-              {footer.ctaText || "Check availability"}
+            <Link href={footer.ctaUrl || "/inquire"} className="resort-btn-primary mt-6">
+              {footer.ctaText || "Contact us"}
             </Link>
           </div>
 
-          <FooterNavColumn title="Navigate" links={PRIMARY_NAV} />
+          <FooterNavColumn title="Accommodation" links={accommodationLinks} />
+          <FooterNavColumn title="Explore" links={PRIMARY_NAV.filter((l) => l.href !== "/")} />
+          <FooterNavColumn title="Guest information" links={GUEST_INFO_NAV.slice(0, 5)} />
+        </div>
 
-          <FooterNavColumn title="Plan your stay" links={FOOTER_SECONDARY_NAV} />
-
+        <div className="mt-12 grid gap-6 border-t border-cream/15 pt-8 md:grid-cols-2">
           <div>
-            <p className="text-[0.68rem] font-medium uppercase tracking-[0.28em] text-golden">Contact</p>
-            <ul className="mt-4 space-y-3 text-sm text-cream/82">
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-golden">Contact</p>
+            <ul className="mt-3 space-y-2 text-sm text-cream/85">
               <li>
-                <a href={`mailto:${contact.email}`} className="break-all transition hover:text-golden">
-                  {contact.email}
-                </a>
+                <a href={`mailto:${contact.email}`} className="hover:text-golden">{contact.email}</a>
               </li>
               <li>
-                <a href={contact.phoneLink} className="transition hover:text-golden">
-                  {contact.phoneDisplay}
-                </a>
+                <a href={contact.phoneLink} className="hover:text-golden">{contact.phoneDisplay}</a>
               </li>
-              {contact.facebookUrl ? (
-                <li>
-                  <a
-                    href={contact.facebookUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="transition hover:text-golden"
-                  >
-                    Facebook
-                  </a>
-                </li>
-              ) : null}
-              {contact.address ? <li className="text-cream/70">{contact.address}</li> : null}
-              {contact.businessHours ? (
-                <li className="text-cream/70">{contact.businessHours}</li>
-              ) : null}
+              {contact.address ? <li>{contact.address}</li> : null}
             </ul>
-
-            <p className="mt-8 text-[0.68rem] font-medium uppercase tracking-[0.28em] text-golden">
-              Legal
-            </p>
-            <ul className="mt-4 flex flex-wrap gap-x-5 gap-y-2">
+          </div>
+          <div>
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-golden">Policies</p>
+            <ul className="mt-3 flex flex-wrap gap-x-4 gap-y-2">
               {legalLinks.map((link) => (
                 <li key={link.href}>
-                  <Link
-                    href={link.href}
-                    className="text-sm text-cream/75 transition hover:text-golden"
-                  >
-                    {link.label}
-                  </Link>
+                  <Link href={link.href} className="text-sm text-cream/80 hover:text-golden">{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -114,15 +89,13 @@ export function Footer({ settings }: FooterProps) {
         </div>
       </div>
 
-      <div className="border-t border-cream/10">
-        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-3 px-4 py-5 text-center text-xs text-cream/65 md:flex-row md:px-6 md:text-left">
+      <div className="border-t border-cream/10 bg-[#122a36]">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-4 py-4 text-center text-xs text-cream/60 md:flex-row md:px-6 md:text-left">
           <p>
             {footer.copyrightText ||
               `© ${new Date().getFullYear()} Vaseaux Lake Waterfront Cabins. All rights reserved.`}
           </p>
-          <p className="max-w-full break-words font-serif tracking-[0.12em] text-cream/50">
-            Vaseaux Lake • Oliver, BC • Wine Country
-          </p>
+          <p>Vaseaux Lake · Oliver, BC</p>
         </div>
       </div>
     </footer>
