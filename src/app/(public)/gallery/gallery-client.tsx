@@ -3,15 +3,14 @@
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { LightboxGrid } from "@/components/gallery/lightbox";
-import type { GalleryCategoryData } from "@/lib/data/gallery";
+import { GALLERY_FILTER_CATEGORIES } from "@/lib/gallery/categories";
 import type { GalleryImageData } from "@/lib/data/gallery";
 
 type GalleryClientProps = {
-  categories: GalleryCategoryData[];
   images: GalleryImageData[];
 };
 
-export function GalleryClient({ categories, images }: GalleryClientProps) {
+export function GalleryClient({ images }: GalleryClientProps) {
   const searchParams = useSearchParams();
   const initial = searchParams.get("category") || "";
   const [active, setActive] = useState(initial);
@@ -22,37 +21,35 @@ export function GalleryClient({ categories, images }: GalleryClientProps) {
   }, [active, images]);
 
   return (
-    <>
-      <section className="mx-auto max-w-7xl px-4 py-10 md:px-6">
-        <div className="flex flex-wrap gap-2">
+    <section className="mx-auto max-w-7xl px-4 py-12 md:px-6">
+      <p className="text-center text-sm text-ink/70">
+        {images.length} photos of Vaseaux Lake, our property, and lake days in the South Okanagan.
+      </p>
+      <div className="mt-8 flex flex-wrap justify-center gap-2">
+        {GALLERY_FILTER_CATEGORIES.map((category) => (
           <button
+            key={category.slug || "all"}
             type="button"
-            onClick={() => setActive("")}
-            className={`rounded-full px-4 py-2 text-sm ${!active ? "bg-lake-deep text-cream" : "border border-sand"}`}
+            onClick={() => setActive(category.slug)}
+            className={`rounded-sm px-4 py-2 text-xs font-semibold uppercase tracking-[0.12em] ${
+              active === category.slug
+                ? "bg-resort-navy text-cream"
+                : "border border-sand bg-white text-resort-navy hover:bg-sand/30"
+            }`}
           >
-            All
+            {category.label}
           </button>
-          {categories.map((category) => (
-            <button
-              key={category.slug}
-              type="button"
-              onClick={() => setActive(category.slug)}
-              className={`rounded-full px-4 py-2 text-sm ${active === category.slug ? "bg-lake-deep text-cream" : "border border-sand"}`}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-        <LightboxGrid
-          className="mt-8"
-          images={filtered.map((image) => ({
-            src: image.src,
-            alt: image.alt,
-            caption: image.caption,
-            credit: image.credit,
-          }))}
-        />
-      </section>
-    </>
+        ))}
+      </div>
+      <LightboxGrid
+        className="mt-10"
+        images={filtered.map((image) => ({
+          src: image.src,
+          alt: image.alt,
+          caption: image.caption,
+          credit: image.credit,
+        }))}
+      />
+    </section>
   );
 }

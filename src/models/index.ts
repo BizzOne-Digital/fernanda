@@ -46,6 +46,14 @@ export {
 } from "@/models/GalleryCategory";
 
 export {
+  default as GalleryPhoto,
+  GALLERY_PHOTO_CATEGORIES,
+  type IGalleryPhoto,
+  type GalleryPhotoCategory,
+  type GalleryPhotoStatus,
+} from "@/models/GalleryPhoto";
+
+export {
   default as StoredUpload,
   type IStoredUpload,
 } from "@/models/StoredUpload";

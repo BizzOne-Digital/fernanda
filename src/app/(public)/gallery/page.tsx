@@ -2,29 +2,27 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import { GalleryClient } from "./gallery-client";
 import { PageHero } from "@/components/layout/page-hero";
-import { getGalleryCategories, getGalleryImages } from "@/lib/data/gallery";
+import { getGalleryImages } from "@/lib/data/gallery";
 import { HERO_IMAGE } from "@/lib/demo-images";
-import { resolveImage } from "@/lib/data/utils";
 
 export const metadata: Metadata = {
   title: "Gallery",
-  description: "Photos of Vaseaux Lake, the historic property, cabins, and lake days.",
+  description: "Photos of Vaseaux Lake, waterfront cabins, sunsets, wildlife, and family lake days near Oliver, BC.",
 };
 
 export default async function GalleryPage() {
-  const [categories, images] = await Promise.all([getGalleryCategories(), getGalleryImages()]);
-  const hero = resolveImage(categories[0]?.coverImage, "lakeHero", "Gallery hero");
-  const heroSrc = hero.src.startsWith("/demo/") ? HERO_IMAGE : hero.src;
+  const images = await getGalleryImages();
 
   return (
     <Suspense>
       <PageHero
         title="Gallery"
-        subtitle="Lake days, historic character, and family time on Vaseaux Lake."
-        imageSrc={heroSrc}
-        imageAlt={hero.alt}
+        subtitle="Lake days, sunsets, wildlife, and life at Vaseaux Lake Waterfront Cabins."
+        eyebrow="Photo gallery"
+        imageSrc={HERO_IMAGE}
+        imageAlt="Waterfront cabins on Vaseaux Lake"
       />
-      <GalleryClient categories={categories} images={images} />
+      <GalleryClient images={images} />
     </Suspense>
   );
 }

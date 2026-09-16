@@ -4,6 +4,7 @@ import { blogSeeds } from "@/lib/seed/blogs";
 import { buildCabinSeeds } from "@/lib/seed/cabins";
 import { faqSeeds } from "@/lib/seed/faqs";
 import { galleryCategorySeeds } from "@/lib/seed/gallery";
+import { galleryPhotoSeeds } from "@/lib/seed/gallery-photos";
 import { seedIfMissing } from "@/lib/seed/helpers";
 import { pageSeeds } from "@/lib/seed/pages";
 import { seasonSeeds } from "@/lib/seed/seasons";
@@ -15,6 +16,7 @@ import BlogPost from "@/models/BlogPost";
 import Cabin from "@/models/Cabin";
 import FAQ from "@/models/FAQ";
 import GalleryCategory from "@/models/GalleryCategory";
+import GalleryPhoto from "@/models/GalleryPhoto";
 import Page from "@/models/Page";
 import Season from "@/models/Season";
 import Service from "@/models/Service";
@@ -107,6 +109,14 @@ async function seedGallery(stats: SeedStats) {
         category,
         `gallery:${category.slug}`,
       ),
+      stats,
+    );
+  }
+
+  console.log("\nGallery photos");
+  for (const photo of galleryPhotoSeeds) {
+    track(
+      await seedIfMissing(GalleryPhoto, { url: photo.url }, photo, `gallery-photo:${photo.url}`),
       stats,
     );
   }

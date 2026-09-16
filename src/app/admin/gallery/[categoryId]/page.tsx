@@ -5,7 +5,7 @@ import { AdminHeader, AdminPanel } from "@/components/admin/admin-header";
 import { useAdminLayout } from "@/components/admin/admin-shell";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
 import { AdminInput, FormField } from "@/components/admin/form-field";
-import { adminUpload, useAdminFetch, useAdminMutation } from "@/hooks/use-admin-fetch";
+import { adminUploadToFolder, useAdminFetch, useAdminMutation } from "@/hooks/use-admin-fetch";
 import { cn } from "@/lib/utils/cn";
 import Image from "next/image";
 import Link from "next/link";
@@ -51,8 +51,23 @@ export default function AdminGalleryCategoryPage() {
   const handleUpload = async (file: File) => {
     setUploading(true);
     try {
-      await adminUpload(file, { galleryCategoryId: categoryId, category: "gallery" });
-      toast.success("Photo uploaded");
+      const uploaded = await adminUploadToFolder(file, "gallery");
+      await mutate(
+        "/api/admin/gallery-photos",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            url: uploaded.url,
+            alt: file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "),
+            category: "property",
+            caption: category?.name ? `Gallery: ${category.name}` : undefined,
+            sortOrder: assets.length,
+            status: "published",
+          }),
+        },
+        { silent: true },
+      );
+      toast.success("Photo uploaded to site gallery");
       reload();
     } catch {
       toast.error("Upload failed");

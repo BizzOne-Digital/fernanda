@@ -61,9 +61,14 @@ export default function AdminGalleryPage() {
         description="Organize photo categories and manage media."
         onMenuClick={openMenu}
         actions={
-          <Button variant="golden" type="button" onClick={() => setCreating(true)}>
-            New category
-          </Button>
+          <div className="flex gap-2">
+            <Link href="/admin/gallery/photos" className="resort-btn-outline">
+              Site photos
+            </Link>
+            <Button variant="golden" type="button" onClick={() => setCreating(true)}>
+              New category
+            </Button>
+          </div>
         }
       />
       <div className="space-y-6 p-4 lg:p-8">

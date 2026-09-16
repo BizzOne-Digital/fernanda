@@ -1,8 +1,8 @@
 import { unstable_cache } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import GalleryCategory, { type IGalleryCategory } from "@/models/GalleryCategory";
-import MediaAsset from "@/models/MediaAsset";
-import { demoGallery } from "@/lib/demo-images";
+import GalleryPhoto from "@/models/GalleryPhoto";
+import { HERO_IMAGE, PROPERTY_GALLERY } from "@/lib/demo-images";
 import { toPlain, type PlainModel } from "@/lib/data/utils";
 
 export type GalleryCategoryData = PlainModel<IGalleryCategory>;
@@ -16,6 +16,26 @@ export type GalleryImageData = {
   categorySlug?: string;
   featured: boolean;
 };
+
+function staticGalleryFallback(): GalleryImageData[] {
+  const hero: GalleryImageData = {
+    _id: "static-hero",
+    src: HERO_IMAGE,
+    alt: "Waterfront cabins on Vaseaux Lake at golden hour",
+    categorySlug: "property",
+    featured: true,
+  };
+
+  const property = PROPERTY_GALLERY.map((item, index) => ({
+    _id: `static-${index}`,
+    src: item.path,
+    alt: item.alt,
+    categorySlug: item.category,
+    featured: index < 4,
+  }));
+
+  return [hero, ...property];
+}
 
 async function fetchGalleryCategories(): Promise<GalleryCategoryData[]> {
   try {
@@ -39,49 +59,39 @@ async function fetchGalleryImages(categorySlug?: string): Promise<GalleryImageDa
       status: "published",
       isArchived: false,
     };
-    if (categorySlug) query.categorySlug = categorySlug;
+    if (categorySlug) query.category = categorySlug;
 
-    const assets = await MediaAsset.find(query)
+    const photos = await GalleryPhoto.find(query)
       .sort({ featured: -1, sortOrder: 1, createdAt: -1 })
-      .limit(120)
       .lean();
 
-    if (assets.length === 0) {
-      return demoGallery(31).map((item, index) => ({
-        _id: `demo-${index}`,
-        src: item.src,
-        alt: item.alt,
-        categorySlug: categorySlug ?? "lake-waterfront",
-        featured: index < 3,
-      }));
+    if (photos.length === 0) {
+      const fallback = staticGalleryFallback();
+      if (!categorySlug) return fallback;
+      return fallback.filter((item) => item.categorySlug === categorySlug);
     }
 
-    const plainAssets = toPlain(assets) as Array<{
+    const plain = toPlain(photos) as Array<{
       _id: string;
-      publicUrl: string;
-      alt?: string;
+      url: string;
+      alt: string;
       caption?: string;
-      credit?: string;
-      categorySlug?: string;
+      category: string;
       featured?: boolean;
     }>;
 
-    return plainAssets.map((asset) => ({
-      _id: String(asset._id),
-      src: asset.publicUrl,
-      alt: asset.alt || "Gallery image",
-      caption: asset.caption,
-      credit: asset.credit,
-      categorySlug: asset.categorySlug,
-      featured: asset.featured ?? false,
+    return plain.map((photo) => ({
+      _id: String(photo._id),
+      src: photo.url,
+      alt: photo.alt,
+      caption: photo.caption,
+      categorySlug: photo.category,
+      featured: photo.featured ?? false,
     }));
   } catch {
-    return demoGallery(12).map((item, index) => ({
-      _id: `demo-${index}`,
-      src: item.src,
-      alt: item.alt,
-      featured: index < 3,
-    }));
+    const fallback = staticGalleryFallback();
+    if (!categorySlug) return fallback;
+    return fallback.filter((item) => item.categorySlug === categorySlug);
   }
 }
 

@@ -74,7 +74,14 @@ export function Lightbox({ images, initialIndex = 0, open, onClose }: LightboxPr
       </button>
       <figure className="max-h-[85vh] max-w-5xl">
         <div className="relative aspect-[4/3] w-[min(90vw,960px)]">
-          <Image src={current.src} alt={current.alt} fill className="object-contain" sizes="90vw" />
+          <Image
+            src={current.src}
+            alt={current.alt}
+            fill
+            className="object-contain"
+            sizes="90vw"
+            unoptimized={current.src.startsWith("/api/uploads/")}
+          />
         </div>
         {(current.caption || current.credit) && (
           <figcaption className="mt-3 text-center text-sm text-cream/85">
@@ -118,6 +125,7 @@ export function LightboxGrid({ images, className }: LightboxGridProps) {
               fill
               className="object-cover transition duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
+              unoptimized={image.src.startsWith("/api/uploads/")}
             />
           </button>
         ))}
