@@ -7,6 +7,7 @@ import { getFaqs } from "@/lib/data/faqs";
 import { FALLBACK_FAQS } from "@/lib/data/fallbacks";
 import { SiteImage } from "@/components/ui/site-image";
 import { Button } from "@/components/ui/button";
+import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import { resolveImage, resolveImages } from "@/lib/data/utils";
 
 export const metadata: Metadata = {
@@ -44,13 +45,26 @@ export default async function ServicesPage() {
       />
 
       <section className="mx-auto max-w-7xl px-4 py-12 md:px-6">
-        <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => {
+        <ScrollReveal direction="up" className="mx-auto max-w-2xl text-center">
+          <h2 className="font-serif text-3xl text-lake-deep md:text-4xl">Choose your lake rhythm</h2>
+          <p className="mt-3 text-sm text-ink/75">
+            Weekly summer stays, family reunions, quiet escapes, and last-minute openings — all by inquiry.
+          </p>
+        </ScrollReveal>
+        <div className="mt-10 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+          {services.map((service, index) => {
             const image = resolveImage(service.cardImage, "boats", service.title);
             return (
-              <article key={service.slug} className="postcard-border overflow-hidden rounded-sm">
-                <div className="relative aspect-[4/3]">
-                  <SiteImage src={image.src} alt={image.alt} fill sizes="(max-width:768px) 100vw, 33vw" />
+              <ScrollReveal key={service.slug} direction="up" delay={(index % 9) * 0.06}>
+              <article className="postcard-border h-full overflow-hidden rounded-sm transition-shadow duration-300 hover:shadow-lg">
+                <div className="relative aspect-[4/3] overflow-hidden">
+                  <SiteImage
+                    src={image.src}
+                    alt={image.alt}
+                    fill
+                    sizes="(max-width:768px) 100vw, 33vw"
+                    className="object-cover"
+                  />
                 </div>
                 <div className="p-4">
                   <h2 className="font-serif text-2xl text-lake-deep">
@@ -59,6 +73,7 @@ export default async function ServicesPage() {
                   <p className="mt-2 text-sm text-ink/75">{service.shortDescription}</p>
                 </div>
               </article>
+              </ScrollReveal>
             );
           })}
         </div>

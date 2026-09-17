@@ -76,6 +76,14 @@ async function seedCabins(stats: SeedStats) {
 async function seedServices(stats: SeedStats) {
   console.log("\nServices");
   for (const service of serviceSeeds) {
+    const existing = await Service.findOne({ slug: service.slug });
+    if (existing) {
+      await Service.findByIdAndUpdate(existing._id, { $set: service }, { runValidators: true });
+      console.log(`  updated service:${service.slug}`);
+      stats.created += 1;
+      continue;
+    }
+
     track(
       await seedIfMissing(Service, { slug: service.slug }, service, `service:${service.slug}`),
       stats,
@@ -142,7 +150,7 @@ async function seedTestimonials(stats: SeedStats) {
   });
 
   for (const testimonial of testimonialSeeds) {
-    const existing = await Testimonial.findOne({ sortOrder: testimonial.sortOrder });
+    const existing = await Testimonial.findOne({ guestName: testimonial.guestName });
     if (existing) {
       await Testimonial.findByIdAndUpdate(existing._id, { $set: testimonial }, { runValidators: true });
       console.log(`  updated testimonial:${testimonial.guestName}`);
@@ -165,6 +173,14 @@ async function seedTestimonials(stats: SeedStats) {
 async function seedAttractions(stats: SeedStats) {
   console.log("\nAttractions");
   for (const attraction of attractionSeeds) {
+    const existing = await Attraction.findOne({ slug: attraction.slug });
+    if (existing) {
+      await Attraction.findByIdAndUpdate(existing._id, { $set: attraction }, { runValidators: true });
+      console.log(`  updated attraction:${attraction.slug}`);
+      stats.created += 1;
+      continue;
+    }
+
     track(
       await seedIfMissing(
         Attraction,

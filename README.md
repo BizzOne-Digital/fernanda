@@ -24,8 +24,6 @@ Family-friendly cabin-style accommodations on **Vaseaux Lake** in the South Okan
 | `/things-to-do` | On-property activities and local guide |
 | `/contact` | Contact details and message form |
 | `/inquire` | Booking inquiry workflow (not instant booking) |
-| `/blog` | Editorial journal |
-| `/blog/[slug]` | Blog post detail |
 | `/policies` | Property policies |
 | `/privacy` | Privacy policy |
 | `/terms` | Terms of use |
@@ -143,7 +141,6 @@ The seed system lives in `src/lib/seed/` and is run via `scripts/seed.ts`.
 | FAQs | `faqs.ts` | Factual starter FAQs |
 | Gallery | `gallery.ts` | 9 gallery categories |
 | Testimonials | `testimonials.ts` | Clearly marked **demo** testimonials (draft) |
-| Blogs | `blogs.ts` | 3 **draft** demo posts |
 | Attractions | `attractions.ts` | Verified on-property entries + draft placeholders |
 | Policies | `policies.ts` | Confirmed packing policy + owner-review placeholders |
 
@@ -199,7 +196,6 @@ Before going live, replace or verify:
 
 - [ ] Demo SVG photos with real property photography
 - [ ] Demo testimonials (`isDemo: true`, draft status)
-- [ ] Draft blog posts (`isDemo: true`)
 - [ ] Draft/unverified attractions
 - [ ] Placeholder policies (only bedding/towels/toiletries is confirmed in seed)
 - [ ] Season calendar dates for the current year

@@ -35,6 +35,13 @@ type InquiryFormProps = {
 };
 
 export function InquiryForm({ cabins, services, settings, initial }: InquiryFormProps) {
+  const booking = settings.booking ?? {
+    inquiryConfirmationCopy:
+      "Thank you for your inquiry. We will review your requested dates and reply with availability and a quote.",
+    availabilityDisclaimer:
+      "Online availability hints are advisory only. Your stay is not confirmed until we reply directly.",
+    responseTimeWording: "We aim to respond within one to two business days.",
+  };
   const [confirmation, setConfirmation] = useState<string | null>(null);
   const [startedAt] = useState(() => Date.now());
   const defaultArrival = initial?.arrival ? new Date(`${initial.arrival}T00:00:00`) : undefined;
@@ -93,9 +100,9 @@ export function InquiryForm({ cabins, services, settings, initial }: InquiryForm
           Reference <strong>{confirmation}</strong>
         </p>
         <p className="mt-3 text-sm text-ink/80">
-          {settings.booking.inquiryConfirmationCopy}
+          {booking.inquiryConfirmationCopy}
         </p>
-        <p className="mt-2 text-sm text-ink/70">{settings.booking.availabilityDisclaimer}</p>
+        <p className="mt-2 text-sm text-ink/70">{booking.availabilityDisclaimer}</p>
       </div>
     );
   }
@@ -229,7 +236,7 @@ export function InquiryForm({ cabins, services, settings, initial }: InquiryForm
         </span>
       </label>
 
-      <p className="text-xs text-ink/60">{settings.booking.availabilityDisclaimer}</p>
+      <p className="text-xs text-ink/60">{booking.availabilityDisclaimer}</p>
 
       <Button type="submit" variant="golden" disabled={isSubmitting}>
         {isSubmitting ? "Submitting…" : "Submit inquiry"}

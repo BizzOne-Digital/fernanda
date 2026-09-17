@@ -20,10 +20,15 @@ export function TestimonialsClient({ testimonials }: TestimonialsClientProps) {
 
   return (
     <>
-      <section className="relative min-h-[45vh] overflow-hidden">
-        <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
+      <section data-hero className="relative min-h-[45vh] overflow-hidden">
+        <div data-hero-media className="absolute inset-0">
+          <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
+        </div>
         <div className="absolute inset-0 bg-lake-deep/55" />
-        <div className="relative mx-auto flex min-h-[45vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6">
+        <div
+          data-hero-copy
+          className="relative mx-auto flex min-h-[45vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6"
+        >
           <h1 className="font-serif text-4xl md:text-6xl">Guest memories</h1>
           <p className="mt-3 max-w-2xl">Stories from families who found their rhythm on the lake.</p>
         </div>

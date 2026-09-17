@@ -90,8 +90,8 @@ export function PageSectionRenderer({
 function HeroSection({ section }: { section: IPageSection }) {
   const images = resolveImages(section.images, 3, ["lakeHero", "patioBbq", "boats"]);
   return (
-    <section className="relative min-h-[70vh] overflow-hidden">
-      <div className="absolute inset-0">
+    <section data-hero className="relative min-h-[70vh] overflow-hidden">
+      <div data-hero-media className="absolute inset-0">
         <SiteImage
           src={images[0].src}
           alt={images[0].alt}
@@ -102,7 +102,10 @@ function HeroSection({ section }: { section: IPageSection }) {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-lake-deep/80 via-lake-deep/35 to-transparent" />
       </div>
-      <div className="relative mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 text-cream md:px-6">
+      <div
+        data-hero-copy
+        className="relative mx-auto flex min-h-[70vh] max-w-7xl flex-col justify-end px-4 pb-16 pt-28 text-cream md:px-6"
+      >
         {section.eyebrow ? (
           <p className="text-xs uppercase tracking-[0.25em] text-sand">{section.eyebrow}</p>
         ) : null}
@@ -168,7 +171,7 @@ function ImageTextSection({ section }: { section: IPageSection }) {
 
 function CtaSection({ section }: { section: IPageSection }) {
   return (
-    <section className="mx-auto max-w-5xl px-4 text-center md:px-6">
+    <section className="mx-auto max-w-5xl px-4 py-4 text-center md:px-6">
       <h2 className="font-serif text-3xl text-lake-deep">{section.heading}</h2>
       {section.body ? <p className="mt-3 text-ink/75">{section.body}</p> : null}
       {section.ctaText && section.ctaUrl ? (

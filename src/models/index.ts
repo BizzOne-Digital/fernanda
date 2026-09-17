@@ -90,12 +90,6 @@ export {
 } from "@/models/Attraction";
 
 export {
-  default as BlogPost,
-  type IBlogPost,
-  type BlogPostStatus,
-} from "@/models/BlogPost";
-
-export {
   default as ContactMessage,
   CONTACT_MESSAGE_STATUSES,
   type IContactMessage,

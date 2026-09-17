@@ -8,8 +8,7 @@ import { Button } from "@/components/ui/button";
 import { getAttractions } from "@/lib/data/attractions";
 import { getPageBySlug } from "@/lib/data/pages";
 import { getSiteSettings } from "@/lib/data/settings";
-import { demoImage } from "@/lib/demo-images";
-import { resolveImages } from "@/lib/data/utils";
+import { resolveImage, resolveImages } from "@/lib/data/utils";
 
 export const metadata: Metadata = {
   title: "Things to Do",
@@ -43,9 +42,26 @@ export default async function ThingsToDoPage() {
   ]);
 
   const heroSection = page?.sections.find((section) => section.sectionKey === "hero");
-  const heroImages = resolveImages(heroSection?.images, 4, ["nature", "lakeHero", "stars", "patioBbq"]);
-  const onPropertyImages = resolveImages(undefined, 4, ["lakeHero", "patioBbq", "nature", "stars"]);
-  const landscapeImages = resolveImages(undefined, 3, ["lakeHero", "nature", "historic"]);
+  const onPropertySection = page?.sections.find((section) => section.sectionKey === "on-property");
+  const landscapeSection = page?.sections.find((section) => section.sectionKey === "landscape");
+
+  const heroImage = resolveImage(
+    heroSection?.backgroundImage,
+    "nature",
+    heroSection?.heading || "Things to do",
+  );
+  const onPropertyImages = resolveImages(onPropertySection?.images, 4, [
+    "lakeHero",
+    "patioBbq",
+    "nature",
+    "stars",
+  ]);
+  const landscapeImages = resolveImages(
+    landscapeSection?.images ??
+      (landscapeSection?.foregroundImage ? [landscapeSection.foregroundImage] : undefined),
+    3,
+    ["lakeHero", "nature", "historic"],
+  );
 
   const featured = attractions.filter((item) => item.featured);
 
@@ -58,8 +74,8 @@ export default async function ThingsToDoPage() {
           heroSection?.subheading ||
           "Lake days at the property, wildlife between the bluffs, and wine country adventures in Oliver and the South Okanagan."
         }
-        imageSrc={heroSection?.backgroundImage?.url || heroImages[0].src}
-        imageAlt={heroSection?.backgroundImage?.alt || "Vaseaux Lake activities"}
+        imageSrc={heroImage.src}
+        imageAlt={heroImage.alt || "Vaseaux Lake activities"}
       />
 
       <section className="border-b border-sand/40 bg-gradient-to-b from-sand/20 to-cream">
@@ -175,18 +191,21 @@ export default async function ThingsToDoPage() {
             Owner-verified highlights for guests planning their first days on the lake.
           </p>
           <div className="mt-8 grid gap-5 lg:grid-cols-2">
-            {featured.slice(0, 2).map((item) => (
+            {featured.slice(0, 2).map((item) => {
+              const featuredImage = resolveImage(
+                item.images?.[0],
+                item.category === "Nature" ? "nature" : "lakeHero",
+                item.title,
+              );
+              return (
               <article
                 key={item._id}
                 className="postcard-border grid overflow-hidden rounded-sm bg-cream md:grid-cols-[0.95fr_1.05fr]"
               >
-                <div className="relative min-h-[220px] md:min-h-full">
+                <div className="relative min-h-[220px] overflow-hidden md:min-h-[280px]">
                   <SiteImage
-                    src={
-                      item.images?.[0]?.url ||
-                      demoImage(item.category === "Nature" ? "nature" : "lakeHero")
-                    }
-                    alt={item.images?.[0]?.alt || item.title}
+                    src={featuredImage.src}
+                    alt={featuredImage.alt}
                     fill
                     sizes="(max-width:768px) 100vw, 40vw"
                   />
@@ -197,7 +216,8 @@ export default async function ThingsToDoPage() {
                   <p className="mt-3 text-sm leading-relaxed text-ink/75">{item.summary}</p>
                 </div>
               </article>
-            ))}
+              );
+            })}
           </div>
         </section>
       ) : null}

@@ -85,6 +85,10 @@
     @apply overflow-hidden border border-sand/90 bg-white shadow-sm transition hover:shadow-md;
   }
 
+  .resort-card-dark {
+    @apply overflow-hidden border border-resort-navy/30 bg-resort-navy text-cream shadow-sm;
+  }
+
   .resort-btn-primary {
     @apply inline-flex items-center justify-center rounded-sm bg-golden px-6 py-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-white transition hover:bg-[#b88428];
   }

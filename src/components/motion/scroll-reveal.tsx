@@ -13,6 +13,8 @@ type ScrollRevealProps = {
   direction?: "up" | "down" | "left" | "right";
   delay?: number;
   as?: ElementType;
+  /** Subtle scale-in (default on). */
+  scale?: boolean;
 };
 
 const offsets = {
@@ -28,8 +30,9 @@ export function ScrollReveal({
   direction = "up",
   delay = 0,
   as: Tag = "div",
+  scale = true,
 }: ScrollRevealProps) {
-  const ref = useRef<HTMLDivElement>(null);
+  const ref = useRef<HTMLElement>(null);
 
   useEffect(() => {
     const element = ref.current;
@@ -42,28 +45,30 @@ export function ScrollReveal({
     const ctx = gsap.context(() => {
       gsap.fromTo(
         element,
-        { autoAlpha: 0, x, y },
+        { autoAlpha: 0, x, y, scale: scale ? 0.96 : 1 },
         {
           autoAlpha: 1,
           x: 0,
           y: 0,
-          duration: 0.9,
+          scale: 1,
+          duration: 0.95,
           delay,
-          ease: "power2.out",
+          ease: "power3.out",
           scrollTrigger: {
             trigger: element,
-            start: "top 85%",
-            toggleActions: "play none none reverse",
+            start: "top 86%",
+            once: true,
           },
         },
       );
     }, element);
 
     return () => ctx.revert();
-  }, [direction, delay]);
+  }, [direction, delay, scale]);
 
   return (
-    <Tag ref={ref} className={cn(className)}>
+    // Polymorphic `as` — ref type varies by element
+    <Tag ref={ref as never} data-scroll-reveal="" className={cn(className)}>
       {children}
     </Tag>
   );

@@ -56,6 +56,9 @@ export default async function HomePage() {
 
   const welcomeParagraph = BRAND_STORY.split("\n\n")[0];
   const activityPreview = attractions.filter((a) => a.status === "published").slice(0, 8);
+  const homepageReviews = [...testimonials]
+    .sort((a, b) => (a.sortOrder ?? 0) - (b.sortOrder ?? 0))
+    .slice(0, 3);
 
   return (
     <>
@@ -132,7 +135,7 @@ export default async function HomePage() {
           />
         </ScrollReveal>
         <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {(testimonials.length > 0 ? testimonials.slice(0, 6) : []).map((item, index) => (
+          {homepageReviews.map((item, index) => (
             <ScrollReveal key={item._id} direction="up" delay={index * 0.06}>
               <blockquote className="resort-card h-full p-6">
                 <p className="font-serif text-lg leading-relaxed text-resort-navy">&ldquo;{item.quote}&rdquo;</p>
@@ -143,7 +146,7 @@ export default async function HomePage() {
               </blockquote>
             </ScrollReveal>
           ))}
-          {testimonials.length === 0 ? (
+          {homepageReviews.length === 0 ? (
             <p className="text-sm text-ink/70 md:col-span-3">Guest reviews will appear here once published.</p>
           ) : null}
         </div>
@@ -195,8 +198,8 @@ export default async function HomePage() {
             </div>
           </ScrollReveal>
           <ScrollReveal direction="right" delay={0.08}>
-            <div className="resort-card h-full p-8 bg-resort-navy text-cream">
-              <h2 className="font-serif text-2xl">Reserve your vacation</h2>
+            <div className="resort-card-dark h-full p-8">
+              <h2 className="font-serif text-2xl text-cream">Reserve your vacation</h2>
               <p className="mt-3 text-sm leading-relaxed text-cream/85">
                 Share your dates and party size — we will reply with availability and a quote. Your
                 stay is not confirmed until we respond.

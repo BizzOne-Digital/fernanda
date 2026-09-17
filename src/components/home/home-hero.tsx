@@ -12,18 +12,23 @@ export function HomeHero({ settings }: HomeHeroProps) {
   const heroSrc = resolvePublicImageUrl(HERO_IMAGE, HERO_IMAGE);
 
   return (
-    <section className="relative">
+    <section data-hero className="relative overflow-hidden">
       <div className="relative min-h-[52vh] md:min-h-[58vh] lg:min-h-[62vh]">
-        <Image
-          src={heroSrc}
-          alt="Guests on the floating swim platform on Vaseaux Lake with McIntyre Bluff in the background"
-          fill
-          priority
-          sizes="100vw"
-          className="object-cover object-center"
-        />
+        <div data-hero-media className="absolute inset-0">
+          <Image
+            src={heroSrc}
+            alt="Guests on the floating swim platform on Vaseaux Lake with McIntyre Bluff in the background"
+            fill
+            priority
+            sizes="100vw"
+            className="object-cover object-center"
+          />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-resort-navy/75 via-resort-navy/25 to-transparent" />
-        <div className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-4 pb-10 pt-16 text-center text-cream md:px-6 md:pb-14">
+        <div
+          data-hero-copy
+          className="absolute inset-x-0 bottom-0 mx-auto max-w-4xl px-4 pb-10 pt-16 text-center text-cream md:px-6 md:pb-14"
+        >
           <p className="text-xs font-semibold uppercase tracking-[0.28em] text-golden">
             Vaseaux Lake Waterfront Cabins
           </p>

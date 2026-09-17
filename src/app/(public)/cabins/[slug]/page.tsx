@@ -48,10 +48,15 @@ export default async function CabinDetailPage({ params }: Props) {
 
   return (
     <>
-      <section className="relative min-h-[60vh] overflow-hidden">
-        <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
+      <section data-hero className="relative min-h-[60vh] overflow-hidden">
+        <div data-hero-media className="absolute inset-0">
+          <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
+        </div>
         <div className="absolute inset-0 bg-gradient-to-t from-lake-deep/80 to-transparent" />
-        <div className="relative mx-auto flex min-h-[60vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6">
+        <div
+          data-hero-copy
+          className="relative mx-auto flex min-h-[60vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6"
+        >
           <p className="text-xs uppercase tracking-[0.2em] text-sand">Unit {cabin.cabinNumber}</p>
           <h1 className="font-serif text-4xl md:text-6xl">{cabin.name}</h1>
           <p className="mt-2 max-w-2xl text-cream/90">Sleeps up to {cabin.capacity} · {cabin.sleepingSummary}</p>

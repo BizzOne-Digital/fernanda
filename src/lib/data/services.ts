@@ -37,7 +37,7 @@ async function fetchServiceBySlug(slug: string): Promise<ServiceData | null> {
 }
 
 export const getServices = createDataFetcher(
-  "services-v2",
+  "services-v3",
   [CACHE_TAGS.services],
   fetchPublishedServices,
 );

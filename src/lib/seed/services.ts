@@ -13,7 +13,7 @@ export const serviceSeeds = [
     shortDescription:
       "Classic week-long lake holidays from Canada Day week through Labour Day week. Contact for pricing.",
     iconAccent: "golden-hour",
-    cardImage: img("lakeHero", "Weekly high-season stays on Vaseaux Lake"),
+    cardImage: propertyImg("/images/property/lake-swim-platform.jpg", "Weekly high-season stays on Vaseaux Lake"),
     ctaText: "Inquire about a weekly stay",
     ctaUrl: "/inquire?interest=weekly-high-season",
     heroEyebrow: "High season",
@@ -53,7 +53,7 @@ export const serviceSeeds = [
     shortDescription:
       "Shorter stays may be available in May, June, and September. Contact for pricing and minimum stays.",
     iconAccent: "sage",
-    cardImage: img("nature", "Shoulder-season lake stay placeholder"),
+    cardImage: propertyImg("/images/property/lake-mountain-forest.jpg", "Shoulder-season lake stay"),
     ctaText: "Ask about shoulder-season dates",
     ctaUrl: "/inquire?interest=shoulder-season",
     heroEyebrow: "Shoulder season",
@@ -92,7 +92,7 @@ export const serviceSeeds = [
     shortDescription:
       "Simple, nostalgic lake holidays made for families — fishing, swimming, BBQs, and time together.",
     iconAccent: "lake-blue",
-    cardImage: img("patioBbq", "Family lake getaway placeholder"),
+    cardImage: propertyImg("/images/property/family-picnic-sunset.jpg", "Family lake getaway"),
     ctaText: "Plan a family stay",
     ctaUrl: "/inquire?interest=family-getaway",
     heroEyebrow: "Families",
@@ -170,7 +170,7 @@ export const serviceSeeds = [
     shortDescription:
       "Paddleboards, shallow swimming, and long sunny afternoons — equipment for guest use when available.",
     iconAccent: "medium-water",
-    cardImage: propertyImg("/images/property/family-lake-canopy.jpg", "Family swimming and lake play"),
+    cardImage: propertyImg("/images/property/family-paddleboard-pov.jpg", "Family swimming and lake play"),
     ctaText: "Ask about water activities",
     ctaUrl: "/inquire?interest=paddle-swim",
     heroEyebrow: "Lake life",
@@ -209,7 +209,7 @@ export const serviceSeeds = [
     shortDescription:
       "Unhurried lake time for two — starry nights, morning coffee on the patio, and calm water views.",
     iconAccent: "sand",
-    cardImage: img("stars", "Couples lakeside getaway placeholder"),
+    cardImage: propertyImg("/images/property/sunset-chairs.jpg", "Couples lakeside getaway"),
     ctaText: "Inquire for two",
     ctaUrl: "/inquire?interest=couples",
     heroEyebrow: "Couples",
@@ -247,7 +247,7 @@ export const serviceSeeds = [
     shortDescription:
       "Ask about last-minute availability — openings may appear when cancellations occur.",
     iconAccent: "golden-hour",
-    cardImage: img("lakeHero", "Last-minute lake opening placeholder"),
+    cardImage: propertyImg("/images/property/property-willow-lawn.jpg", "Last-minute lake opening"),
     ctaText: "Ask about last-minute openings",
     ctaUrl: "/inquire?interest=last-minute",
     heroEyebrow: "Availability",

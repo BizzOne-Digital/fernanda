@@ -97,6 +97,21 @@ export const FALLBACK_TESTIMONIALS = [
     createdAt: new Date(0),
     updatedAt: new Date(0),
   },
+  {
+    _id: "fallback-testimonial-3",
+    guestName: "Linda & Tom",
+    location: "Edmonton, AB",
+    quote:
+      "Fire pit nights, calm mornings on the lake, and the kids on the swim platform — it felt like the Okanagan summers we grew up with. We are already talking about booking again.",
+    stayLabel: "Multi-family reunion",
+    featured: false,
+    isDemo: false,
+    status: "published" as const,
+    sortOrder: 2,
+    isArchived: false,
+    createdAt: new Date(0),
+    updatedAt: new Date(0),
+  },
 ];
 
 export const FALLBACK_ATTRACTIONS = [

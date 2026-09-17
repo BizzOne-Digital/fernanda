@@ -3,6 +3,7 @@ import { InquiryForm } from "@/components/forms/inquiry-form";
 import { getCabins } from "@/lib/data/cabins";
 import { getServices } from "@/lib/data/services";
 import { getSiteSettings } from "@/lib/data/settings";
+import { PageHero } from "@/components/layout/page-hero";
 import { SiteImage } from "@/components/ui/site-image";
 import { resolveImages } from "@/lib/data/utils";
 
@@ -31,18 +32,19 @@ export default async function InquirePage({ searchParams }: Props) {
   ]);
   const images = resolveImages(undefined, 5, ["lakeHero", "boats", "patioBbq", "stars", "nature"]);
 
+  const responseTime =
+    settings.booking?.responseTimeWording ||
+    "We aim to respond within one to two business days.";
+
   return (
     <>
-      <section className="relative min-h-[35vh] overflow-hidden">
-        <SiteImage src={images[0].src} alt={images[0].alt} fill priority sizes="100vw" />
-        <div className="absolute inset-0 bg-lake-deep/55" />
-        <div className="relative mx-auto flex min-h-[35vh] max-w-7xl flex-col justify-end px-4 pb-8 pt-24 text-cream md:px-6">
-          <h1 className="font-serif text-4xl md:text-5xl">Plan your stay</h1>
-          <p className="mt-2 max-w-2xl text-sm text-cream/90">
-            This is an inquiry request — availability is not confirmed until we reply with a quote.
-          </p>
-        </div>
-      </section>
+      <PageHero
+        title="Plan your stay"
+        eyebrow="Reservation inquiry"
+        subtitle="This is an inquiry request — availability is not confirmed until we reply with a quote."
+        imageSrc={images[0].src}
+        imageAlt={images[0].alt}
+      />
 
       <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-[0.9fr_1.1fr] md:px-6">
         <div>
@@ -50,7 +52,7 @@ export default async function InquirePage({ searchParams }: Props) {
           <ul className="mt-4 space-y-2 text-sm text-ink/75">
             <li>• Eight private cabin-style units under one historic roof (not detached cabins).</li>
             <li>• Rates vary by dates, guest count, and stay length — contact for pricing.</li>
-            <li>• {settings.booking.responseTimeWording}</li>
+            <li>• {responseTime}</li>
           </ul>
           <div className="mt-6 grid grid-cols-2 gap-2">
             {images.slice(1, 5).map((image) => (

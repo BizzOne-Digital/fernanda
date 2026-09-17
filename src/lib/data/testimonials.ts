@@ -25,7 +25,7 @@ async function fetchPublicTestimonials(): Promise<TestimonialData[]> {
 }
 
 export const getTestimonials = createDataFetcher(
-  "testimonials-v4",
+  "testimonials-v5",
   [CACHE_TAGS.testimonials],
   fetchPublicTestimonials,
 );

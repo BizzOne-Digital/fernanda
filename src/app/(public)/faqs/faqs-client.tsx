@@ -32,10 +32,15 @@ export function FaqsClient({ faqs }: FaqsClientProps) {
 
   return (
     <>
-      <section className="relative min-h-[40vh] overflow-hidden">
-        <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
+      <section data-hero className="relative min-h-[40vh] overflow-hidden">
+        <div data-hero-media className="absolute inset-0">
+          <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
+        </div>
         <div className="absolute inset-0 bg-lake-deep/55" />
-        <div className="relative mx-auto flex min-h-[40vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6">
+        <div
+          data-hero-copy
+          className="relative mx-auto flex min-h-[40vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6"
+        >
           <h1 className="font-serif text-4xl md:text-6xl">FAQs</h1>
           <p className="mt-3 max-w-2xl">Answers about cabins, seasons, packing, and lake stays.</p>
         </div>

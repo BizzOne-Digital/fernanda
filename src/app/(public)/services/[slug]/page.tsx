@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import Link from "next/link";
 import { getServiceBySlug, getServices, getServiceSlugs } from "@/lib/data/services";
-import { SiteImage } from "@/components/ui/site-image";
+import { PageHero } from "@/components/layout/page-hero";
 import { Button } from "@/components/ui/button";
 import { LightboxGrid } from "@/components/gallery/lightbox";
 import { resolveImage, resolveImages } from "@/lib/data/utils";
@@ -35,17 +35,13 @@ export default async function ServiceDetailPage({ params }: Props) {
 
   return (
     <>
-      <section className="relative min-h-[55vh] overflow-hidden">
-        <SiteImage src={hero.src} alt={hero.alt} fill priority sizes="100vw" />
-        <div className="absolute inset-0 bg-lake-deep/55" />
-        <div className="relative mx-auto flex min-h-[55vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6">
-          {service.heroEyebrow ? (
-            <p className="text-xs uppercase tracking-[0.2em] text-sand">{service.heroEyebrow}</p>
-          ) : null}
-          <h1 className="font-serif text-4xl md:text-6xl">{service.heroHeading || service.title}</h1>
-          <p className="mt-3 max-w-2xl">{service.heroSubheading || service.shortDescription}</p>
-        </div>
-      </section>
+      <PageHero
+        title={service.heroHeading || service.title}
+        eyebrow={service.heroEyebrow}
+        subtitle={service.heroSubheading || service.shortDescription}
+        imageSrc={hero.src}
+        imageAlt={hero.alt}
+      />
 
       <section className="mx-auto max-w-4xl px-4 py-12 md:px-6">
         <h2 className="font-serif text-3xl text-lake-deep">Overview</h2>

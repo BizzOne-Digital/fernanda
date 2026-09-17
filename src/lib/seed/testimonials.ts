@@ -34,7 +34,7 @@ export const testimonialSeeds = [
     image: img("stars", "Guest testimonial — starry lake night"),
     featured: false,
     isDemo: false,
-    sortOrder: 2,
+    sortOrder: 3,
     status: "published" as const,
   },
   {
@@ -46,7 +46,19 @@ export const testimonialSeeds = [
     image: img("historic", "Guest testimonial — historic property"),
     featured: true,
     isDemo: false,
-    sortOrder: 3,
+    sortOrder: 4,
+    status: "published" as const,
+  },
+  {
+    guestName: "Linda & Tom",
+    location: "Edmonton, AB",
+    quote:
+      "Fire pit nights, calm mornings on the lake, and the kids on the swim platform — it felt like the Okanagan summers we grew up with. We are already talking about booking again.",
+    stayLabel: "Multi-family reunion",
+    image: img("boats", "Guest testimonial — lake activities"),
+    featured: false,
+    isDemo: false,
+    sortOrder: 2,
     status: "published" as const,
   },
 ];

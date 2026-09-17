@@ -41,10 +41,15 @@ export function CabinsPageClient({ cabins, settings, faqs }: CabinsPageClientPro
 
   return (
     <>
-      <section className="relative min-h-[55vh] overflow-hidden">
-        <SiteImage src={images[0].src} alt={images[0].alt} fill priority className="object-cover" sizes="100vw" />
+      <section data-hero className="relative min-h-[55vh] overflow-hidden">
+        <div data-hero-media className="absolute inset-0">
+          <SiteImage src={images[0].src} alt={images[0].alt} fill priority className="object-cover" sizes="100vw" />
+        </div>
         <div className="absolute inset-0 bg-lake-deep/55" />
-        <div className="relative mx-auto flex min-h-[55vh] max-w-7xl flex-col justify-end px-4 pb-12 pt-24 text-cream md:px-6">
+        <div
+          data-hero-copy
+          className="relative mx-auto flex min-h-[55vh] max-w-7xl flex-col justify-end px-4 pb-12 pt-24 text-cream md:px-6"
+        >
           <h1 className="font-serif text-4xl md:text-6xl">Eight private stays. One unforgettable lakeside setting.</h1>
           <p className="mt-3 max-w-2xl text-cream/90">
             Private cabin-style units within the historic original building — units 5 through 12 on

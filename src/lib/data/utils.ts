@@ -12,7 +12,7 @@ const LEGACY_DEMO_MAP: Record<string, string> = {
   "/demo/nature.svg": DEMO_IMAGES.nature,
 };
 
-function normalizeImageSrc(url: string) {
+export function normalizeImageSrc(url: string) {
   return LEGACY_DEMO_MAP[url] ?? url;
 }
 import type { IImageRef } from "@/models/shared/schemas";
@@ -32,12 +32,13 @@ export function resolveImage(
   fallback: DemoImageKey = "lakeHero",
   fallbackAlt = "Vaseaux Lake — placeholder image",
 ): ResolvedImage {
-  if (image?.url) {
+  const rawUrl = image?.url?.trim();
+  if (rawUrl) {
     return {
-      src: resolvePublicImageUrl(normalizeImageSrc(image.url)),
-      alt: image.alt || fallbackAlt,
-      caption: image.caption,
-      credit: image.credit,
+      src: resolvePublicImageUrl(normalizeImageSrc(rawUrl)),
+      alt: image?.alt || fallbackAlt,
+      caption: image?.caption,
+      credit: image?.credit,
     };
   }
 

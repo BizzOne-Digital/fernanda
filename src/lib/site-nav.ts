@@ -9,7 +9,6 @@ export const PRIMARY_NAV: SiteNavItem[] = [
   { href: "/cabins", label: "Accommodation" },
   { href: "/things-to-do", label: "Activities" },
   { href: "/gallery", label: "Gallery" },
-  { href: "/policies", label: "Policies" },
 ];
 
 export const GUEST_INFO_NAV: SiteNavItem[] = [

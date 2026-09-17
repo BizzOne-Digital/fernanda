@@ -23,10 +23,15 @@ export default async function RatesAndSeasonsPage() {
 
   return (
     <>
-      <section className="relative min-h-[45vh] overflow-hidden">
-        <SiteImage src={images[0].src} alt={images[0].alt} fill priority sizes="100vw" />
+      <section data-hero className="relative min-h-[45vh] overflow-hidden">
+        <div data-hero-media className="absolute inset-0">
+          <SiteImage src={images[0].src} alt={images[0].alt} fill priority sizes="100vw" />
+        </div>
         <div className="absolute inset-0 bg-lake-deep/55" />
-        <div className="relative mx-auto flex min-h-[45vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6">
+        <div
+          data-hero-copy
+          className="relative mx-auto flex min-h-[45vh] max-w-7xl flex-col justify-end px-4 pb-10 pt-24 text-cream md:px-6"
+        >
           <h1 className="font-serif text-4xl md:text-6xl">A simple stay, quoted for your dates</h1>
           <p className="mt-3 max-w-2xl">Contact for pricing — we do not publish fixed rates online.</p>
         </div>

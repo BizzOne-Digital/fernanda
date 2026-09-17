@@ -24,7 +24,7 @@ async function fetchPublishedAttractions(): Promise<AttractionData[]> {
 }
 
 export const getAttractions = createDataFetcher(
-  "attractions-v2",
+  "attractions-v3",
   ["attractions"],
   fetchPublishedAttractions,
 );

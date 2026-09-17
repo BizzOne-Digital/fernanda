@@ -27,10 +27,23 @@ export function isLegacyUploadUrl(url?: string | null) {
   return Boolean(url && (url.startsWith("/uploads/") || url.startsWith("/media/")));
 }
 
+const LEGACY_DEMO_MAP: Record<string, string> = {
+  "/demo/lake-hero.svg": "/images/property/lake-mcintyre-bluff.jpg",
+  "/demo/cabin-interior.svg": "/images/property/property-lakefront-lawn.jpg",
+  "/demo/patio-bbq.svg": "/images/property/family-picnic-sunset.jpg",
+  "/demo/boats.svg": "/images/property/family-paddleboat.jpg",
+  "/demo/kitchen.svg": "/images/property/property-hydrangeas-lawn.jpg",
+  "/demo/stars.svg": "/images/property/sunset-chairs.jpg",
+  "/demo/historic.svg": "/images/property/property-pine-sky.jpg",
+  "/demo/nature.svg": "/images/property/wildlife-eagle.jpg",
+};
+
 export function resolvePublicImageUrl(url?: string | null, fallback = PLACEHOLDER_IMAGE) {
   if (!url) return fallback;
   if (isLegacyUploadUrl(url)) return fallback;
-  return url;
+  const normalized = LEGACY_DEMO_MAP[url] ?? url;
+  if (normalized.startsWith("/demo/")) return fallback;
+  return normalized;
 }
 
 export function sanitizeUploadFilename(filename: string) {

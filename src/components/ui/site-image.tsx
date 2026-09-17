@@ -13,6 +13,7 @@ export function SiteImage({
   label,
   alt,
   src,
+  fill,
   ...props
 }: SiteImageProps) {
   const resolvedSrc = typeof src === "string" ? resolvePublicImageUrl(src) : src;
@@ -21,6 +22,7 @@ export function SiteImage({
     <figure
       className={cn(
         "relative overflow-hidden",
+        fill && "absolute inset-0 h-full w-full",
         frame === "postcard" && "postcard-border rounded-sm bg-cream p-2",
         frame === "film" && "rounded-sm border-y-8 border-ink/80 bg-ink/80",
         className,
@@ -32,7 +34,9 @@ export function SiteImage({
         className="h-full w-full object-cover"
         unoptimized={
           typeof resolvedSrc === "string" &&
-          (resolvedSrc.startsWith("/api/uploads/") || resolvedSrc.startsWith("/media/"))
+          (resolvedSrc.startsWith("/api/uploads/") ||
+            resolvedSrc.startsWith("/media/") ||
+            resolvedSrc.startsWith("/images/"))
         }
         {...props}
       />
