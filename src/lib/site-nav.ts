@@ -5,13 +5,11 @@ export type SiteNavItem = {
 
 /** Main header navigation — classic resort style. */
 export const PRIMARY_NAV: SiteNavItem[] = [
-  { href: "/", label: "Home" },
   { href: "/about", label: "About Us" },
   { href: "/cabins", label: "Accommodation" },
   { href: "/things-to-do", label: "Activities" },
   { href: "/gallery", label: "Gallery" },
   { href: "/policies", label: "Policies" },
-  { href: "/contact", label: "Contact" },
 ];
 
 export const GUEST_INFO_NAV: SiteNavItem[] = [

@@ -77,8 +77,6 @@ export function Header({ settings, cabins }: HeaderProps) {
           <SiteLogo className="min-w-0 shrink" />
 
           <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Main">
-            <Link href="/" className={navLinkClass("/")}>Home</Link>
-
             <div
               ref={menuRef}
               className="relative"
@@ -156,7 +154,6 @@ export function Header({ settings, cabins }: HeaderProps) {
       {open ? (
         <nav id="mobile-nav" className="border-t border-sand bg-white px-4 py-4 lg:hidden" aria-label="Mobile">
           <ul className="space-y-1">
-            <li><Link href="/" className={cn("block py-2", navLinkClass("/"))}>Home</Link></li>
             <li><Link href="/cabins" className={cn("block py-2", navLinkClass("/cabins"))}>Accommodation</Link></li>
             {cabins.map((cabin) => (
               <li key={cabin.slug} className="pl-3">
