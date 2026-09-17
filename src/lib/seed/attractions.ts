@@ -28,7 +28,7 @@ export const attractionSeeds = [
   {
     title: "McIntyre Bluff Hike",
     slug: "mcintyre-bluff-hike",
-    category: "Hiking",
+    category: "Day Trips",
     summary:
       "One of the South Okanagan's signature hikes — panoramic views over the valley, Vaseaux Lake, and the surrounding bluffs.",
     body: `<p>McIntyre Bluff rises above the valley floor and offers one of the region's most rewarding day hikes. The trail rewards effort with sweeping views across wine country and the lake below.</p>

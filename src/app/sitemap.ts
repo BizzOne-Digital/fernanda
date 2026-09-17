@@ -2,7 +2,6 @@ import type { MetadataRoute } from "next";
 import { env } from "@/lib/env";
 import { getCabins } from "@/lib/data/cabins";
 import { getServices } from "@/lib/data/services";
-import { getBlogPosts } from "@/lib/data/blog";
 
 const STATIC_ROUTES = [
   "",
@@ -16,7 +15,6 @@ const STATIC_ROUTES = [
   "/things-to-do",
   "/contact",
   "/inquire",
-  "/blog",
   "/policies",
   "/privacy",
   "/terms",
@@ -24,11 +22,7 @@ const STATIC_ROUTES = [
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = env.siteUrl.replace(/\/$/, "");
-  const [cabins, services, posts] = await Promise.all([
-    getCabins(),
-    getServices(),
-    getBlogPosts(),
-  ]);
+  const [cabins, services] = await Promise.all([getCabins(), getServices()]);
 
   const staticEntries = STATIC_ROUTES.map((route) => ({
     url: `${base}${route}`,
@@ -45,10 +39,5 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     lastModified: new Date(service.updatedAt),
   }));
 
-  const blogEntries = posts.map((post) => ({
-    url: `${base}/blog/${post.slug}`,
-    lastModified: new Date(post.updatedAt),
-  }));
-
-  return [...staticEntries, ...cabinEntries, ...serviceEntries, ...blogEntries];
+  return [...staticEntries, ...cabinEntries, ...serviceEntries];
 }

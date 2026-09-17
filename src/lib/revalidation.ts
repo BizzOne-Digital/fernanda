@@ -8,7 +8,6 @@ export const CACHE_TAGS = {
   faqs: "faqs",
   testimonials: "testimonials",
   attractions: "attractions",
-  blog: "blog",
   pages: "pages",
   seasons: "seasons",
   availability: "availability",
@@ -19,10 +18,12 @@ export function revalidatePublicHome() {
   revalidateTag(CACHE_TAGS.settings);
   revalidateTag(CACHE_TAGS.cabins);
   revalidateTag(CACHE_TAGS.services);
+  revalidateTag(CACHE_TAGS.testimonials);
+  revalidateTag(CACHE_TAGS.faqs);
 }
 
 export function revalidateCabins(slug?: string) {
-  revalidatePath("/cabins");
+  revalidatePath("/cabins", "layout");
   revalidateTag(CACHE_TAGS.cabins);
   if (slug) {
     revalidatePath(`/cabins/${slug}`);
@@ -31,11 +32,12 @@ export function revalidateCabins(slug?: string) {
 }
 
 export function revalidateServices(slug?: string) {
-  revalidatePath("/services");
+  revalidatePath("/services", "layout");
   revalidateTag(CACHE_TAGS.services);
   if (slug) {
     revalidatePath(`/services/${slug}`);
   }
+  revalidatePath("/inquire");
   revalidatePublicHome();
 }
 
@@ -46,6 +48,8 @@ export function revalidateGallery() {
 
 export function revalidateFaqs() {
   revalidatePath("/faqs");
+  revalidatePath("/rates-and-seasons");
+  revalidatePath("/services");
   revalidateTag(CACHE_TAGS.faqs);
   revalidatePublicHome();
 }
@@ -61,14 +65,6 @@ export function revalidateAttractions() {
   revalidateTag(CACHE_TAGS.attractions);
 }
 
-export function revalidateBlog(slug?: string) {
-  revalidatePath("/blog");
-  revalidateTag(CACHE_TAGS.blog);
-  if (slug) {
-    revalidatePath(`/blog/${slug}`);
-  }
-}
-
 export function revalidatePages(slugs: string[] = []) {
   revalidateTag(CACHE_TAGS.pages);
   for (const slug of slugs) {
@@ -79,6 +75,8 @@ export function revalidatePages(slugs: string[] = []) {
 
 export function revalidateSeasons() {
   revalidatePath("/rates-and-seasons");
+  revalidatePath("/cabins", "layout");
+  revalidatePath("/inquire");
   revalidateTag(CACHE_TAGS.seasons);
 }
 

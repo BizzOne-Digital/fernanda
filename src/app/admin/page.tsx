@@ -9,13 +9,12 @@ import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
 
 type DashboardResponse = {
-  stats?: {
+  counts?: {
     newInquiries?: number;
-    unreadMessages?: number;
+    newMessages?: number;
     publishedCabins?: number;
-    publishedPages?: number;
-    tentativeBlocks?: number;
-    draftContent?: number;
+    publishedServices?: number;
+    mediaCount?: number;
   };
   recentInquiries?: Array<{
     _id: string;
@@ -37,7 +36,7 @@ export default function AdminDashboardPage() {
   const { openMenu } = useAdminLayout();
   const { data, loading, error } = useAdminFetch<DashboardResponse>("/api/admin/dashboard");
 
-  const stats = data?.stats;
+  const stats = data?.counts;
 
   return (
     <>
@@ -55,11 +54,10 @@ export default function AdminDashboardPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
           <StatCard label="New inquiries" value={stats?.newInquiries} loading={loading} hint="Awaiting response" />
-          <StatCard label="Unread messages" value={stats?.unreadMessages} loading={loading} />
+          <StatCard label="Unread messages" value={stats?.newMessages} loading={loading} />
           <StatCard label="Published cabins" value={stats?.publishedCabins} loading={loading} />
-          <StatCard label="Published pages" value={stats?.publishedPages} loading={loading} />
-          <StatCard label="Tentative holds" value={stats?.tentativeBlocks} loading={loading} />
-          <StatCard label="Draft content" value={stats?.draftContent} loading={loading} />
+          <StatCard label="Published services" value={stats?.publishedServices} loading={loading} />
+          <StatCard label="Media assets" value={stats?.mediaCount} loading={loading} />
         </div>
 
         <div className="grid gap-6 xl:grid-cols-2">

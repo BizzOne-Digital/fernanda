@@ -1,6 +1,7 @@
 import connectDB from "@/lib/mongodb";
 import FAQ, { type IFAQ } from "@/models/FAQ";
 import { createDataFetcher } from "@/lib/data/cache";
+import { CACHE_TAGS } from "@/lib/revalidation";
 import { FALLBACK_FAQS } from "@/lib/data/fallbacks";
 import { toPlain, type PlainModel } from "@/lib/data/utils";
 
@@ -26,7 +27,7 @@ async function fetchPublishedFaqs(): Promise<FaqData[]> {
   }
 }
 
-export const getFaqs = createDataFetcher("faqs-v3", ["faqs"], fetchPublishedFaqs);
+export const getFaqs = createDataFetcher("faqs-v4", [CACHE_TAGS.faqs], fetchPublishedFaqs);
 export async function getFaqsByCategory(category?: string) {
   const faqs = await getFaqs();
   if (!category) return faqs;

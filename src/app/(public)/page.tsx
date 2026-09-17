@@ -26,22 +26,22 @@ const QUICK_LINKS = [
     href: "/cabins",
     title: "Cabins",
     text: "Eight private units (5–12) with kitchen, washroom, patio, and BBQ.",
-    image: "/images/property/property-lakefront-lawn.jpg",
-    alt: "Lakefront cabins and lawn",
+    image: "/images/property/property-willow-lawn.jpg",
+    alt: "Lakefront lawn with willows and cliff views",
   },
   {
     href: "/services",
     title: "Stay types",
     text: "Weekly high-season stays, family getaways, reunions, and fishing trips.",
-    image: "/images/property/family-lake-canopy.jpg",
-    alt: "Family enjoying the lake",
+    image: "/images/property/family-paddleboard-pov.jpg",
+    alt: "Paddleboarding on Vaseaux Lake",
   },
   {
     href: "/things-to-do",
     title: "Activities",
     text: "Swimming, paddleboards, Oliver wine country, hiking, and local fruit stands.",
-    image: "/images/property/lake-shallow-clear.jpg",
-    alt: "Clear shallow water on the lake",
+    image: "/images/property/sunset-fire-pit.jpg",
+    alt: "Lakeside fire pit at sunset",
   },
 ];
 

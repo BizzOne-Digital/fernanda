@@ -5,7 +5,17 @@ export const runtime = "nodejs";
 
 type RouteContext = { params: Promise<{ folder: string; filename: string }> };
 
-export async function GET(_request: Request, context: RouteContext) {
+function buildEtag(updatedAt: unknown, size: number) {
+  const stamp =
+    updatedAt instanceof Date
+      ? updatedAt.getTime()
+      : updatedAt
+        ? new Date(String(updatedAt)).getTime()
+        : size;
+  return `"upload-${stamp}-${size}"`;
+}
+
+export async function GET(request: Request, context: RouteContext) {
   const { folder, filename } = await context.params;
 
   if (!isUploadFolder(folder) || !sanitizeUploadFilename(filename)) {
@@ -18,13 +28,25 @@ export async function GET(_request: Request, context: RouteContext) {
   }
 
   const body = Buffer.isBuffer(doc.data) ? doc.data : Buffer.from(doc.data);
+  const etag = buildEtag(doc.updatedAt, body.length);
+  const ifNoneMatch = request.headers.get("if-none-match");
+  if (ifNoneMatch === etag) {
+    return new NextResponse(null, {
+      status: 304,
+      headers: {
+        ETag: etag,
+        "Cache-Control": "public, max-age=3600, must-revalidate",
+      },
+    });
+  }
 
   return new NextResponse(new Uint8Array(body), {
     status: 200,
     headers: {
       "Content-Type": doc.mimeType,
       "Content-Length": String(body.length),
-      "Cache-Control": "public, max-age=31536000, immutable",
+      ETag: etag,
+      "Cache-Control": "public, max-age=3600, must-revalidate",
     },
   });
 }

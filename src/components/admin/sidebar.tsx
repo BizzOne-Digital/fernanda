@@ -6,7 +6,6 @@ import { cn } from "@/lib/utils/cn";
 
 const items = [
   ["Dashboard", "/admin"],
-  ["Pages", "/admin/pages"],
   ["Cabins", "/admin/cabins"],
   ["Services", "/admin/services"],
   ["Rates & Seasons", "/admin/seasons"],
@@ -16,7 +15,6 @@ const items = [
   ["Testimonials", "/admin/testimonials"],
   ["FAQs", "/admin/faqs"],
   ["Things to Do", "/admin/attractions"],
-  ["Blogs", "/admin/blogs"],
   ["Messages", "/admin/messages"],
   ["Settings", "/admin/settings"],
 ];

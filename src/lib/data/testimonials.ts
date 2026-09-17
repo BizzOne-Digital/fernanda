@@ -1,6 +1,7 @@
 import connectDB from "@/lib/mongodb";
 import Testimonial, { type ITestimonial } from "@/models/Testimonial";
 import { createDataFetcher } from "@/lib/data/cache";
+import { CACHE_TAGS } from "@/lib/revalidation";
 import { FALLBACK_TESTIMONIALS } from "@/lib/data/fallbacks";
 import { toPlain, type PlainModel } from "@/lib/data/utils";
 
@@ -24,7 +25,7 @@ async function fetchPublicTestimonials(): Promise<TestimonialData[]> {
 }
 
 export const getTestimonials = createDataFetcher(
-  "testimonials-v3",
-  ["testimonials"],
+  "testimonials-v4",
+  [CACHE_TAGS.testimonials],
   fetchPublicTestimonials,
 );

@@ -1,6 +1,6 @@
+import "./load-env";
 import { connectMongo, disconnectMongo } from "@/lib/mongodb";
 import { attractionSeeds } from "@/lib/seed/attractions";
-import { blogSeeds } from "@/lib/seed/blogs";
 import { buildCabinSeeds } from "@/lib/seed/cabins";
 import { faqSeeds } from "@/lib/seed/faqs";
 import { galleryCategorySeeds } from "@/lib/seed/gallery";
@@ -12,7 +12,6 @@ import { serviceSeeds } from "@/lib/seed/services";
 import { SITE_SETTINGS_KEY, siteSettingsSeed } from "@/lib/seed/settings";
 import { testimonialSeeds } from "@/lib/seed/testimonials";
 import Attraction from "@/models/Attraction";
-import BlogPost from "@/models/BlogPost";
 import Cabin from "@/models/Cabin";
 import FAQ from "@/models/FAQ";
 import GalleryCategory from "@/models/GalleryCategory";
@@ -163,16 +162,6 @@ async function seedTestimonials(stats: SeedStats) {
   }
 }
 
-async function seedBlogs(stats: SeedStats) {
-  console.log("\nBlog posts");
-  for (const post of blogSeeds) {
-    track(
-      await seedIfMissing(BlogPost, { slug: post.slug }, post, `blog:${post.slug}`),
-      stats,
-    );
-  }
-}
-
 async function seedAttractions(stats: SeedStats) {
   console.log("\nAttractions");
   for (const attraction of attractionSeeds) {
@@ -205,7 +194,6 @@ async function main() {
     await seedGallery(stats);
     await seedFaqs(stats);
     await seedTestimonials(stats);
-    await seedBlogs(stats);
     await seedAttractions(stats);
 
     console.log(`\nDone. Created ${stats.created}, skipped ${stats.skipped}.`);

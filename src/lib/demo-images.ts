@@ -73,6 +73,19 @@ export const PROPERTY_GALLERY: { path: string; alt: string; category: string }[]
   { path: `${BASE}/property-lakefront-lawn.jpg`, alt: "Lakefront lawn and sandy beach with guests relaxing", category: "property" },
   { path: `${BASE}/property-hydrangeas-lawn.jpg`, alt: "Sunny lawn and white hydrangeas under leafy canopy", category: "property" },
   { path: `${BASE}/property-pine-sky.jpg`, alt: "Tall pine tree against a bright blue summer sky", category: "property" },
+  { path: `${BASE}/sunset-fire-pit.jpg`, alt: "Fire pit and lakeside chairs at sunset on Vaseaux Lake", category: "sunset" },
+  { path: `${BASE}/sunset-valley-bluff.jpg`, alt: "Pink sunset sky over the valley and McIntyre Bluff", category: "sunset" },
+  { path: `${BASE}/property-rental-sign.jpg`, alt: "Vaseux Lake weekly rentals sign at the property entrance", category: "property" },
+  { path: `${BASE}/property-willow-lawn.jpg`, alt: "Weeping willows, lawn seating, and lake views at the property", category: "property" },
+  { path: `${BASE}/property-herb-garden.jpg`, alt: "Herb and flower garden on the property", category: "property" },
+  { path: `${BASE}/property-hydrangeas-table.jpg`, alt: "Hydrangeas on a picnic table overlooking the lake", category: "property" },
+  { path: `${BASE}/lake-reflection-bluff.jpg`, alt: "Glassy lake reflecting mountains and sky at Vaseaux Lake", category: "lake" },
+  { path: `${BASE}/wildlife-ducks.jpg`, alt: "Ducks swimming on Vaseaux Lake", category: "wildlife" },
+  { path: `${BASE}/property-picnic-shore.jpg`, alt: "Picnic area and string lights along the sandy lakeshore", category: "property" },
+  { path: `${BASE}/wildlife-bird-nest.jpg`, alt: "Baby birds in a nest under the property eaves", category: "wildlife" },
+  { path: `${BASE}/family-swing-sunset.jpg`, alt: "Lakefront swings at sunset", category: "family" },
+  { path: `${BASE}/family-kids-wading.jpg`, alt: "Children wading and playing in the shallow lake", category: "family" },
+  { path: `${BASE}/family-paddleboard-pov.jpg`, alt: "Stand-up paddleboard on calm Vaseaux Lake", category: "family" },
 ];
 
 export const HERO_IMAGE = "/images/hero-lake.jpg";

@@ -1,5 +1,6 @@
 import { unstable_cache } from "next/cache";
 import connectDB from "@/lib/mongodb";
+import { CACHE_TAGS } from "@/lib/revalidation";
 import GalleryCategory, { type IGalleryCategory } from "@/models/GalleryCategory";
 import GalleryPhoto from "@/models/GalleryPhoto";
 import { HERO_IMAGE, PROPERTY_GALLERY } from "@/lib/demo-images";
@@ -95,16 +96,27 @@ async function fetchGalleryImages(categorySlug?: string): Promise<GalleryImageDa
   }
 }
 
-export const getGalleryCategories = unstable_cache(
-  fetchGalleryCategories,
-  ["gallery-categories"],
-  { tags: ["gallery"], revalidate: 300 },
-);
-
-export async function getGalleryImages(categorySlug?: string) {
+function cachedGalleryImages(categorySlug?: string) {
   return unstable_cache(
     () => fetchGalleryImages(categorySlug),
-    [`gallery-images-${categorySlug ?? "all"}`],
-    { tags: ["gallery"], revalidate: 300 },
-  )();
+    [`gallery-images-v2-${categorySlug ?? "all"}`],
+    { tags: [CACHE_TAGS.gallery], revalidate: 300 },
+  );
+}
+
+export async function getGalleryCategories() {
+  if (process.env.NODE_ENV === "development") {
+    return fetchGalleryCategories();
+  }
+  return unstable_cache(fetchGalleryCategories, ["gallery-categories-v2"], {
+    tags: [CACHE_TAGS.gallery],
+    revalidate: 300,
+  })();
+}
+
+export async function getGalleryImages(categorySlug?: string) {
+  if (process.env.NODE_ENV === "development") {
+    return fetchGalleryImages(categorySlug);
+  }
+  return cachedGalleryImages(categorySlug)();
 }

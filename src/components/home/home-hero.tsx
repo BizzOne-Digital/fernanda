@@ -16,7 +16,7 @@ export function HomeHero({ settings }: HomeHeroProps) {
       <div className="relative min-h-[52vh] md:min-h-[58vh] lg:min-h-[62vh]">
         <Image
           src={heroSrc}
-          alt="Waterfront cabins on Vaseaux Lake at golden hour"
+          alt="Guests on the floating swim platform on Vaseaux Lake with McIntyre Bluff in the background"
           fill
           priority
           sizes="100vw"

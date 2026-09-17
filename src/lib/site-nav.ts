@@ -20,7 +20,6 @@ export const GUEST_INFO_NAV: SiteNavItem[] = [
   { href: "/services", label: "Stay Types" },
   { href: "/inquire", label: "Check Availability" },
   { href: "/testimonials", label: "Guest Reviews" },
-  { href: "/blog", label: "Journal" },
 ];
 
 /** Footer “Plan your stay” column. */

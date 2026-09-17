@@ -1,6 +1,7 @@
-import { unstable_cache } from "next/cache";
 import connectDB from "@/lib/mongodb";
 import Season, { type ISeason } from "@/models/Season";
+import { createDataFetcher } from "@/lib/data/cache";
+import { CACHE_TAGS } from "@/lib/revalidation";
 import { toPlain, type PlainModel } from "@/lib/data/utils";
 
 export type SeasonData = PlainModel<ISeason>;
@@ -20,7 +21,8 @@ async function fetchPublishedSeasons(): Promise<SeasonData[]> {
   }
 }
 
-export const getSeasons = unstable_cache(fetchPublishedSeasons, ["seasons"], {
-  tags: ["seasons"],
-  revalidate: 300,
-});
+export const getSeasons = createDataFetcher(
+  "seasons-v2",
+  [CACHE_TAGS.seasons],
+  fetchPublishedSeasons,
+);
