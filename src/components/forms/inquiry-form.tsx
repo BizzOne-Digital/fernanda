@@ -1,12 +1,11 @@
 "use client";
 
 import { useMemo, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, type Resolver } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { inquirySchema, type InquiryFormValues } from "@/lib/validation/inquiry";
 import type { CabinData } from "@/lib/data/cabins";
 import type { ServiceData } from "@/lib/data/services";
-import type { SiteSettingsData } from "@/lib/data/settings";
 import { Button } from "@/components/ui/button";
 import { toDateOnlyString } from "@/lib/validation/common";
 import { toast } from "sonner";
@@ -21,10 +20,16 @@ const ACTIVITIES = [
   "Stargazing",
 ];
 
+type InquiryBookingCopy = {
+  inquiryConfirmationCopy: string;
+  availabilityDisclaimer: string;
+  responseTimeWording?: string;
+};
+
 type InquiryFormProps = {
   cabins: CabinData[];
   services: ServiceData[];
-  settings: SiteSettingsData;
+  booking: InquiryBookingCopy;
   initial?: Partial<{
     arrival: string;
     departure: string;
@@ -34,29 +39,32 @@ type InquiryFormProps = {
   }>;
 };
 
-export function InquiryForm({ cabins, services, settings, initial }: InquiryFormProps) {
-  const booking = settings.booking ?? {
-    inquiryConfirmationCopy:
-      "Thank you for your inquiry. We will review your requested dates and reply with availability and a quote.",
-    availabilityDisclaimer:
-      "Online availability hints are advisory only. Your stay is not confirmed until we reply directly.",
-    responseTimeWording: "We aim to respond within one to two business days.",
-  };
+/** RHF draft state — date fields stay as `YYYY-MM-DD` strings until submit. */
+type InquiryFormDraft = Omit<InquiryFormValues, "arrivalDate" | "departureDate" | "consent"> & {
+  arrivalDate: string;
+  departureDate: string;
+  consent: boolean;
+};
+
+function parseDateQuery(value?: string) {
+  if (!value || !/^\d{4}-\d{2}-\d{2}$/.test(value)) return "";
+  return value;
+}
+
+export function InquiryForm({ cabins, services, booking, initial }: InquiryFormProps) {
   const [confirmation, setConfirmation] = useState<string | null>(null);
   const [startedAt] = useState(() => Date.now());
-  const defaultArrival = initial?.arrival ? new Date(`${initial.arrival}T00:00:00`) : undefined;
-  const defaultDeparture = initial?.departure ? new Date(`${initial.departure}T00:00:00`) : undefined;
 
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<InquiryFormValues>({
-    resolver: zodResolver(inquirySchema),
+  } = useForm<InquiryFormDraft>({
+    resolver: zodResolver(inquirySchema) as unknown as Resolver<InquiryFormDraft>,
     defaultValues: {
-      arrivalDate: defaultArrival,
-      departureDate: defaultDeparture,
+      arrivalDate: parseDateQuery(initial?.arrival),
+      departureDate: parseDateQuery(initial?.departure),
       adults: Number(initial?.guests || 2),
       children: 0,
       preferredCabins: initial?.cabin ? [initial.cabin] : [],
@@ -64,7 +72,17 @@ export function InquiryForm({ cabins, services, settings, initial }: InquiryForm
       activities: [],
       dateFlexible: false,
       helpMeChoose: false,
-      consent: undefined,
+      consent: false,
+      website: "",
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      homeRegion: "",
+      country: "",
+      specialRequests: "",
+      message: "",
+      heardAbout: "",
     },
   });
 
@@ -72,14 +90,15 @@ export function InquiryForm({ cabins, services, settings, initial }: InquiryForm
 
   const cabinOptions = useMemo(() => cabins, [cabins]);
 
-  const onSubmit = async (values: InquiryFormValues) => {
+  const onSubmit = async (values: InquiryFormDraft) => {
+    const parsed = inquirySchema.parse(values);
     const response = await fetch("/api/inquire", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        ...values,
-        arrivalDate: toDateOnlyString(new Date(values.arrivalDate)),
-        departureDate: toDateOnlyString(new Date(values.departureDate)),
+        ...parsed,
+        arrivalDate: toDateOnlyString(parsed.arrivalDate),
+        departureDate: toDateOnlyString(parsed.departureDate),
         formStartedAt: startedAt,
       }),
     });

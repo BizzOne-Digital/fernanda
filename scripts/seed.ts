@@ -61,6 +61,24 @@ async function seedPages(stats: SeedStats) {
 async function seedCabins(stats: SeedStats) {
   console.log("\nCabins");
   for (const cabin of buildCabinSeeds()) {
+    const existing = await Cabin.findOne({ cabinNumber: cabin.cabinNumber });
+    if (existing) {
+      await Cabin.findByIdAndUpdate(
+        existing._id,
+        {
+          $set: {
+            cardImage: cabin.cardImage,
+            heroImage: cabin.heroImage,
+            galleryImages: cabin.galleryImages,
+          },
+        },
+        { runValidators: true },
+      );
+      console.log(`  updated cabin:${cabin.cabinNumber} images`);
+      stats.created += 1;
+      continue;
+    }
+
     track(
       await seedIfMissing(
         Cabin,

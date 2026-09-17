@@ -32,9 +32,17 @@ export default async function InquirePage({ searchParams }: Props) {
   ]);
   const images = resolveImages(undefined, 5, ["lakeHero", "boats", "patioBbq", "stars", "nature"]);
 
-  const responseTime =
-    settings.booking?.responseTimeWording ||
-    "We aim to respond within one to two business days.";
+  const booking = {
+    inquiryConfirmationCopy:
+      settings.booking?.inquiryConfirmationCopy ||
+      "Thank you for your inquiry. We will review your requested dates and reply with availability and a quote.",
+    availabilityDisclaimer:
+      settings.booking?.availabilityDisclaimer ||
+      "Online availability hints are advisory only. Your stay is not confirmed until we reply directly.",
+    responseTimeWording:
+      settings.booking?.responseTimeWording ||
+      "We aim to respond within one to two business days.",
+  };
 
   return (
     <>
@@ -52,7 +60,7 @@ export default async function InquirePage({ searchParams }: Props) {
           <ul className="mt-4 space-y-2 text-sm text-ink/75">
             <li>• Eight private cabin-style units under one historic roof (not detached cabins).</li>
             <li>• Rates vary by dates, guest count, and stay length — contact for pricing.</li>
-            <li>• {responseTime}</li>
+            <li>• {booking.responseTimeWording}</li>
           </ul>
           <div className="mt-6 grid grid-cols-2 gap-2">
             {images.slice(1, 5).map((image) => (
@@ -64,7 +72,7 @@ export default async function InquirePage({ searchParams }: Props) {
           <InquiryForm
             cabins={cabins}
             services={services}
-            settings={settings}
+            booking={booking}
             initial={{
               arrival: params.arrival,
               departure: params.departure,

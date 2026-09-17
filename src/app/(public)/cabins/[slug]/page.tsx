@@ -63,7 +63,7 @@ export default async function CabinDetailPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto grid max-w-7xl gap-10 px-4 py-12 md:grid-cols-[1.2fr_0.8fr] md:px-6">
+      <section className="mx-auto grid max-w-7xl gap-8 px-4 py-8 md:grid-cols-[1.2fr_0.8fr] md:gap-10 md:py-12 md:px-6">
         <div>
           <h2 className="font-serif text-3xl text-lake-deep">Unit overview</h2>
           <p className="mt-3 whitespace-pre-line text-ink/80">
@@ -91,29 +91,29 @@ export default async function CabinDetailPage({ params }: Props) {
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 md:px-6">
+      <section className="mx-auto max-w-7xl px-4 pb-6 md:px-6 md:pb-8">
         <h2 className="font-serif text-3xl text-lake-deep">Gallery</h2>
         <LightboxGrid
-          className="mt-6"
+          className="mt-4 md:mt-6"
           images={gallery.map((image) => ({ src: image.src, alt: image.alt, caption: image.caption }))}
         />
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-6">
+      <section className="mx-auto max-w-7xl border-t border-sand/60 px-4 py-6 md:px-6 md:py-10">
         <h2 className="font-serif text-3xl text-lake-deep">Included in every unit</h2>
-        <ul className="mt-4 grid gap-2 md:grid-cols-2">
+        <ul className="mt-3 space-y-1.5 md:mt-4 md:grid md:grid-cols-2 md:gap-2 md:space-y-0">
           {(cabin.amenities.length ? cabin.amenities : settings.property.sharedAmenities).map((item) => (
             <li key={item} className="text-sm text-ink/80">
               • {item}
             </li>
           ))}
         </ul>
-        <p className="mt-4 text-sm text-ink/70">
+        <p className="mt-3 text-sm text-ink/70 md:mt-4">
           <strong>Packing:</strong> {cabin.packingNotes || settings.property.packingNotes}
         </p>
       </section>
 
-      <section className="mx-auto max-w-5xl px-4 md:px-6">
+      <section className="mx-auto max-w-5xl px-4 pb-8 pt-0 md:px-6 md:pb-12">
         <h2 className="font-serif text-3xl text-lake-deep">Seasons & minimum stay</h2>
         {seasons.map((season) => (
           <p key={season._id} className="mt-2 text-sm text-ink/75">
@@ -125,7 +125,7 @@ export default async function CabinDetailPage({ params }: Props) {
       </section>
 
       {cabin.cabinFaqs.length ? (
-        <section className="mx-auto max-w-4xl px-4 py-10 md:px-6">
+        <section className="mx-auto max-w-4xl px-4 py-6 md:px-6 md:py-10">
           <h2 className="font-serif text-3xl text-lake-deep">Cabin notes</h2>
           <div className="mt-4 space-y-3">
             {cabin.cabinFaqs.map((faq) => (
@@ -138,7 +138,7 @@ export default async function CabinDetailPage({ params }: Props) {
         </section>
       ) : null}
 
-      <section className="mx-auto max-w-7xl px-4 py-12 md:px-6">
+      <section className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
         <h2 className="font-serif text-3xl text-lake-deep">Compare other units</h2>
         <div className="mt-4 flex flex-wrap gap-3">
           {related.map((item) => (

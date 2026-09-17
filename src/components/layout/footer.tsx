@@ -31,7 +31,14 @@ function FooterNavColumn({
 }
 
 export function Footer({ settings }: FooterProps) {
-  const { contact, footer } = settings;
+  const contact = settings.contact;
+  const footer = settings.footer ?? {
+    shortDescription: "",
+    ctaText: "Contact us",
+    ctaUrl: "/inquire",
+    copyrightText: "",
+    legalLinks: [],
+  };
   const legalLinks =
     footer.legalLinks?.length > 0
       ? footer.legalLinks.map((link) => ({ href: link.url, label: link.label }))

@@ -1,5 +1,5 @@
 import Image, { ImageProps } from "next/image";
-import { resolvePublicImageUrl } from "@/lib/uploads/public-url";
+import { resolvePublicImageUrl, requiresUnoptimizedImage } from "@/lib/uploads/public-url";
 import { cn } from "@/lib/utils/cn";
 
 type SiteImageProps = ImageProps & {
@@ -32,12 +32,7 @@ export function SiteImage({
         alt={alt}
         src={resolvedSrc}
         className="h-full w-full object-cover"
-        unoptimized={
-          typeof resolvedSrc === "string" &&
-          (resolvedSrc.startsWith("/api/uploads/") ||
-            resolvedSrc.startsWith("/media/") ||
-            resolvedSrc.startsWith("/images/"))
-        }
+        unoptimized={typeof resolvedSrc === "string" && requiresUnoptimizedImage(resolvedSrc)}
         {...props}
       />
       {label ? (

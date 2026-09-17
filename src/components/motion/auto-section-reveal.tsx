@@ -48,7 +48,7 @@ function animateHero(section: HTMLElement) {
 function animateSectionBlock(section: HTMLElement) {
   const heading = section.querySelector(":scope > h1, :scope > h2, :scope > p.text-center");
   const grid = section.querySelector(
-    ":scope > .grid, :scope > div.grid, :scope > .mt-8.grid, :scope > .mt-6.grid, :scope > .mt-10.grid",
+    ":scope > div.grid, :scope > .mt-8.grid, :scope > .mt-6.grid, :scope > .mt-10.grid",
   );
 
   const trigger = {

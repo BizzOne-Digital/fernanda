@@ -41,8 +41,8 @@ export function Header({ settings, cabins }: HeaderProps) {
     return () => window.removeEventListener("keydown", onKey);
   }, []);
 
-  const ctaText = settings.footer.ctaText || "Request a Reservation";
-  const ctaUrl = settings.footer.ctaUrl || "/inquire";
+  const ctaText = settings.footer?.ctaText || "Request a Reservation";
+  const ctaUrl = settings.footer?.ctaUrl || "/inquire";
   const phone = settings.contact.phoneDisplay;
   const phoneLink = settings.contact.phoneLink;
 
@@ -55,11 +55,11 @@ export function Header({ settings, cabins }: HeaderProps) {
   return (
     <header className="site-shell sticky top-0 z-50 w-full shadow-sm">
       <div className="bg-resort-navy text-cream">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-2 px-4 py-2 text-xs md:px-6">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-center gap-2 px-4 py-2 text-center text-xs sm:flex-row sm:flex-wrap sm:items-center sm:justify-between sm:text-left md:px-6">
           <p className="font-serif tracking-[0.14em] text-cream/90">
             An Okanagan lakeside classic · Oliver, B.C.
           </p>
-          <div className="flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-4 sm:justify-end">
             {phone ? (
               <a href={phoneLink} className="font-semibold tracking-wide hover:text-golden">
                 {phone}
@@ -74,7 +74,7 @@ export function Header({ settings, cabins }: HeaderProps) {
 
       <div className="border-b border-sand/80 bg-white">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-3 px-4 py-3 md:px-6">
-          <SiteLogo className="min-w-0 shrink" />
+          <SiteLogo className="min-w-0 shrink" showText={false} />
 
           <nav className="hidden items-center gap-5 lg:flex xl:gap-7" aria-label="Main">
             <div

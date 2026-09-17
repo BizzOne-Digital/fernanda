@@ -4,6 +4,7 @@ import { CACHE_TAGS } from "@/lib/revalidation";
 import GalleryCategory, { type IGalleryCategory } from "@/models/GalleryCategory";
 import GalleryPhoto from "@/models/GalleryPhoto";
 import { HERO_IMAGE, PROPERTY_GALLERY } from "@/lib/demo-images";
+import { normalizePublicImageUrl, PLACEHOLDER_IMAGE } from "@/lib/uploads/public-url";
 import { toPlain, type PlainModel } from "@/lib/data/utils";
 
 export type GalleryCategoryData = PlainModel<IGalleryCategory>;
@@ -83,7 +84,7 @@ async function fetchGalleryImages(categorySlug?: string): Promise<GalleryImageDa
 
     return plain.map((photo) => ({
       _id: String(photo._id),
-      src: photo.url,
+      src: normalizePublicImageUrl(photo.url) || PLACEHOLDER_IMAGE,
       alt: photo.alt,
       caption: photo.caption,
       categorySlug: photo.category,

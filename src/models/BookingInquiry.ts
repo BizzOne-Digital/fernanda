@@ -1,17 +1,10 @@
 import mongoose, { type Document, type Model, Schema } from "mongoose";
+import {
+  BOOKING_INQUIRY_STATUSES,
+  type BookingInquiryStatus,
+} from "@/lib/booking/inquiry-constants";
 
-export const BOOKING_INQUIRY_STATUSES = [
-  "new",
-  "contacted",
-  "quote-sent",
-  "tentative",
-  "confirmed",
-  "declined",
-  "closed",
-  "spam",
-] as const;
-
-export type BookingInquiryStatus = (typeof BOOKING_INQUIRY_STATUSES)[number];
+export { BOOKING_INQUIRY_STATUSES, type BookingInquiryStatus };
 
 export interface IBookingInquirySnapshot {
   arrivalDate: Date;

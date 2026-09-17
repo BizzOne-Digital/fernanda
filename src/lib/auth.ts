@@ -2,7 +2,7 @@ import NextAuth from "next-auth";
 import Credentials from "next-auth/providers/credentials";
 import bcrypt from "bcryptjs";
 import { connectMongo } from "@/lib/mongodb";
-import { AdminUser } from "@/models";
+import AdminUser from "@/models/AdminUser";
 import { env } from "@/lib/env";
 import { checkRateLimit, getClientIp } from "@/lib/utils/rate-limit";
 import { authConfig } from "@/lib/auth.config";

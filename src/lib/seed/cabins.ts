@@ -1,5 +1,6 @@
-import { demoGallery, img } from "@/lib/seed/helpers";
-import type { ICabinSleepingRow } from "@/models/shared/schemas";
+import { PROPERTY_GALLERY } from "@/lib/demo-images";
+import { propertyImg } from "@/lib/seed/helpers";
+import type { ICabinSleepingRow, IImageRef } from "@/models/shared/schemas";
 
 const SHARED_AMENITIES = [
   "Private washroom with hot shower, sink, and toilet",
@@ -152,6 +153,27 @@ const cabinDefinitions: CabinSeed[] = [
   },
 ];
 
+/** One distinct hero/card photo per cabin (units 5–12). */
+const CABIN_PRIMARY_PHOTOS: { path: string; alt: string }[] = [
+  PROPERTY_GALLERY[17], // lake-swim-platform
+  PROPERTY_GALLERY[32], // property-willow-lawn
+  PROPERTY_GALLERY[26], // family-picnic-sunset
+  PROPERTY_GALLERY[0], // sunset-chairs
+  PROPERTY_GALLERY[23], // family-paddleboat
+  PROPERTY_GALLERY[22], // property-lakefront-lawn
+  PROPERTY_GALLERY[35], // property-hydrangeas-table
+  PROPERTY_GALLERY[36], // sunset-fire-pit
+];
+
+function cabinGalleryImages(cabinIndex: number, cabinName: string): IImageRef[] {
+  const count = 8;
+  const start = (cabinIndex * 5) % PROPERTY_GALLERY.length;
+  return Array.from({ length: count }, (_, offset) => {
+    const item = PROPERTY_GALLERY[(start + offset) % PROPERTY_GALLERY.length];
+    return propertyImg(item.path, `${cabinName} — ${item.alt}`, item.alt);
+  });
+}
+
 export function buildCabinSeeds() {
   return cabinDefinitions.map((cabin, index) => ({
     cabinNumber: cabin.cabinNumber,
@@ -163,9 +185,15 @@ export function buildCabinSeeds() {
     hasSeparateBedroom: cabin.hasSeparateBedroom,
     sleepingSummary: cabin.sleepingSummary,
     sleepingArrangement: cabin.sleepingArrangement,
-    cardImage: img("cabinInterior", `${cabin.name} — demo card image`),
-    heroImage: img("lakeHero", `${cabin.name} lakeside hero placeholder`),
-    galleryImages: demoGallery(8, cabin.name),
+    cardImage: propertyImg(
+      CABIN_PRIMARY_PHOTOS[index].path,
+      `${cabin.name} — ${CABIN_PRIMARY_PHOTOS[index].alt}`,
+    ),
+    heroImage: propertyImg(
+      CABIN_PRIMARY_PHOTOS[index].path,
+      `${cabin.name} — ${CABIN_PRIMARY_PHOTOS[index].alt}`,
+    ),
+    galleryImages: cabinGalleryImages(index, cabin.name),
     featureHighlights: cabin.featureHighlights,
     amenities: SHARED_AMENITIES,
     packingNotes: PACKING_NOTE,

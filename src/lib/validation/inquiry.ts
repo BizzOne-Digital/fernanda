@@ -9,7 +9,7 @@ import {
   phoneSchema,
   shortTextSchema,
 } from "./common";
-import { BOOKING_INQUIRY_STATUSES } from "@/models/BookingInquiry";
+import { BOOKING_INQUIRY_STATUSES } from "@/lib/booking/inquiry-constants";
 
 export const bookingInquirySchema = z
   .object({

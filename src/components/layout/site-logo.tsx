@@ -5,9 +5,11 @@ type SiteLogoProps = {
   className?: string;
   compact?: boolean;
   tone?: "dark" | "light";
+  /** Show “Vaseaux Lake / Waterfront Cabins” beside the mark (footer default on). */
+  showText?: boolean;
 };
 
-export function SiteLogo({ className, compact, tone = "dark" }: SiteLogoProps) {
+export function SiteLogo({ className, compact, tone = "dark", showText = true }: SiteLogoProps) {
   const textClass = tone === "light" ? "text-cream" : "text-resort-navy";
   const subTextClass = tone === "light" ? "text-cream/75" : "text-resort-navy/75";
   const iconWrapClass =
@@ -16,7 +18,11 @@ export function SiteLogo({ className, compact, tone = "dark" }: SiteLogoProps) {
       : "border-lake-deep/15 bg-cream";
 
   return (
-    <Link href="/" className={cn("group flex min-w-0 items-center gap-2.5 sm:gap-3", className)}>
+    <Link
+      href="/"
+      aria-label="Vaseaux Lake Waterfront Cabins — home"
+      className={cn("group flex min-w-0 items-center gap-2.5 sm:gap-3", className)}
+    >
       <span
         aria-hidden
         className={cn(
@@ -42,14 +48,16 @@ export function SiteLogo({ className, compact, tone = "dark" }: SiteLogoProps) {
           <path d="M36 19v3" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
         </svg>
       </span>
-      <span className={cn("min-w-0 leading-none", compact && "hidden sm:block")}>
-        <span className={cn("block truncate font-serif text-base font-bold tracking-[0.06em] sm:text-[1.05rem] sm:tracking-[0.08em] md:text-lg", textClass)}>
-          Vaseaux Lake
+      {showText ? (
+        <span className={cn("min-w-0 leading-none", compact && "hidden sm:block")}>
+          <span className={cn("block truncate font-serif text-base font-bold tracking-[0.06em] sm:text-[1.05rem] sm:tracking-[0.08em] md:text-lg", textClass)}>
+            Vaseaux Lake
+          </span>
+          <span className={cn("mt-1 block truncate font-serif text-[0.58rem] font-bold tracking-[0.2em] sm:text-[0.62rem] sm:tracking-[0.28em] md:text-[0.68rem]", subTextClass)}>
+            Waterfront Cabins
+          </span>
         </span>
-        <span className={cn("mt-1 block truncate font-serif text-[0.58rem] font-bold tracking-[0.2em] sm:text-[0.62rem] sm:tracking-[0.28em] md:text-[0.68rem]", subTextClass)}>
-          Waterfront Cabins
-        </span>
-      </span>
+      ) : null}
     </Link>
   );
 }

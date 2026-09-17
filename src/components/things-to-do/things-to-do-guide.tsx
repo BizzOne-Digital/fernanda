@@ -86,7 +86,7 @@ export function ThingsToDoGuide({ attractions }: ThingsToDoGuideProps) {
           ))}
         </div>
       ) : (
-        <div className="mt-10 space-y-14">
+        <div className="mt-8 space-y-8 md:mt-10 md:space-y-12">
           {grouped?.map((group) => (
             <div key={group.category}>
               <div className="flex flex-wrap items-end justify-between gap-3 border-b border-sand/60 pb-4">

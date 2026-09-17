@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
+import { uploadDataToBuffer } from "@/lib/uploads/buffer";
 import { getStoredUpload, sanitizeUploadFilename, isUploadFolder } from "@/lib/uploads/stored-uploads";
 
 export const runtime = "nodejs";
+export const dynamic = "force-dynamic";
 
 type RouteContext = { params: Promise<{ folder: string; filename: string }> };
 
@@ -27,7 +29,10 @@ export async function GET(request: Request, context: RouteContext) {
     return new NextResponse("Not found", { status: 404 });
   }
 
-  const body = Buffer.isBuffer(doc.data) ? doc.data : Buffer.from(doc.data);
+  const body = uploadDataToBuffer(doc.data);
+  if (!body?.length) {
+    return new NextResponse("Not found", { status: 404 });
+  }
   const etag = buildEtag(doc.updatedAt, body.length);
   const ifNoneMatch = request.headers.get("if-none-match");
   if (ifNoneMatch === etag) {

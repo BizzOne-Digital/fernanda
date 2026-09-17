@@ -140,7 +140,7 @@ export default async function ThingsToDoPage() {
         </div>
       </section>
 
-      <section className="mx-auto w-full min-w-0 max-w-7xl px-4 py-16 md:px-6">
+      <section className="mx-auto w-full min-w-0 max-w-7xl px-4 py-10 md:px-6 md:py-16">
         <div className="overflow-hidden rounded-sm border border-sand/70 bg-gradient-to-br from-lake-deep/[0.04] via-cream to-sand/25">
           <div className="grid lg:grid-cols-2">
             <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
@@ -182,7 +182,7 @@ export default async function ThingsToDoPage() {
       </section>
 
       {featured.length > 0 ? (
-        <section className="mx-auto max-w-7xl px-4 md:px-6">
+        <section className="mx-auto max-w-7xl px-4 pt-6 md:px-6 md:pt-8">
           <p className="text-[0.68rem] font-medium uppercase tracking-[0.28em] text-golden">
             Start here
           </p>
@@ -222,7 +222,7 @@ export default async function ThingsToDoPage() {
         </section>
       ) : null}
 
-      <section className="mx-auto w-full min-w-0 max-w-7xl px-4 py-16 md:px-6">
+      <section className="mx-auto w-full min-w-0 max-w-7xl px-4 pt-8 pb-4 md:px-6 md:py-14">
         <div className="max-w-2xl">
           <p className="text-[0.68rem] font-medium uppercase tracking-[0.28em] text-lake-medium">
             Explore
@@ -233,15 +233,15 @@ export default async function ThingsToDoPage() {
             are marked clearly — always confirm details before you go.
           </p>
         </div>
-        <div className="mt-8">
+        <div className="mt-6 md:mt-8">
           <ThingsToDoGuide attractions={attractions} />
         </div>
       </section>
 
-      <section className="mx-auto max-w-7xl px-4 pb-20 md:px-6">
+      <section className="mx-auto max-w-7xl px-4 pb-8 pt-6 md:px-6 md:pb-12 md:pt-10">
         <div className="overflow-hidden rounded-sm bg-lake-deep text-cream">
           <div className="h-1 bg-gradient-to-r from-transparent via-golden/80 to-transparent" />
-          <div className="grid gap-8 px-6 py-10 md:grid-cols-[1.2fr_0.8fr] md:px-10 md:py-12">
+          <div className="grid gap-6 px-5 py-8 md:grid-cols-[1.2fr_0.8fr] md:gap-8 md:px-10 md:py-12">
             <div>
               <p className="text-[0.68rem] font-medium uppercase tracking-[0.28em] text-golden">
                 Plan your stay
@@ -268,7 +268,7 @@ export default async function ThingsToDoPage() {
             </div>
           </div>
         </div>
-        <p className="mt-4 text-center text-xs text-ink/50">
+        <p className="mt-3 text-center text-xs text-ink/50 md:mt-4">
           {settings.property.generalSafetyNotes ||
             "Lake conditions, wildlife sightings, and equipment availability vary by season and are never guaranteed."}
         </p>

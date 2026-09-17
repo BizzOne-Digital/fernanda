@@ -11,6 +11,7 @@ import { AdminInput, AdminSelect, AdminTextarea, FormField } from "@/components/
 import { StatusBadge } from "@/components/admin/status-badge";
 import { GALLERY_PHOTO_CATEGORIES } from "@/models/GalleryPhoto";
 import { galleryCategoryLabel } from "@/lib/gallery/categories";
+import { requiresUnoptimizedImage } from "@/lib/uploads/public-url";
 import { adminUploadToFolder, deleteStoredUpload, useAdminFetch, useAdminMutation } from "@/hooks/use-admin-fetch";
 import Link from "next/link";
 
@@ -201,7 +202,13 @@ export default function AdminGalleryPhotosPage() {
           {photos.map((photo) => (
             <article key={photo._id} className="overflow-hidden rounded-sm border border-sand/80 bg-white">
               <div className="relative aspect-[4/3] bg-sand/20">
-                <Image src={photo.url} alt={photo.alt} fill className="object-cover" unoptimized={photo.url.startsWith("/api/uploads/")} />
+                <Image
+                  src={photo.url}
+                  alt={photo.alt}
+                  fill
+                  className="object-cover"
+                  unoptimized={requiresUnoptimizedImage(photo.url)}
+                />
               </div>
               <div className="space-y-2 p-3">
                 <p className="line-clamp-2 text-sm font-medium text-ink">{photo.alt}</p>

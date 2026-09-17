@@ -1,11 +1,19 @@
 import { NextResponse } from "next/server";
+import sharp from "sharp";
 import connectDB from "@/lib/mongodb";
 import { requireAdmin } from "@/lib/auth-helpers";
 import { MediaAsset } from "@/models";
-import { saveUploadedImage } from "@/lib/media/upload";
-import { publicUrlToRelativePath } from "@/lib/media/serve";
 import { logActivity } from "@/lib/activity";
 import { handleApiError, jsonError, jsonOk } from "@/lib/api-utils";
+import {
+  ALLOWED_UPLOAD_MIMES,
+  buildUploadUrl,
+  generateUploadFilename,
+  saveStoredUpload,
+  type UploadFolder,
+} from "@/lib/uploads/stored-uploads";
+
+export const runtime = "nodejs";
 
 export async function POST(request: Request) {
   try {
@@ -21,41 +29,56 @@ export async function POST(request: Request) {
       return jsonError("No file provided", 400);
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
-    const saved = await saveUploadedImage(buffer, file.name, authResult.session.user.id);
+    if (!ALLOWED_UPLOAD_MIMES[file.type]) {
+      return jsonError("Invalid file type. Allowed: JPEG, PNG, WebP, GIF", 415);
+    }
 
-    const relativeDiskPath = publicUrlToRelativePath(saved.publicUrl);
+    const rawBuffer = Buffer.from(await file.arrayBuffer());
+    const optimized = await sharp(rawBuffer, { failOn: "error" })
+      .rotate()
+      .webp({ quality: 85 })
+      .toBuffer({ resolveWithObject: true });
+
+    const folder: UploadFolder =
+      String(formData.get("category") ?? "") === "gallery" || formData.get("galleryCategoryId")
+        ? "gallery"
+        : "misc";
+
+    const filename = generateUploadFilename("image/webp");
+    if (!filename) {
+      return jsonError("Could not determine file extension", 400);
+    }
+
+    await saveStoredUpload({
+      folder,
+      filename,
+      mimeType: "image/webp",
+      data: optimized.data,
+    });
+
+    const publicUrl = buildUploadUrl(folder, filename);
 
     const asset = await MediaAsset.create({
-      originalFilename: saved.originalFilename,
-      diskPath: relativeDiskPath,
-      publicUrl: saved.publicUrl,
-      mimeType: saved.mimeType,
-      bytes: saved.bytes,
-      dimensions: { width: saved.width, height: saved.height },
+      originalFilename: file.name,
+      diskPath: `${folder}/${filename}`,
+      publicUrl,
+      mimeType: "image/webp",
+      bytes: optimized.data.byteLength,
+      dimensions: { width: optimized.info.width, height: optimized.info.height },
       alt: String(formData.get("alt") ?? ""),
       caption: String(formData.get("caption") ?? ""),
       credit: String(formData.get("credit") ?? ""),
       categoryId: formData.get("galleryCategoryId") || undefined,
       categorySlug: String(formData.get("category") ?? "") || undefined,
-      metadata: {
-        variants: saved.variants.map((variant) => ({
-          label: variant.label,
-          diskPath: variant.diskPath,
-          publicUrl: variant.publicUrl,
-          width: variant.width,
-          height: variant.height,
-          bytes: 0,
-        })),
-      },
+      metadata: { variants: [] },
     });
 
     await logActivity({
       action: "upload",
       entityType: "MediaAsset",
       entityId: asset._id.toString(),
-      entityLabel: saved.originalFilename,
-      summary: `Uploaded ${saved.originalFilename}`,
+      entityLabel: file.name,
+      summary: `Uploaded ${file.name}`,
       adminEmail: authResult.session.user.email,
       adminUserId: authResult.session.user.id,
     });

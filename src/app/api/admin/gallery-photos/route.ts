@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import { requireAdmin } from "@/lib/auth-helpers";
-import { handleApiError, jsonOk } from "@/lib/api-utils";
+import { handleApiError, jsonError, jsonOk } from "@/lib/api-utils";
 import { revalidateGallery } from "@/lib/revalidation";
 import GalleryPhoto from "@/models/GalleryPhoto";
 import { galleryPhotoSchema } from "@/lib/validation/gallery-photo";
+import { normalizePublicImageUrl } from "@/lib/uploads/public-url";
 
 export const runtime = "nodejs";
 
@@ -32,8 +33,13 @@ export async function POST(request: Request) {
     const body = galleryPhotoSchema.parse(await request.json());
     await connectDB();
 
+    const url = normalizePublicImageUrl(body.url);
+    if (!url) {
+      return jsonError("Invalid image URL", 400);
+    }
+
     const photo = await GalleryPhoto.create({
-      url: body.url,
+      url,
       alt: body.alt,
       caption: body.caption,
       category: body.category ?? "property",

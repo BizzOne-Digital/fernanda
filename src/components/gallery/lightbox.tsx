@@ -2,6 +2,11 @@
 
 import { useCallback, useEffect, useState } from "react";
 import Image from "next/image";
+import {
+  PLACEHOLDER_IMAGE,
+  resolvePublicImageUrl,
+  requiresUnoptimizedImage,
+} from "@/lib/uploads/public-url";
 import { cn } from "@/lib/utils/cn";
 
 export type LightboxImage = {
@@ -51,6 +56,7 @@ export function Lightbox({ images, initialIndex = 0, open, onClose }: LightboxPr
   if (!open || images.length === 0) return null;
 
   const current = images[index];
+  const currentSrc = resolvePublicImageUrl(current.src, PLACEHOLDER_IMAGE);
 
   return (
     <div
@@ -75,12 +81,12 @@ export function Lightbox({ images, initialIndex = 0, open, onClose }: LightboxPr
       <figure className="max-h-[85vh] max-w-5xl">
         <div className="relative aspect-[4/3] w-[min(90vw,960px)]">
           <Image
-            src={current.src}
+            src={currentSrc}
             alt={current.alt}
             fill
             className="object-contain"
             sizes="90vw"
-            unoptimized={current.src.startsWith("/api/uploads/")}
+            unoptimized={requiresUnoptimizedImage(currentSrc)}
           />
         </div>
         {(current.caption || current.credit) && (
@@ -109,7 +115,9 @@ export function LightboxGrid({ images, className }: LightboxGridProps) {
   return (
     <>
       <div className={cn("grid gap-3 sm:grid-cols-2 lg:grid-cols-3", className)}>
-        {images.map((image, imageIndex) => (
+        {images.map((image, imageIndex) => {
+          const src = resolvePublicImageUrl(image.src, PLACEHOLDER_IMAGE);
+          return (
           <button
             key={`${image.src}-${imageIndex}`}
             type="button"
@@ -120,15 +128,16 @@ export function LightboxGrid({ images, className }: LightboxGridProps) {
             }}
           >
             <Image
-              src={image.src}
+              src={src}
               alt={image.alt}
               fill
               className="object-cover transition duration-500 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 33vw"
-              unoptimized={image.src.startsWith("/api/uploads/")}
+              unoptimized={requiresUnoptimizedImage(src)}
             />
           </button>
-        ))}
+          );
+        })}
       </div>
       <Lightbox images={images} initialIndex={index} open={open} onClose={() => setOpen(false)} />
     </>
