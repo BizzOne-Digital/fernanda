@@ -137,8 +137,13 @@ export function MediaPicker({
             Choose from library
           </Button>
           {value ? (
-            <Button type="button" variant="ghost" onClick={handleRemove}>
-              Remove
+            <Button
+              type="button"
+              variant="ghost"
+              className="text-red-700 hover:bg-red-50 hover:text-red-800"
+              onClick={handleRemove}
+            >
+              Delete image
             </Button>
           ) : null}
         </div>

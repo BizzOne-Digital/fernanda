@@ -89,8 +89,14 @@ export function LocalImageField({
             {uploading ? "Uploading…" : value ? "Replace" : "Upload image"}
           </Button>
           {value ? (
-            <Button type="button" variant="ghost" disabled={uploading} onClick={handleRemove}>
-              Remove
+            <Button
+              type="button"
+              variant="ghost"
+              disabled={uploading}
+              className="text-red-700 hover:bg-red-50 hover:text-red-800"
+              onClick={handleRemove}
+            >
+              Delete image
             </Button>
           ) : null}
         </div>

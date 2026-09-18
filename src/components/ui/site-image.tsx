@@ -31,7 +31,8 @@ export function SiteImage({
       <Image
         alt={alt}
         src={resolvedSrc}
-        className="h-full w-full object-cover"
+        fill={fill}
+        className={cn("object-cover", fill ? "h-full w-full" : undefined)}
         unoptimized={typeof resolvedSrc === "string" && requiresUnoptimizedImage(resolvedSrc)}
         {...props}
       />

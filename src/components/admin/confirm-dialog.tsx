@@ -2,7 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils/cn";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 
 type ConfirmDialogProps = {
   open: boolean;
@@ -27,42 +28,68 @@ export function ConfirmDialog({
   onConfirm,
   onCancel,
 }: ConfirmDialogProps) {
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     if (!open) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
     const onKey = (event: KeyboardEvent) => {
       if (event.key === "Escape") onCancel();
     };
     window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      window.removeEventListener("keydown", onKey);
+    };
   }, [open, onCancel]);
 
-  if (!open) return null;
+  if (!open || !mounted) return null;
 
-  return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+  return createPortal(
+    <div
+      className="fixed inset-0 z-[200] flex items-center justify-center p-4 sm:p-6"
+      role="presentation"
+    >
       <button
         type="button"
         aria-label="Close dialog"
-        className="absolute inset-0 bg-lake-deep/30 backdrop-blur-[2px]"
+        className="absolute inset-0 bg-lake-deep/50 backdrop-blur-sm"
         onClick={onCancel}
       />
       <div
         role="dialog"
         aria-modal="true"
+        aria-labelledby="confirm-dialog-title"
         className={cn(
-          "relative w-full max-w-md rounded-2xl border border-sand/60 bg-cream p-6 shadow-xl",
+          "relative z-[201] w-full max-w-md max-h-[min(90vh,32rem)] overflow-y-auto rounded-2xl border border-sand/60 bg-cream p-6 shadow-2xl",
         )}
       >
-        <h2 className="font-serif text-xl text-lake-deep">{title}</h2>
-        {description ? <p className="mt-2 text-sm text-ink/70">{description}</p> : null}
-        <div className="mt-6 flex justify-end gap-3">
-          <Button type="button" variant="ghost" onClick={onCancel} disabled={loading}>
+        <h2 id="confirm-dialog-title" className="font-serif text-xl text-lake-deep">
+          {title}
+        </h2>
+        {description ? <p className="mt-2 text-sm leading-relaxed text-ink/70">{description}</p> : null}
+        <div className="mt-6 flex flex-col-reverse gap-2 sm:flex-row sm:justify-end sm:gap-3">
+          <Button
+            type="button"
+            variant="ghost"
+            className="w-full normal-case tracking-normal sm:w-auto"
+            onClick={onCancel}
+            disabled={loading}
+          >
             {cancelLabel}
           </Button>
           <Button
             type="button"
             variant={variant === "danger" ? "primary" : "golden"}
-            className={variant === "danger" ? "bg-red-700 hover:bg-red-800" : undefined}
+            className={cn(
+              "w-full normal-case tracking-normal sm:w-auto",
+              variant === "danger" && "bg-red-700 hover:bg-red-800",
+            )}
             onClick={onConfirm}
             disabled={loading}
           >
@@ -70,6 +97,7 @@ export function ConfirmDialog({
           </Button>
         </div>
       </div>
-    </div>
+    </div>,
+    document.body,
   );
 }

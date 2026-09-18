@@ -43,6 +43,7 @@ export async function POST(request: Request) {
       alt: body.alt,
       caption: body.caption,
       category: body.category ?? "property",
+      galleryCategoryId: body.galleryCategoryId ?? null,
       sortOrder: body.sortOrder ?? 0,
       featured: body.featured ?? false,
       status: body.status ?? "published",

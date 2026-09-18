@@ -1,29 +1,21 @@
 "use client";
 
-import Image from "next/image";
 import { useRef, useState } from "react";
 import { toast } from "sonner";
 import { Button } from "@/components/ui/button";
 import { AdminHeader, AdminPanel } from "@/components/admin/admin-header";
 import { useAdminLayout } from "@/components/admin/admin-shell";
 import { ConfirmDialog } from "@/components/admin/confirm-dialog";
+import { GalleryPhotoAdminCard, type GalleryPhotoAdminItem } from "@/components/admin/gallery-photo-card";
 import { AdminInput, AdminSelect, AdminTextarea, FormField } from "@/components/admin/form-field";
-import { StatusBadge } from "@/components/admin/status-badge";
-import { GALLERY_PHOTO_CATEGORIES } from "@/models/GalleryPhoto";
+import { GALLERY_PHOTO_CATEGORIES } from "@/lib/gallery/photo-constants";
 import { galleryCategoryLabel } from "@/lib/gallery/categories";
-import { requiresUnoptimizedImage } from "@/lib/uploads/public-url";
 import { adminUploadToFolder, deleteStoredUpload, useAdminFetch, useAdminMutation } from "@/hooks/use-admin-fetch";
 import Link from "next/link";
 
-type GalleryPhotoRow = {
-  _id: string;
-  url: string;
-  alt: string;
-  caption?: string;
-  category: string;
+type GalleryPhotoRow = GalleryPhotoAdminItem & {
   sortOrder?: number;
   featured?: boolean;
-  status: string;
 };
 
 export default function AdminGalleryPhotosPage() {
@@ -200,59 +192,29 @@ export default function AdminGalleryPhotosPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {photos.map((photo) => (
-            <article key={photo._id} className="overflow-hidden rounded-sm border border-sand/80 bg-white">
-              <div className="relative aspect-[4/3] bg-sand/20">
-                <Image
-                  src={photo.url}
-                  alt={photo.alt}
-                  fill
-                  className="object-cover"
-                  unoptimized={requiresUnoptimizedImage(photo.url)}
-                />
-              </div>
-              <div className="space-y-2 p-3">
-                <p className="line-clamp-2 text-sm font-medium text-ink">{photo.alt}</p>
-                <div className="flex flex-wrap items-center gap-2">
-                  <StatusBadge status={photo.status} />
-                  <span className="text-xs text-ink/50">{galleryCategoryLabel(photo.category)}</span>
-                </div>
-                <div className="flex flex-wrap gap-2">
-                  <button type="button" className="text-xs text-lake-medium" onClick={() => setEditing(photo)}>
-                    Edit
-                  </button>
-                  <label className="cursor-pointer text-xs text-lake-medium">
-                    Replace
-                    <input
-                      type="file"
-                      accept="image/png,image/jpeg,image/webp,image/gif"
-                      className="hidden"
-                      onChange={(event) => {
-                        const file = event.target.files?.[0];
-                        if (file) replaceImage(file, photo);
-                      }}
-                    />
-                  </label>
-                  <button type="button" className="text-xs text-red-600" onClick={() => setDeleteId(photo._id)}>
-                    Remove
-                  </button>
-                </div>
-              </div>
-            </article>
+            <GalleryPhotoAdminCard
+              key={photo._id}
+              photo={photo}
+              uploading={uploading}
+              onEdit={() => setEditing(photo)}
+              onDelete={() => setDeleteId(photo._id)}
+              onReplace={(file) => replaceImage(file, photo)}
+            />
           ))}
         </div>
       </div>
 
       <ConfirmDialog
         open={Boolean(deleteId)}
-        title="Remove photo from gallery?"
-        description="The image file will be deleted from MongoDB if it was uploaded through the admin."
-        confirmLabel="Remove"
+        title="Delete this photo?"
+        description="This removes the image from the public gallery and deletes the uploaded file from storage."
+        confirmLabel="Delete"
         variant="danger"
         loading={saving}
         onCancel={() => setDeleteId(null)}
         onConfirm={async () => {
           if (!deleteId) return;
-          await mutate(`/api/admin/gallery-photos/${deleteId}`, { method: "DELETE" }, { successMessage: "Photo removed" });
+          await mutate(`/api/admin/gallery-photos/${deleteId}`, { method: "DELETE" }, { successMessage: "Photo deleted" });
           setDeleteId(null);
           reload();
         }}

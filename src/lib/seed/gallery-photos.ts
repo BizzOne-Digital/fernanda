@@ -1,5 +1,5 @@
 import { HERO_IMAGE, PROPERTY_GALLERY } from "@/lib/demo-images";
-import type { GalleryPhotoCategory } from "@/models/GalleryPhoto";
+import type { GalleryPhotoCategory } from "@/lib/gallery/photo-constants";
 
 function asCategory(value: string): GalleryPhotoCategory {
   if (value === "lake" || value === "sunset" || value === "family" || value === "wildlife") {

@@ -1,7 +1,8 @@
 import { NextResponse } from "next/server";
 import connectDB from "@/lib/mongodb";
 import { requireAdmin } from "@/lib/auth-helpers";
-import { GalleryCategory, MediaAsset } from "@/models";
+import { GalleryCategory } from "@/models";
+import { listGalleryPhotosForAdminCategory } from "@/lib/gallery/admin-category-photos";
 import { handleApiError, jsonError, jsonOk, notArchivedFilter, parseObjectId } from "@/lib/api-utils";
 
 type RouteContext = { params: Promise<{ categoryId: string }> };
@@ -16,14 +17,16 @@ export async function GET(_request: Request, context: RouteContext) {
 
     await connectDB();
 
-    const [category, assets] = await Promise.all([
-      GalleryCategory.findOne({ _id: categoryId, ...notArchivedFilter }).lean(),
-      MediaAsset.find({ categoryId, ...notArchivedFilter }).sort({ sortOrder: 1, createdAt: -1 }).lean(),
-    ]);
+    const category = await GalleryCategory.findOne({ _id: categoryId, ...notArchivedFilter }).lean();
 
     if (!category) return jsonError("Gallery category not found", 404);
 
-    return jsonOk({ category, assets, items: assets });
+    const photos = await listGalleryPhotosForAdminCategory({
+      _id: category._id,
+      slug: category.slug,
+    });
+
+    return jsonOk({ category, photos, items: photos, assets: photos });
   } catch (error) {
     return handleApiError(error);
   }

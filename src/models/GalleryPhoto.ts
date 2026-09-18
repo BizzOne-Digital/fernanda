@@ -1,17 +1,21 @@
-import mongoose, { type Document, type Model, Schema } from "mongoose";
+import mongoose, { type Document, type Model, Schema, type Types } from "mongoose";
 
+import {
+  GALLERY_PHOTO_CATEGORIES,
+  type GalleryPhotoCategory,
+  type GalleryPhotoStatus,
+} from "@/lib/gallery/photo-constants";
 import { archiveFields } from "@/models/shared/schemas";
 
-export const GALLERY_PHOTO_CATEGORIES = ["lake", "sunset", "family", "wildlife", "property"] as const;
-export type GalleryPhotoCategory = (typeof GALLERY_PHOTO_CATEGORIES)[number];
-
-export type GalleryPhotoStatus = "draft" | "published";
+export { GALLERY_PHOTO_CATEGORIES, type GalleryPhotoCategory, type GalleryPhotoStatus };
 
 export interface IGalleryPhoto extends Document {
   url: string;
   alt: string;
   caption?: string;
   category: GalleryPhotoCategory;
+  /** Admin gallery category (Gallery → Manage category). */
+  galleryCategoryId?: Types.ObjectId | null;
   sortOrder: number;
   featured: boolean;
   status: GalleryPhotoStatus;
@@ -30,6 +34,12 @@ const galleryPhotoSchema = new Schema<IGalleryPhoto>(
       type: String,
       enum: GALLERY_PHOTO_CATEGORIES,
       default: "property",
+    },
+    galleryCategoryId: {
+      type: Schema.Types.ObjectId,
+      ref: "GalleryCategory",
+      default: null,
+      index: true,
     },
     sortOrder: { type: Number, default: 0 },
     featured: { type: Boolean, default: false },
