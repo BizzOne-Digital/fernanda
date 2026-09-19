@@ -1,5 +1,6 @@
 import mongoose, { type Document, type Model, Schema } from "mongoose";
 
+import { PAGE_SECTION_TYPES, type PageSectionType } from "@/lib/pages/page-section-types";
 import {
   archiveFields,
   imageRefSchema,
@@ -10,23 +11,7 @@ import {
   type IStatItem,
 } from "@/models/shared/schemas";
 
-export const PAGE_SECTION_TYPES = [
-  "hero",
-  "rich-text",
-  "image-text",
-  "cta",
-  "stats",
-  "timeline",
-  "faq-preview",
-  "cabin-rail",
-  "testimonials",
-  "gallery",
-  "seasons",
-  "inquiry-bar",
-  "custom",
-] as const;
-
-export type PageSectionType = (typeof PAGE_SECTION_TYPES)[number];
+export { PAGE_SECTION_TYPES, type PageSectionType };
 
 export type PageStatus = "draft" | "published";
 

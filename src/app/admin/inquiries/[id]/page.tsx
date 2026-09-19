@@ -5,7 +5,7 @@ import { AdminHeader, AdminPanel } from "@/components/admin/admin-header";
 import { useAdminLayout } from "@/components/admin/admin-shell";
 import { AdminInput, AdminSelect, AdminTextarea, FormField } from "@/components/admin/form-field";
 import { StatusBadge } from "@/components/admin/status-badge";
-import { BOOKING_INQUIRY_STATUSES } from "@/models/BookingInquiry";
+import { BOOKING_INQUIRY_STATUSES } from "@/lib/booking/inquiry-constants";
 import { useAdminFetch, useAdminMutation } from "@/hooks/use-admin-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { format } from "date-fns";

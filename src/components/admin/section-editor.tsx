@@ -9,7 +9,8 @@ import {
   adminInputClass,
 } from "@/components/admin/form-field";
 import { MediaPicker, type ImageRefValue } from "@/components/admin/media-picker";
-import { PAGE_SECTION_TYPES, type IPageSection } from "@/models/Page";
+import { PAGE_SECTION_TYPES } from "@/lib/pages/page-section-types";
+import type { IPageSection } from "@/models/Page";
 import type { AdminImageRef } from "@/lib/validation/admin-ui";
 import { cn } from "@/lib/utils/cn";
 import { useState } from "react";
@@ -314,32 +315,4 @@ export function SectionEditor({ index, section, onRemove }: SectionEditorProps) 
   );
 }
 
-export function SeoEditor() {
-  const { register, watch, setValue } = useFormContext<{ seo?: SectionFormValues["seo"] }>();
-  const ogImage = watch("seo.ogImage");
-
-  return (
-    <AdminPanel className="space-y-4">
-      <h3 className="font-serif text-xl text-lake-deep">SEO</h3>
-      <FormField label="Meta title">
-        <AdminInput {...register("seo.title")} />
-      </FormField>
-      <FormField label="Meta description">
-        <AdminTextarea rows={3} {...register("seo.description")} />
-      </FormField>
-      <FormField label="Canonical URL">
-        <AdminInput {...register("seo.canonical")} placeholder="https://..." />
-      </FormField>
-      <label className="flex items-center gap-2 text-sm text-ink/70">
-        <input type="checkbox" {...register("seo.noIndex")} />
-        No index
-      </label>
-      <MediaPicker
-        label="Open Graph image"
-        folder="pages"
-        value={ogImage ?? null}
-        onChange={(image) => setValue("seo.ogImage", image ?? undefined, { shouldDirty: true })}
-      />
-    </AdminPanel>
-  );
-}
+export { SeoEditor } from "@/components/admin/seo-editor";

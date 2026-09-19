@@ -12,7 +12,7 @@ import {
   adminInputClass,
 } from "@/components/admin/form-field";
 import { MediaPicker, type ImageRefValue } from "@/components/admin/media-picker";
-import { SeoEditor } from "@/components/admin/section-editor";
+import { SeoEditor } from "@/components/admin/seo-editor";
 import { useAdminFetch, useAdminMutation } from "@/hooks/use-admin-fetch";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Link from "next/link";
