@@ -10,7 +10,7 @@ import {
   type ISeoFields,
 } from "@/models/shared/schemas";
 
-export type ServiceStatus = "draft" | "published";
+export type ServiceStatus = "draft" | "published" | "archived";
 
 export interface IService extends Document {
   title: string;
@@ -75,7 +75,7 @@ const serviceSchema = new Schema<IService>(
     faqs: [cabinFaqItemSchema],
     status: {
       type: String,
-      enum: ["draft", "published"],
+      enum: ["draft", "published", "archived"],
       default: "draft",
       index: true,
     },

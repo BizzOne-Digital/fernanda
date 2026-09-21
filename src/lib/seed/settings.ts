@@ -1,4 +1,3 @@
-import { img } from "@/lib/seed/helpers";
 import { SITE_SETTINGS_KEY } from "@/models/SiteSettings";
 
 export { SITE_SETTINGS_KEY };
@@ -9,7 +8,7 @@ export const siteSettingsSeed = {
     brandName: "Vaseaux Lake Waterfront Cabins",
     shortBrandName: "Vaseaux Lake Cabins",
     descriptor: "Vaseaux Lake Rentals",
-    logo: img("lakeHero", "Vaseaux Lake Cabins"),
+    logo: { url: "/images/vaseaux-lake-logo.png", alt: "Vaseaux Lake Waterfront Cabins" },
     primaryHeadline: "Bring your family vacation memories to life.",
     supportingHeadline:
       "Waterfront cabin-style stays on Vaseaux Lake — fishing, family days, and reunions in the heart of the South Okanagan.",

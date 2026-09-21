@@ -91,13 +91,25 @@ export const focalPointSchema = z.object({
 });
 
 export const imageRefSchema = z.object({
-  mediaId: objectIdSchema.optional(),
+  mediaId: z
+    .string()
+    .trim()
+    .optional()
+    .refine((value) => !value || /^[a-f\d]{24}$/i.test(value), "Invalid media id"),
   url: z.string().trim().min(1).max(2048),
   alt: z.string().trim().max(300).optional(),
   caption: z.string().trim().max(500).optional(),
   credit: z.string().trim().max(200).optional(),
   focalPoint: focalPointSchema.optional(),
 });
+
+/** Drop empty slots and normalize image refs for admin saves. */
+export function sanitizeImageRefList(
+  images?: Array<z.infer<typeof imageRefSchema> | null> | null,
+): z.infer<typeof imageRefSchema>[] {
+  if (!images?.length) return [];
+  return images.filter((item): item is z.infer<typeof imageRefSchema> => Boolean(item?.url?.trim()));
+}
 
 export const seoSchema = z.object({
   title: z.string().trim().max(120).optional(),

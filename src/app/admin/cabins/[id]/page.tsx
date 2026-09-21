@@ -20,7 +20,9 @@ import { useParams, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
-import { adminImageRefSchema, adminSeoSchema } from "@/lib/validation/admin-ui";
+import { ImageListField } from "@/components/admin/image-list-field";
+import { adminImageArraySchema, adminImageRefSchema, adminSeoSchema } from "@/lib/validation/admin-ui";
+import { sanitizeImageRefList } from "@/lib/validation/common";
 
 const cabinSchema = z.object({
   cabinNumber: z.coerce.number().min(1),
@@ -40,6 +42,7 @@ const cabinSchema = z.object({
   amenities: z.array(z.string()).optional(),
   packingNotes: z.string().optional(),
   importantNotes: z.string().optional(),
+  detailImages: adminImageArraySchema,
   status: z.enum(["draft", "published", "archived"]),
   sortOrder: z.coerce.number().optional(),
   seo: adminSeoSchema,
@@ -71,6 +74,7 @@ export default function AdminCabinEditorPage() {
       sortOrder: 0,
       featureHighlights: [],
       amenities: [],
+      detailImages: [],
       seo: {},
     },
   });
@@ -80,10 +84,15 @@ export default function AdminCabinEditorPage() {
   }, [data, form]);
 
   const onSubmit = form.handleSubmit(async (values) => {
+    const payload = {
+      ...values,
+      detailImages: sanitizeImageRefList(values.detailImages),
+    };
+
     if (isNew) {
       const result = await mutate<{ cabin?: { _id: string } }>(
         "/api/admin/cabins",
-        { method: "POST", body: JSON.stringify(values) },
+        { method: "POST", body: JSON.stringify(payload) },
         { successMessage: "Cabin created" },
       );
       if (result.cabin?._id) router.replace(`/admin/cabins/${result.cabin._id}`);
@@ -91,7 +100,7 @@ export default function AdminCabinEditorPage() {
     }
     await mutate(
       `/api/admin/cabins/${id}`,
-      { method: "PATCH", body: JSON.stringify(values) },
+      { method: "PATCH", body: JSON.stringify(payload) },
       { successMessage: "Cabin saved" },
     );
     reload();
@@ -225,6 +234,14 @@ export default function AdminCabinEditorPage() {
                     value={(form.watch("heroImage") as ImageRefValue) ?? null}
                     onChange={(image) => form.setValue("heroImage", image, { shouldDirty: true })}
                     folder="products"
+                  />
+                  <ImageListField
+                    label="Gallery photos"
+                    hint="Add multiple photos for this cabin (shown on the public cabin page). Card and hero images above are separate single images."
+                    value={(form.watch("detailImages") as ImageRefValue[]) ?? []}
+                    onChange={(images) => form.setValue("detailImages", images, { shouldDirty: true })}
+                    folder="products"
+                    max={24}
                   />
                   <FormField label="Full description">
                     <AdminTextarea rows={6} {...form.register("fullDescription")} />

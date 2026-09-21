@@ -77,10 +77,13 @@ export default function AdminServiceEditorPage() {
   }, [data, form]);
 
   const onSubmit = form.handleSubmit(async (values) => {
+    const { intendedGuestType, ...payload } = values;
+    void intendedGuestType;
+
     if (isNew) {
       const result = await mutate<{ service?: { _id: string } }>(
         "/api/admin/services",
-        { method: "POST", body: JSON.stringify(values) },
+        { method: "POST", body: JSON.stringify(payload) },
         { successMessage: "Service created" },
       );
       if (result.service?._id) router.replace(`/admin/services/${result.service._id}`);
@@ -88,7 +91,7 @@ export default function AdminServiceEditorPage() {
     }
     await mutate(
       `/api/admin/services/${id}`,
-      { method: "PATCH", body: JSON.stringify(values) },
+      { method: "PATCH", body: JSON.stringify(payload) },
       { successMessage: "Service saved" },
     );
     reload();
@@ -171,12 +174,15 @@ export default function AdminServiceEditorPage() {
                     </FormField>
                   </div>
                   <div className="sm:col-span-2">
-                    <MediaPicker
-                      label="Card image"
-                      value={(form.watch("cardImage") as ImageRefValue) ?? null}
-                      onChange={(image) => form.setValue("cardImage", image, { shouldDirty: true })}
-                      folder="pages"
-                    />
+                  <MediaPicker
+                    label="Card image"
+                    value={(form.watch("cardImage") as ImageRefValue) ?? null}
+                    onChange={(image) => form.setValue("cardImage", image, { shouldDirty: true })}
+                    folder="products"
+                  />
+                  <p className="text-xs text-ink/50 sm:col-span-2">
+                    After replacing an image, click <strong>Save</strong> at the top right.
+                  </p>
                   </div>
                 </AdminPanel>
               ) : null}
@@ -195,7 +201,7 @@ export default function AdminServiceEditorPage() {
                     label="Hero image"
                     value={(form.watch("heroImage") as ImageRefValue) ?? null}
                     onChange={(image) => form.setValue("heroImage", image, { shouldDirty: true })}
-                    folder="pages"
+                    folder="products"
                   />
                   <FormField label="Overview">
                     <AdminTextarea rows={5} {...form.register("overview")} />

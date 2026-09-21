@@ -36,9 +36,16 @@ export async function PATCH(request: Request, context: RouteContext) {
     if (!parseObjectId(id)) return jsonError("Invalid service id", 400);
 
     const body = serviceUpdateSchema.parse(await request.json());
+    const { intendedGuestType, id: _bodyId, ...updates } = body;
+    void intendedGuestType;
+    void _bodyId;
     await connectDB();
 
-    const service = await Service.findByIdAndUpdate(id, { $set: body }, { new: true, runValidators: true });
+    const service = await Service.findByIdAndUpdate(
+      id,
+      { $set: updates },
+      { new: true, runValidators: true },
+    );
     if (!service) return jsonError("Service not found", 404);
 
     revalidateServices(service.slug);

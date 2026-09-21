@@ -12,7 +12,7 @@ import {
   type ICabinSleepingRow,
 } from "@/models/shared/schemas";
 
-export type CabinStatus = "draft" | "published";
+export type CabinStatus = "draft" | "published" | "archived";
 
 export interface ICabin extends Document {
   cabinNumber: number;
@@ -85,7 +85,7 @@ const cabinSchema = new Schema<ICabin>(
     relatedCabinIds: [{ type: Schema.Types.ObjectId, ref: "Cabin" }],
     status: {
       type: String,
-      enum: ["draft", "published"],
+      enum: ["draft", "published", "archived"],
       default: "draft",
       index: true,
     },
