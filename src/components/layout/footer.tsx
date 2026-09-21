@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { SiteSettingsData } from "@/lib/data/settings";
 import { SiteLogo } from "@/components/layout/site-logo";
+import { SocialLinks } from "@/components/layout/social-links";
 import { GUEST_INFO_NAV, LEGAL_NAV, PRIMARY_NAV } from "@/lib/site-nav";
 
 type FooterProps = {
@@ -82,6 +83,11 @@ export function Footer({ settings }: FooterProps) {
               </li>
               {contact.address ? <li>{contact.address}</li> : null}
             </ul>
+            <p className="mt-4 text-xs font-bold uppercase tracking-[0.2em] text-golden">Follow us</p>
+            <SocialLinks
+              className="mt-2"
+              linkClassName="text-sm text-cream/85 transition hover:text-golden"
+            />
           </div>
           <div>
             <p className="text-xs font-bold uppercase tracking-[0.2em] text-golden">Policies</p>

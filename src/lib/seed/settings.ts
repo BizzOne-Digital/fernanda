@@ -23,8 +23,13 @@ export const siteSettingsSeed = {
     email: "vaseauxlakecabins@gmail.com",
     phoneDisplay: "+1 250-870-4365",
     phoneLink: "tel:+12508704365",
-    facebookUrl: "https://www.facebook.com/vaseauxlakewaterfrontcabins/",
-    socialLinks: [],
+    facebookUrl: "https://www.facebook.com/share/1CDyErC1J1/?mibextid=wwXIfr",
+    socialLinks: [
+      {
+        label: "Threads",
+        url: "https://www.threads.com/@vaseaux?igshid=NTc4MTIwNjQ2YQ==",
+      },
+    ],
     address: "",
     businessHours: "Inquiries answered year-round; seasonal on-site hours vary.",
   },

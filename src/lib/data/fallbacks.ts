@@ -22,8 +22,13 @@ export const FALLBACK_SETTINGS: ISiteSettings = {
     email: "vaseauxlakecabins@gmail.com",
     phoneDisplay: "+1 250-870-4365",
     phoneLink: "tel:+12508704365",
-    facebookUrl: "https://www.facebook.com/vaseauxlakewaterfrontcabins/",
-    socialLinks: [],
+    facebookUrl: "https://www.facebook.com/share/1CDyErC1J1/?mibextid=wwXIfr",
+    socialLinks: [
+      {
+        label: "Threads",
+        url: "https://www.threads.com/@vaseaux?igshid=NTc4MTIwNjQ2YQ==",
+      },
+    ],
     businessHours: "Inquiries welcome by email or phone.",
   },
   property: {

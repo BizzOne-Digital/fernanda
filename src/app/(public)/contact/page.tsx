@@ -7,6 +7,7 @@ import { ScrollReveal } from "@/components/motion/scroll-reveal";
 import { SiteImage } from "@/components/ui/site-image";
 import { getPageBySlug } from "@/lib/data/pages";
 import { getSiteSettings } from "@/lib/data/settings";
+import { SocialLinks } from "@/components/layout/social-links";
 import { resolveImage } from "@/lib/data/utils";
 
 export const metadata: Metadata = {
@@ -83,16 +84,16 @@ export default async function ContactPage() {
             <p className="mt-2 text-sm leading-relaxed text-ink/80">
               {settings.contact.address || "Vaseaux Lake · near Oliver, BC"}
             </p>
-            {settings.contact.facebookUrl ? (
-              <a
-                href={settings.contact.facebookUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="mt-3 inline-block text-sm font-medium text-lake-medium hover:underline"
-              >
-                Follow on Facebook →
-              </a>
-            ) : null}
+          </ScrollReveal>
+          <ScrollReveal direction="up" delay={0.2} className="resort-card p-5 sm:col-span-2 lg:col-span-4">
+            <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-lake-medium">Social</p>
+            <p className="mt-2 text-sm leading-relaxed text-ink/80">
+              Photos, updates, and lake days from Vaseaux Lake Waterfront Cabins.
+            </p>
+            <SocialLinks
+              className="mt-4"
+              linkClassName="text-sm font-medium text-lake-medium hover:underline"
+            />
           </ScrollReveal>
         </div>
       </section>

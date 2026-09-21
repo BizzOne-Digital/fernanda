@@ -131,7 +131,7 @@ const contactSettingsSchema = new Schema<ISiteContactSettings>(
     phoneLink: { type: String, default: "tel:+12508704365", trim: true },
     facebookUrl: {
       type: String,
-      default: "https://www.facebook.com/vaseauxlakewaterfrontcabins/",
+      default: "https://www.facebook.com/share/1CDyErC1J1/?mibextid=wwXIfr",
       trim: true,
     },
     socialLinks: { type: [socialLinkSchema], default: [] },
