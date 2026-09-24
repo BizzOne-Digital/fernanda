@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { toast } from "sonner";
+import { prepareImageFileForUpload } from "@/lib/uploads/compress-client";
 import type { UploadFolder } from "@/lib/uploads/public-url";
 
 export class AdminApiError extends Error {
@@ -25,10 +26,11 @@ export async function adminFetch<T = unknown>(url: string, init?: RequestInit): 
   const payload = await response.json().catch(() => ({}));
 
   if (!response.ok) {
-    throw new AdminApiError(
-      (payload as { error?: string }).error ?? `Request failed (${response.status})`,
-      response.status,
-    );
+    const fallback =
+      response.status === 413
+        ? "The photo is too large for the server (max about 4 MB per upload). Use a smaller image or let the site compress it by uploading again after our latest update."
+        : `Request failed (${response.status})`;
+    throw new AdminApiError((payload as { error?: string }).error ?? fallback, response.status);
   }
 
   return payload as T;
@@ -109,8 +111,9 @@ export async function adminUploadToFolder(
   file: File,
   folder: UploadFolder,
 ): Promise<UploadResult> {
+  const prepared = await prepareImageFileForUpload(file);
   const form = new FormData();
-  form.append("file", file);
+  form.append("file", prepared);
   form.append("folder", folder);
   return adminFetch<UploadResult>("/api/upload", { method: "POST", body: form });
 }

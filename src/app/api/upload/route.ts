@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import sharp from "sharp";
 import { z } from "zod";
 import { requireAdmin } from "@/lib/auth-helpers";
 import { handleApiError, jsonOk } from "@/lib/api-utils";
@@ -42,16 +43,31 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: "File exceeds 8MB limit" }, { status: 400 });
     }
 
-    const filename = generateUploadFilename(file.type);
+    let mimeType = file.type;
+    let buffer = Buffer.from(await file.arrayBuffer());
+
+    if (file.type !== "image/gif") {
+      const optimized = await sharp(buffer, { failOn: "error" })
+        .rotate()
+        .webp({ quality: 85 })
+        .toBuffer();
+      mimeType = "image/webp";
+      buffer = Buffer.from(optimized);
+    }
+
+    const filename = generateUploadFilename(mimeType);
     if (!filename) {
       return NextResponse.json({ error: "Could not determine file extension" }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    if (buffer.length > MAX_UPLOAD_BYTES) {
+      return NextResponse.json({ error: "File exceeds 8MB limit after processing" }, { status: 413 });
+    }
+
     await saveStoredUpload({
       folder,
       filename,
-      mimeType: file.type,
+      mimeType,
       data: buffer,
     });
 
