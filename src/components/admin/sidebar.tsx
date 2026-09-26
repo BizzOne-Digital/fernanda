@@ -12,6 +12,7 @@ const items = [
   ["Booking Inquiries", "/admin/inquiries"],
   ["Availability", "/admin/availability"],
   ["Gallery", "/admin/gallery"],
+  ["Guest memories", "/admin/guest-memories"],
   ["Testimonials", "/admin/testimonials"],
   ["FAQs", "/admin/faqs"],
   ["Things to Do", "/admin/attractions"],

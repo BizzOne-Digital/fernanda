@@ -3,6 +3,11 @@ import connectDB from "@/lib/mongodb";
 import { CACHE_TAGS } from "@/lib/revalidation";
 import GalleryCategory, { type IGalleryCategory } from "@/models/GalleryCategory";
 import GalleryPhoto from "@/models/GalleryPhoto";
+import {
+  galleryCategoryFilterValues,
+  isGalleryPhotoCategory,
+  normalizeGalleryPhotoCategory,
+} from "@/lib/gallery/photo-constants";
 import { HERO_IMAGE, PROPERTY_GALLERY } from "@/lib/demo-images";
 import { normalizePublicImageUrl, PLACEHOLDER_IMAGE } from "@/lib/uploads/public-url";
 import { toPlain, type PlainModel } from "@/lib/data/utils";
@@ -61,7 +66,9 @@ async function fetchGalleryImages(categorySlug?: string): Promise<GalleryImageDa
       status: "published",
       isArchived: false,
     };
-    if (categorySlug) query.category = categorySlug;
+    if (categorySlug && isGalleryPhotoCategory(categorySlug)) {
+      query.category = { $in: galleryCategoryFilterValues(categorySlug) };
+    }
 
     const photos = await GalleryPhoto.find(query)
       .sort({ featured: -1, sortOrder: 1, createdAt: -1 })
@@ -70,7 +77,9 @@ async function fetchGalleryImages(categorySlug?: string): Promise<GalleryImageDa
     if (photos.length === 0) {
       const fallback = staticGalleryFallback();
       if (!categorySlug) return fallback;
-      return fallback.filter((item) => item.categorySlug === categorySlug);
+      return fallback.filter(
+        (item) => normalizeGalleryPhotoCategory(item.categorySlug) === categorySlug,
+      );
     }
 
     const plain = toPlain(photos) as Array<{
@@ -87,7 +96,7 @@ async function fetchGalleryImages(categorySlug?: string): Promise<GalleryImageDa
       src: normalizePublicImageUrl(photo.url) || PLACEHOLDER_IMAGE,
       alt: photo.alt,
       caption: photo.caption,
-      categorySlug: photo.category,
+      categorySlug: normalizeGalleryPhotoCategory(photo.category),
       featured: photo.featured ?? false,
     }));
   } catch {

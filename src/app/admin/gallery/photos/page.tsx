@@ -43,7 +43,7 @@ export default function AdminGalleryPhotosPage() {
           body: JSON.stringify({
             url: uploaded.url,
             alt: file.name.replace(/\.[^.]+$/, "").replace(/[-_]+/g, " "),
-            category: "property",
+            category: "friends-family",
             sortOrder: photos.length,
             status: "published",
           }),

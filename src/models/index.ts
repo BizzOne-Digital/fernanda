@@ -74,6 +74,13 @@ export {
 } from "@/models/Testimonial";
 
 export {
+  default as GuestMemory,
+  GUEST_MEMORY_STATUSES,
+  type IGuestMemory,
+  type GuestMemoryStatus,
+} from "@/models/GuestMemory";
+
+export {
   default as FAQ,
   FAQ_CATEGORIES,
   type IFAQ,

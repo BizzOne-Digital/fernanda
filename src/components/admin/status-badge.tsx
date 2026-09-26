@@ -18,6 +18,9 @@ const STATUS_STYLES: Record<string, string> = {
   held: "bg-golden/20 text-ink border-golden/40",
   "owner-blocked": "bg-ink/10 text-ink/60 border-ink/20",
   maintenance: "bg-red-50 text-red-700 border-red-200",
+  pending: "bg-golden/20 text-ink border-golden/40",
+  approved: "bg-forest/20 text-forest border-forest/40",
+  rejected: "bg-red-50 text-red-700 border-red-200",
 };
 
 type StatusBadgeProps = {

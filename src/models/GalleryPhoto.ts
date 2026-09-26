@@ -2,18 +2,26 @@ import mongoose, { type Document, type Model, Schema, type Types } from "mongoos
 
 import {
   GALLERY_PHOTO_CATEGORIES,
+  GALLERY_PHOTO_CATEGORY_VALUES,
   type GalleryPhotoCategory,
+  type GalleryPhotoCategoryValue,
   type GalleryPhotoStatus,
 } from "@/lib/gallery/photo-constants";
 import { archiveFields } from "@/models/shared/schemas";
 
-export { GALLERY_PHOTO_CATEGORIES, type GalleryPhotoCategory, type GalleryPhotoStatus };
+export {
+  GALLERY_PHOTO_CATEGORIES,
+  GALLERY_PHOTO_CATEGORY_VALUES,
+  type GalleryPhotoCategory,
+  type GalleryPhotoCategoryValue,
+  type GalleryPhotoStatus,
+};
 
 export interface IGalleryPhoto extends Document {
   url: string;
   alt: string;
   caption?: string;
-  category: GalleryPhotoCategory;
+  category: GalleryPhotoCategoryValue;
   /** Admin gallery category (Gallery → Manage category). */
   galleryCategoryId?: Types.ObjectId | null;
   sortOrder: number;
@@ -32,8 +40,8 @@ const galleryPhotoSchema = new Schema<IGalleryPhoto>(
     caption: { type: String, trim: true },
     category: {
       type: String,
-      enum: GALLERY_PHOTO_CATEGORIES,
-      default: "property",
+      enum: GALLERY_PHOTO_CATEGORY_VALUES,
+      default: "exploring",
     },
     galleryCategoryId: {
       type: Schema.Types.ObjectId,

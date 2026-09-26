@@ -1,18 +1,22 @@
 import { HERO_IMAGE, PROPERTY_GALLERY } from "@/lib/demo-images";
-import type { GalleryPhotoCategory } from "@/lib/gallery/photo-constants";
+import { normalizeGalleryPhotoCategory } from "@/lib/gallery/photo-constants";
+import type { GalleryPhotoCategoryValue } from "@/lib/gallery/photo-constants";
 
-function asCategory(value: string): GalleryPhotoCategory {
-  if (value === "lake" || value === "sunset" || value === "family" || value === "wildlife") {
-    return value;
-  }
-  return "property";
+function asCategory(value: string): GalleryPhotoCategoryValue {
+  const normalized = normalizeGalleryPhotoCategory(value);
+  if (normalized === "exploring" && value === "lake") return "lake";
+  if (normalized === "seasons" && value === "sunset") return "sunset";
+  if (normalized === "friends-family" && value === "family") return "family";
+  if (value === "wildlife") return "wildlife";
+  if (normalized === "exploring" && value === "property") return "property";
+  return normalized;
 }
 
 export const galleryPhotoSeeds = [
   {
     url: HERO_IMAGE,
     alt: "Waterfront cabins on Vaseaux Lake at golden hour",
-    category: "property" as const,
+    category: "exploring" as const,
     sortOrder: -1,
     featured: true,
     status: "published" as const,

@@ -5,6 +5,7 @@ export const CACHE_TAGS = {
   cabins: "cabins",
   services: "services",
   gallery: "gallery",
+  guestMemories: "guest-memories",
   faqs: "faqs",
   testimonials: "testimonials",
   attractions: "attractions",
@@ -43,7 +44,15 @@ export function revalidateServices(slug?: string) {
 
 export function revalidateGallery() {
   revalidatePath("/gallery");
+  revalidatePath("/gallery/share-a-memory");
   revalidateTag(CACHE_TAGS.gallery);
+  revalidateTag(CACHE_TAGS.guestMemories);
+}
+
+export function revalidateGuestMemories() {
+  revalidatePath("/gallery");
+  revalidatePath("/gallery/share-a-memory");
+  revalidateTag(CACHE_TAGS.guestMemories);
 }
 
 export function revalidateFaqs() {

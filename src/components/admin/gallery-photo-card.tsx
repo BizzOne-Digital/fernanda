@@ -54,6 +54,9 @@ export function GalleryPhotoAdminCard({
       </div>
       <div className="space-y-2 p-3">
         <p className="line-clamp-2 text-sm font-medium text-ink">{photo.alt}</p>
+        {photo.caption ? (
+          <p className="line-clamp-2 text-xs text-ink/55">{photo.caption}</p>
+        ) : null}
         <div className="flex flex-wrap items-center gap-2">
           <StatusBadge status={photo.status} />
           <span className="text-xs text-ink/50">{galleryCategoryLabel(photo.category)}</span>

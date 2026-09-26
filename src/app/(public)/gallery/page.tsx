@@ -3,6 +3,8 @@ import { Suspense } from "react";
 import { GalleryClient } from "./gallery-client";
 import { PageHero } from "@/components/layout/page-hero";
 import { getGalleryImages } from "@/lib/data/gallery";
+import { getApprovedGuestMemories } from "@/lib/data/guest-memories";
+import { GuestMemoriesSection } from "@/components/gallery/guest-memories-section";
 import { HERO_IMAGE } from "@/lib/demo-images";
 
 export const metadata: Metadata = {
@@ -11,7 +13,7 @@ export const metadata: Metadata = {
 };
 
 export default async function GalleryPage() {
-  const images = await getGalleryImages();
+  const [images, memories] = await Promise.all([getGalleryImages(), getApprovedGuestMemories()]);
 
   return (
     <Suspense>
@@ -23,6 +25,7 @@ export default async function GalleryPage() {
         imageAlt="Waterfront cabins on Vaseaux Lake"
       />
       <GalleryClient images={images} />
+      <GuestMemoriesSection memories={memories} />
     </Suspense>
   );
 }

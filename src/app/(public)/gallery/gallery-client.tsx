@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { LightboxGrid } from "@/components/gallery/lightbox";
@@ -23,7 +24,12 @@ export function GalleryClient({ images }: GalleryClientProps) {
   return (
     <section className="mx-auto max-w-7xl px-4 py-12 md:px-6">
       <p className="text-center text-sm text-ink/70">
-        {images.length} photos of Vaseaux Lake, our property, and lake days in the South Okanagan.
+        {images.length} photos — friends & family, seasons, wildlife, exploring, and fishing fun at Vaseaux Lake.
+      </p>
+      <p className="mt-3 text-center text-sm">
+        <Link href="/gallery/share-a-memory" className="font-medium text-lake-medium hover:underline">
+          Share a guest memory
+        </Link>
       </p>
       <div className="mt-8 flex flex-wrap justify-center gap-2">
         {GALLERY_FILTER_CATEGORIES.map((category) => (
