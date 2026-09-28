@@ -1,17 +1,38 @@
 import { z } from "zod";
 import {
-  emailSchema,
   imageRefSchema,
+  optionalEmailSchema,
   optionalUrlSchema,
   richTextSchema,
   shortTextSchema,
 } from "./common";
 
+/** Admin forms send "" for untouched optional fields — treat as omitted. */
+function optionalText(max: number) {
+  return z
+    .string()
+    .trim()
+    .max(max)
+    .optional()
+    .transform((value) => (value === "" ? undefined : value));
+}
+
+const logoSettingsSchema = imageRefSchema
+  .extend({
+    mediaId: z
+      .string()
+      .trim()
+      .optional()
+      .transform((value) => (value && /^[a-f\d]{24}$/i.test(value) ? value : undefined)),
+  })
+  .optional()
+  .nullable();
+
 const generalSettingsSchema = z.object({
-  brandName: z.string().trim().min(1).max(160).optional(),
-  shortBrandName: z.string().trim().min(1).max(80).optional(),
-  projectName: z.string().trim().min(1).max(160).optional(),
-  logo: imageRefSchema.optional().nullable(),
+  brandName: optionalText(160),
+  shortBrandName: optionalText(80),
+  projectName: optionalText(160),
+  logo: logoSettingsSchema,
   primaryHeadline: shortTextSchema.optional(),
   supportingHeadline: shortTextSchema.optional(),
   announcement: shortTextSchema.optional().nullable(),
@@ -20,9 +41,19 @@ const generalSettingsSchema = z.object({
 });
 
 const contactSettingsSchema = z.object({
-  email: emailSchema.optional(),
-  phoneDisplay: z.string().trim().min(7).max(40).optional(),
-  phoneLink: z.string().trim().max(40).optional(),
+  email: optionalEmailSchema,
+  phoneDisplay: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .transform((value) => (value === "" ? undefined : value)),
+  phoneLink: z
+    .string()
+    .trim()
+    .max(40)
+    .optional()
+    .transform((value) => (value === "" ? undefined : value)),
   facebook: optionalUrlSchema,
   address: shortTextSchema.optional().nullable(),
   businessHours: shortTextSchema.optional().nullable(),
